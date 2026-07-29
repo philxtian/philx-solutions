@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "title": "Website Design",
+        "description": "High-converting, responsive UI/UX design systems optimized for speed, accessibility, and high visual polish."
+    },
+    {
+        "id": 2,
+        "title": "Web Development",
+        "description": "Custom full-stack web applications, Headless WordPress integrations, and high-performance server-rendered architectures."
+    },
+    {
+        "id": 3,
+        "title": "Mobile Applications",
+        "description": "Cross-platform mobile applications for iOS & Android engineered for performance and offline reliability."
+    },
+    {
+        "id": 4,
+        "title": "Enterprise Software & Cloud",
+        "description": "Microsoft 365 migrations, secure business email setups, API integration, and cloud productivity software."
+    }
+]
