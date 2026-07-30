@@ -1,49 +1,49 @@
-<section id="services" class="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<section id="services" class="py-28 relative z-10 border-t border-white/[0.06]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-3">Core Expertise</h2>
-            <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Enterprise IT & Digital Development</p>
-            <p class="mt-4 text-slate-600 dark:text-slate-400">Powered by Headless WordPress CMS content & modern dynamic HTMX delivery.</p>
+        <div class="text-center max-w-3xl mx-auto mb-20">
+            <h2 class="text-xs font-bold uppercase tracking-[0.25em] text-blue-400 mb-3">Core Expertise</h2>
+            <p class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Engineering Capabilities</p>
+            <p class="mt-4 text-slate-400 text-base leading-relaxed">Dynamic content served via Headless WordPress CMS REST API and HTMX partial swaps.</p>
         </div>
 
-        <!-- HTMX Dynamic Services List Loader from WordPress REST API or local mock -->
+        <!-- HTMX Dynamic Services List Container -->
         <div id="services-grid" 
              hx-get="api/services.json" 
              hx-trigger="load" 
              hx-target="#services-grid" 
              hx-swap="innerHTML"
-             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <!-- Fallback Static Cards while loading -->
-            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col justify-between h-full">
+            <!-- Loading State Frosted Cards -->
+            <div class="p-8 rounded-3xl bg-[#16161C]/80 border border-white/10 backdrop-blur-xl flex flex-col justify-between h-full group hover:border-blue-500/50 hover:shadow-[0_0_40px_-10px_rgba(37,99,235,0.3)] transition-all duration-300">
                 <div>
-                    <div class="w-12 h-12 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center font-bold text-xl mb-6">01</div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Website Design</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">High-converting, responsive UI/UX design systems optimized for speed and engagement.</p>
+                    <div class="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-extrabold text-lg mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">01</div>
+                    <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Website Design</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed font-normal">High-converting, responsive UI/UX design systems optimized for speed, accessibility, and high visual polish.</p>
                 </div>
             </div>
 
-            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col justify-between h-full">
+            <div class="p-8 rounded-3xl bg-[#16161C]/80 border border-white/10 backdrop-blur-xl flex flex-col justify-between h-full group hover:border-blue-500/50 hover:shadow-[0_0_40px_-10px_rgba(37,99,235,0.3)] transition-all duration-300">
                 <div>
-                    <div class="w-12 h-12 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center font-bold text-xl mb-6">02</div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Web Development</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Custom full-stack web applications, Headless CMS integration, and scalable APIs.</p>
+                    <div class="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-extrabold text-lg mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">02</div>
+                    <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Web Development</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed font-normal">Custom full-stack web applications, Headless WordPress integrations, and high-performance server-rendered architectures.</p>
                 </div>
             </div>
 
-            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col justify-between h-full">
+            <div class="p-8 rounded-3xl bg-[#16161C]/80 border border-white/10 backdrop-blur-xl flex flex-col justify-between h-full group hover:border-blue-500/50 hover:shadow-[0_0_40px_-10px_rgba(37,99,235,0.3)] transition-all duration-300">
                 <div>
-                    <div class="w-12 h-12 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center font-bold text-xl mb-6">03</div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Mobile Applications</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Cross-platform mobile apps for iOS & Android built with native responsiveness.</p>
+                    <div class="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-extrabold text-lg mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">03</div>
+                    <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Mobile Applications</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed font-normal">Cross-platform mobile applications for iOS & Android engineered for performance and offline reliability.</p>
                 </div>
             </div>
 
-            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col justify-between h-full">
+            <div class="p-8 rounded-3xl bg-[#16161C]/80 border border-white/10 backdrop-blur-xl flex flex-col justify-between h-full group hover:border-blue-500/50 hover:shadow-[0_0_40px_-10px_rgba(37,99,235,0.3)] transition-all duration-300">
                 <div>
-                    <div class="w-12 h-12 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center font-bold text-xl mb-6">04</div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Enterprise & Cloud</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Microsoft 365 migration, secure business email setups, and cloud infrastructure.</p>
+                    <div class="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-extrabold text-lg mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">04</div>
+                    <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Enterprise & Cloud</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed font-normal">Microsoft 365 migrations, secure business email setups, API integration, and cloud productivity software.</p>
                 </div>
             </div>
 

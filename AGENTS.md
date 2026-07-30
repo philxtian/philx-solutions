@@ -28,3 +28,8 @@
 
 ## 4. Workflow & Git Commit Rules
 * **Strict Commit Rule:** Always execute a git commit with a clear, descriptive message immediately after completing any major feature change or component integration.
+
+## 5. Design Language & Aesthetic (Apple x Antigravity)
+* **Vibe:** Ultra-clean minimalist structure meets futuristic developer-first tooling.
+* **Color Palette:** Deep dark space surfaces (`#0A0A0C`), crisp white/silver text contrast, frosted glass borders (`border-white/10`), and radiant Royal Blue (`#2563EB`) accents with subtle luminous glows.
+* **Typography:** Tight tracking, bold high-impact headings, and excellent readability across all viewports.

@@ -1,12 +1,12 @@
-<section id="contact" class="py-20 bg-slate-50 dark:bg-slate-950">
+<section id="contact" class="py-28 relative z-10 border-t border-white/[0.06]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-3">Get In Touch</h2>
-            <p class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Start Your Project Consultation</p>
-            <p class="mt-3 text-slate-600 dark:text-slate-400">Fill out the requirements below and our engineering team will get back to you within 24 hours.</p>
+        <div class="text-center mb-16">
+            <h2 class="text-xs font-bold uppercase tracking-[0.25em] text-blue-400 mb-3">Get In Touch</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Initiate Consultation</p>
+            <p class="mt-4 text-slate-400 text-base">Fill out your technical requirements and our engineering leads will respond within 24 hours.</p>
         </div>
 
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 sm:p-10 shadow-sm">
+        <div class="bg-[#121216]/90 border border-white/10 rounded-3xl p-8 sm:p-12 backdrop-blur-2xl shadow-2xl shadow-black/60">
             <form id="contact-form" 
                   hx-post="api/contact-success.html" 
                   hx-target="#form-response" 
@@ -15,45 +15,45 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                        <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Full Name *</label>
+                        <label for="name" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Full Name *</label>
                         <input type="text" id="name" name="name" required placeholder="John Doe" 
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                               class="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200">
                     </div>
                     <div>
-                        <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Business Email *</label>
+                        <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Business Email *</label>
                         <input type="email" id="email" name="email" required placeholder="john@company.com" 
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                               class="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                        <label for="organization" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Organization</label>
+                        <label for="organization" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Organization</label>
                         <input type="text" id="organization" name="organization" placeholder="Company Name Inc." 
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                               class="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200">
                     </div>
                     <div>
-                        <label for="service" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Service Interested In *</label>
+                        <label for="service" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Service Interested In *</label>
                         <select id="service" name="service" required 
-                                class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
-                            <option value="">Select a service...</option>
-                            <option value="Website Design">Website Design</option>
-                            <option value="Web Development">Web Development</option>
-                            <option value="Mobile Applications">Mobile Applications</option>
-                            <option value="Enterprise & Cloud">Enterprise Software & Microsoft 365</option>
+                                class="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-[#0A0A0C] text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200">
+                            <option value="" class="bg-[#0A0A0C] text-slate-400">Select a service...</option>
+                            <option value="Website Design" class="bg-[#0A0A0C]">Website Design</option>
+                            <option value="Web Development" class="bg-[#0A0A0C]">Web Development</option>
+                            <option value="Mobile Applications" class="bg-[#0A0A0C]">Mobile Applications</option>
+                            <option value="Enterprise & Cloud" class="bg-[#0A0A0C]">Enterprise Software & Microsoft 365</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
-                    <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Project Scope & Requirements *</label>
+                    <label for="message" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Project Scope & Requirements *</label>
                     <textarea id="message" name="message" rows="4" required placeholder="Describe your project goals, timelines, or key requirements..." 
-                              class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none"></textarea>
+                              class="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 resize-none"></textarea>
                 </div>
 
                 <div>
-                    <button type="submit" class="w-full py-4 text-base font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-600/30 transition-all hover:scale-[1.01] active:scale-[0.99]">
-                        Submit Lead Inquiry
+                    <button type="submit" class="w-full py-4 text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 border border-blue-400/30 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99]">
+                        Submit Lead Inquiry &rarr;
                     </button>
                 </div>
 
