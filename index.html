@@ -58,50 +58,50 @@
             -webkit-backdrop-filter: blur(24px);
         }
 
-        /* Silky-Smooth Aurora Rainbow Gradient Hover Effect */
+        /* Silky-Smooth Aurora Rainbow Gradient Hover Effect - Layered Behind Content */
         .aurora-card {
             position: relative;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity;
+            z-index: 1;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
         }
 
         .aurora-card:hover {
             transform: translateY(-2px);
         }
 
+        /* Aurora Border Edge Glow - Positioned strictly at boundary z-0 */
         .aurora-card::before {
             content: '';
             position: absolute;
             inset: -1px;
             border-radius: inherit;
             padding: 1px;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.55), rgba(59, 130, 246, 0.55), rgba(139, 92, 246, 0.55), rgba(245, 158, 11, 0.45));
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.6), rgba(59, 130, 246, 0.6), rgba(139, 92, 246, 0.6), rgba(245, 158, 11, 0.5));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             opacity: 0;
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
-            z-index: 10;
+            z-index: 0;
         }
 
-        .aurora-card:hover::before {
-            opacity: 1;
-        }
-
+        /* Diffused Blooming Rainbow Aura - Positioned deep behind card z--1 */
         .aurora-card::after {
             content: '';
             position: absolute;
-            inset: -8px;
+            inset: -10px;
             border-radius: inherit;
-            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.16), rgba(59, 130, 246, 0.14), rgba(236, 72, 153, 0.1), transparent 70%);
-            filter: blur(28px);
+            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.22), rgba(59, 130, 246, 0.18), rgba(236, 72, 153, 0.15), transparent 70%);
+            filter: blur(24px);
             opacity: 0;
             z-index: -1;
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
         }
 
+        .aurora-card:hover::before,
         .aurora-card:hover::after {
             opacity: 1;
         }
