@@ -1,12 +1,12 @@
-<section id="contact" class="py-32 bg-black border-b border-white/10">
+<section id="contact" class="py-32 bg-white dark:bg-black border-b border-black/10 dark:border-white/10 transition-colors duration-300">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-20">
-            <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-zinc-400 mb-4">Get In Touch</h2>
-            <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Initiate Consultation</p>
-            <p class="mt-4 text-zinc-400 text-base">Fill out your technical requirements and our engineering leads will respond within 24 hours.</p>
+            <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-slate-500 dark:text-zinc-400 mb-4">Get In Touch</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Initiate Consultation</p>
+            <p class="mt-4 text-slate-600 dark:text-zinc-400 text-base">Fill out your technical requirements and our engineering leads will respond within 24 hours.</p>
         </div>
 
-        <div class="bg-black border border-white/20 rounded-2xl p-8 sm:p-12">
+        <div class="bg-white/80 dark:bg-black border border-black/10 dark:border-white/20 backdrop-blur-md rounded-2xl p-8 sm:p-12 shadow-xl shadow-black/5 dark:shadow-none">
             <form id="contact-form" 
                   hx-post="api/contact-success.html" 
                   hx-target="#form-response" 
@@ -15,44 +15,44 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                        <label for="name" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Full Name *</label>
+                        <label for="name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Full Name *</label>
                         <input type="text" id="name" name="name" required placeholder="John Doe" 
-                               class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-black text-white placeholder-zinc-500 focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors">
+                               class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-black text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors">
                     </div>
                     <div>
-                        <label for="email" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Business Email *</label>
+                        <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Business Email *</label>
                         <input type="email" id="email" name="email" required placeholder="john@company.com" 
-                               class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-black text-white placeholder-zinc-500 focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors">
+                               class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-black text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                        <label for="organization" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Organization</label>
+                        <label for="organization" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Organization</label>
                         <input type="text" id="organization" name="organization" placeholder="Company Name Inc." 
-                               class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-black text-white placeholder-zinc-500 focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors">
+                               class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-black text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors">
                     </div>
                     <div>
-                        <label for="service" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Service Interested In *</label>
+                        <label for="service" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Service Interested In *</label>
                         <select id="service" name="service" required 
-                                class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-black text-white focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors">
-                            <option value="" class="bg-black text-zinc-400">Select a service...</option>
-                            <option value="Website Design" class="bg-black text-white">Website Design</option>
-                            <option value="Web Development" class="bg-black text-white">Web Development</option>
-                            <option value="Mobile Applications" class="bg-black text-white">Mobile Applications</option>
-                            <option value="Enterprise & Cloud" class="bg-black text-white">Enterprise Software & Microsoft 365</option>
+                                class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-black text-slate-900 dark:text-white focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors">
+                            <option value="" class="bg-white dark:bg-black text-slate-500 dark:text-zinc-400">Select a service...</option>
+                            <option value="Website Design" class="bg-white dark:bg-black text-slate-900 dark:text-white">Website Design</option>
+                            <option value="Web Development" class="bg-white dark:bg-black text-slate-900 dark:text-white">Web Development</option>
+                            <option value="Mobile Applications" class="bg-white dark:bg-black text-slate-900 dark:text-white">Mobile Applications</option>
+                            <option value="Enterprise & Cloud" class="bg-white dark:bg-black text-slate-900 dark:text-white">Enterprise Software & Microsoft 365</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
-                    <label for="message" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Project Scope & Requirements *</label>
+                    <label for="message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Project Scope & Requirements *</label>
                     <textarea id="message" name="message" rows="4" required placeholder="Describe your project goals, timelines, or key requirements..." 
-                              class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-black text-white placeholder-zinc-500 focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors resize-none"></textarea>
+                              class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-black text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors resize-none"></textarea>
                 </div>
 
                 <div>
-                    <button type="submit" class="w-full py-4 text-sm font-bold text-black bg-white hover:bg-zinc-200 rounded-full border border-white transition-colors">
+                    <button type="submit" class="w-full py-4 text-sm font-bold text-white bg-black hover:bg-slate-800 dark:text-black dark:bg-white dark:hover:bg-zinc-200 rounded-full border border-black dark:border-white transition-colors">
                         Submit Lead Inquiry &rarr;
                     </button>
                 </div>

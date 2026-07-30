@@ -1,7 +1,7 @@
 /**
- * PHILX Solutions — Headless WordPress REST API & HTMX Bridge
+ * PHILX Solutions — Headless WordPress REST API, HTMX & Theme Bridge
  * Handles dynamic content fetching from WordPress endpoints (e.g. /wp-json/wp/v2/services)
- * and transforms JSON responses into strict Monochromatic Black & White Tailwind CSS components.
+ * and controls Dark/Light mode theme switching with localStorage persistence.
  */
 
 window.PHILX_WP_CONFIG = {
@@ -9,13 +9,43 @@ window.PHILX_WP_CONFIG = {
     isLiveWpActive: false
 };
 
+// Global Theme Toggle Function
+window.toggleTheme = function() {
+    if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+    }
+    updateThemeIcons();
+};
+
+function updateThemeIcons() {
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    if (!lightIcon || !darkIcon) return;
+
+    if (document.documentElement.classList.contains('dark')) {
+        lightIcon.classList.remove('hidden');
+        darkIcon.classList.add('hidden');
+    } else {
+        lightIcon.classList.add('hidden');
+        darkIcon.classList.remove('hidden');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('PHILX Solutions WP + HTMX Bridge initialized with Monochromatic Black & White aesthetic.');
+    updateThemeIcons();
+});
+
+document.body.addEventListener('htmx:afterSwap', function (evt) {
+    updateThemeIcons();
 });
 
 /**
  * HTMX Event Hook: Intercepts JSON responses from WordPress REST API
- * and converts JSON data into Black & White cards before HTMX swaps into DOM.
+ * and converts JSON data into Frosted Glass Cards before HTMX swaps into DOM.
  */
 document.body.addEventListener('htmx:beforeSwap', function (evt) {
     if (evt.detail.xhr.responseURL.includes('services') || evt.detail.target.id === 'services-grid') {
@@ -30,13 +60,13 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                     const description = item.excerpt?.rendered || item.description || item.content || '';
 
                     return `
-                        <div class="p-8 rounded-2xl bg-black border border-white/20 flex flex-col justify-between h-full group hover:border-white transition-all duration-200">
+                        <div class="p-8 rounded-2xl bg-white/80 dark:bg-black border border-black/10 dark:border-white/20 flex flex-col justify-between h-full group hover:border-black dark:hover:border-white backdrop-blur-md shadow-lg shadow-black/5 dark:shadow-none transition-all duration-200">
                             <div>
-                                <div class="w-12 h-12 rounded-xl bg-white text-black flex items-center justify-center font-extrabold text-lg mb-8">
+                                <div class="w-12 h-12 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-extrabold text-lg mb-8">
                                     ${number}
                                 </div>
-                                <h3 class="text-xl font-bold text-white mb-4 tracking-tight">${title}</h3>
-                                <div class="text-zinc-400 text-sm leading-relaxed font-normal">${description}</div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">${title}</h3>
+                                <div class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">${description}</div>
                             </div>
                         </div>
                     `;
