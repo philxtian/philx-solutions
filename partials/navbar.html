@@ -1,5 +1,5 @@
 <header id="navbar-container" class="sticky top-4 z-50 w-full max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="w-full backdrop-blur-xl bg-white/70 dark:bg-black/60 border border-black/10 dark:border-white/15 rounded-full px-6 h-16 flex items-center justify-between shadow-xl shadow-black/5 dark:shadow-none transition-all duration-300 relative z-50">
+    <div class="w-full backdrop-blur-xl bg-white/80 dark:bg-black/80 border border-black/10 dark:border-white/15 rounded-full px-6 h-16 flex items-center justify-between shadow-xl shadow-black/5 dark:shadow-none transition-all duration-300 relative z-50">
         <!-- Brand Monogram & Name -->
         <a href="#" class="flex items-center space-x-3 group relative z-20">
             <div class="w-9 h-9 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-extrabold text-sm group-hover:scale-105 transition-transform">
@@ -11,7 +11,7 @@
             </div>
         </a>
 
-        <!-- Navigation Links with Animated Underline Transitions -->
+        <!-- Desktop Navigation Links with Animated Underline Transitions -->
         <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold text-slate-600 dark:text-zinc-300 tracking-wider uppercase relative z-20">
             <a href="#hero" class="relative py-1 hover:text-black dark:hover:text-white transition-colors group">
                 Home
@@ -35,7 +35,7 @@
             </a>
         </nav>
 
-        <!-- CTA & Dark/Light Mode Toggle Switch -->
+        <!-- CTA & Dark/Light Mode Toggle Switch + Mobile Menu Button -->
         <div class="flex items-center space-x-3 relative z-20">
             <!-- Theme Toggle Button -->
             <button id="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Toggle Theme"
@@ -50,10 +50,28 @@
                 </svg>
             </button>
 
+            <!-- Mobile Hamburger Toggle Button -->
+            <button id="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu"
+                    class="md:hidden p-2 rounded-full border border-black/10 dark:border-white/20 bg-white/80 dark:bg-zinc-900/80 text-slate-800 dark:text-zinc-200 hover:bg-slate-200 dark:hover:bg-zinc-800 transition-colors backdrop-blur-md relative z-30 cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
             <!-- CTA Button -->
-            <a href="#contact" class="inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-black hover:bg-slate-800 dark:text-black dark:bg-white dark:hover:bg-zinc-200 rounded-full border border-black dark:border-white transition-all shadow-md relative z-30 cursor-pointer">
+            <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-black hover:bg-slate-800 dark:text-black dark:bg-white dark:hover:bg-zinc-200 rounded-full border border-black dark:border-white transition-all shadow-md relative z-30 cursor-pointer">
                 Get a Quote
             </a>
         </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 w-full bg-white/95 dark:bg-black/95 border border-black/10 dark:border-white/15 rounded-2xl p-6 backdrop-blur-2xl shadow-2xl space-y-4 text-sm font-semibold text-slate-800 dark:text-zinc-200 uppercase tracking-wider relative z-40 transition-all duration-300">
+        <a href="#hero" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">Home</a>
+        <a href="#services" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">Services</a>
+        <a href="#about" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">About</a>
+        <a href="#expertise" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">Expertise</a>
+        <a href="#contact" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">Contact</a>
+        <a href="#contact" class="block w-full text-center py-3 px-4 mt-2 text-xs font-bold text-white bg-black dark:text-black dark:bg-white rounded-full">Get a Quote &rarr;</a>
     </div>
 </header>

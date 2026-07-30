@@ -1,7 +1,6 @@
 /**
  * PHILX Solutions — Headless WordPress REST API, HTMX & Theme Bridge
- * Handles dynamic content fetching from WordPress endpoints (e.g. /wp-json/wp/v2/services)
- * and controls Dark/Light mode theme switching with localStorage persistence.
+ * High-performance event delegation, smooth scrolling, theme switching, & dynamic REST card rendering.
  */
 
 window.PHILX_WP_CONFIG = {
@@ -21,6 +20,13 @@ window.toggleTheme = function() {
     updateThemeIcons();
 };
 
+// Mobile Menu Toggle Function
+window.toggleMobileMenu = function() {
+    const menu = document.getElementById('mobile-menu');
+    if (!menu) return;
+    menu.classList.toggle('hidden');
+};
+
 function updateThemeIcons() {
     const lightIcon = document.getElementById('theme-toggle-light-icon');
     const darkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -34,6 +40,27 @@ function updateThemeIcons() {
         darkIcon.classList.remove('hidden');
     }
 }
+
+// Global Event Delegation for Smooth Anchor Link Navigation
+document.addEventListener('click', function (evt) {
+    const targetLink = evt.target.closest('a[href^="#"]');
+    if (!targetLink) return;
+
+    const targetId = targetLink.getAttribute('href');
+    if (!targetId || targetId === '#') return;
+
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+        evt.preventDefault();
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Close mobile menu if open
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+        }
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     updateThemeIcons();
