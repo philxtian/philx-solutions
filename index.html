@@ -54,28 +54,33 @@
 
         /* Enhanced Glassmorphism Backdrop Filter */
         .glass-panel {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
         }
 
-        /* Aurora / Rainbow Multi-Color Glow on Hover */
+        /* Silky-Smooth Aurora Rainbow Gradient Hover Effect */
         .aurora-card {
             position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+
+        .aurora-card:hover {
+            transform: translateY(-2px);
         }
 
         .aurora-card::before {
             content: '';
             position: absolute;
             inset: -1px;
-            border-radius: 1rem;
+            border-radius: inherit;
             padding: 1px;
-            background: linear-gradient(135deg, #EC4899, #3B82F6, #8B5CF6, #F59E0B);
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.55), rgba(59, 130, 246, 0.55), rgba(139, 92, 246, 0.55), rgba(245, 158, 11, 0.45));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             z-index: 10;
         }
@@ -87,13 +92,13 @@
         .aurora-card::after {
             content: '';
             position: absolute;
-            inset: -4px;
-            border-radius: 1.25rem;
-            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.25), rgba(59, 130, 246, 0.2), rgba(236, 72, 153, 0.15), transparent 70%);
-            filter: blur(18px);
+            inset: -8px;
+            border-radius: inherit;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.16), rgba(59, 130, 246, 0.14), rgba(236, 72, 153, 0.1), transparent 70%);
+            filter: blur(28px);
             opacity: 0;
             z-index: -1;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
         }
 
@@ -104,10 +109,10 @@
 </head>
 <body class="bg-white dark:bg-black text-slate-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 relative bg-tech-grid overflow-x-hidden">
 
-    <!-- Ambient Background Color Patches -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[550px] bg-gradient-to-b from-slate-200/50 via-zinc-300/20 to-transparent dark:from-zinc-800/30 dark:via-zinc-900/10 dark:to-transparent rounded-full blur-[140px] pointer-events-none z-0"></div>
-    <div class="fixed top-[35%] right-[-10%] w-[650px] h-[650px] bg-slate-200/40 dark:bg-zinc-800/20 rounded-full blur-[160px] pointer-events-none z-0"></div>
-    <div class="fixed bottom-[10%] left-[-10%] w-[700px] h-[700px] bg-zinc-300/40 dark:bg-zinc-800/20 rounded-full blur-[160px] pointer-events-none z-0"></div>
+    <!-- Highly Diffused Soft Atmospheric Aurora Aura Background Patches -->
+    <div class="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-slate-200/40 via-zinc-300/15 to-transparent dark:from-zinc-800/20 dark:via-zinc-900/10 dark:to-transparent rounded-full blur-[160px] pointer-events-none z-0 transition-opacity duration-500"></div>
+    <div class="fixed top-[30%] right-[-5%] w-[750px] h-[750px] bg-gradient-to-tr from-indigo-200/20 via-slate-200/30 to-transparent dark:from-indigo-900/10 dark:via-zinc-800/15 dark:to-transparent rounded-full blur-[180px] pointer-events-none z-0 transition-opacity duration-500"></div>
+    <div class="fixed bottom-[5%] left-[-5%] w-[800px] h-[800px] bg-gradient-to-tr from-slate-300/30 via-zinc-200/20 to-transparent dark:from-zinc-800/15 dark:via-zinc-900/10 dark:to-transparent rounded-full blur-[180px] pointer-events-none z-0 transition-opacity duration-500"></div>
 
     <!-- Sticky Pill Navigation Bar -->
     <div id="navbar-container" hx-get="partials/navbar.html" hx-trigger="load" hx-swap="outerHTML" class="z-50 relative">
