@@ -45,7 +45,7 @@ document.body.addEventListener('htmx:afterSwap', function (evt) {
 
 /**
  * HTMX Event Hook: Intercepts JSON responses from WordPress REST API
- * and converts JSON data into Frosted Glass Cards before HTMX swaps into DOM.
+ * and converts JSON data into Frosted Glass Cards (Backdrop Blur XL) before HTMX swaps into DOM.
  */
 document.body.addEventListener('htmx:beforeSwap', function (evt) {
     if (evt.detail.xhr.responseURL.includes('services') || evt.detail.target.id === 'services-grid') {
@@ -60,9 +60,9 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                     const description = item.excerpt?.rendered || item.description || item.content || '';
 
                     return `
-                        <div class="p-8 rounded-2xl bg-white/80 dark:bg-black border border-black/10 dark:border-white/20 flex flex-col justify-between h-full group hover:border-black dark:hover:border-white backdrop-blur-md shadow-lg shadow-black/5 dark:shadow-none transition-all duration-200">
+                        <div class="p-8 rounded-2xl bg-white/60 dark:bg-black/60 border border-black/10 dark:border-white/15 flex flex-col justify-between h-full group hover:border-black dark:hover:border-white backdrop-blur-xl shadow-xl shadow-black/5 dark:shadow-none transition-all duration-300">
                             <div>
-                                <div class="w-12 h-12 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-extrabold text-lg mb-8">
+                                <div class="w-12 h-12 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-extrabold text-lg mb-8 shadow-md">
                                     ${number}
                                 </div>
                                 <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">${title}</h3>

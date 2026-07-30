@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHILX Solutions | Enterprise IT & Software Solutions</title>
     <meta name="description" content="PHILX Solutions delivers enterprise website design, full-stack development, mobile apps, and cloud software powered by Headless WordPress, HTMX, and modern engineering.">
-    <!-- Inline Theme Initializer script (Prevents dark mode flash) -->
+    <!-- Inline Theme Initializer script -->
     <script>
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -43,16 +43,31 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
         }
 
+        /* Tech Dot Grid Background Pattern */
+        .bg-tech-grid {
+            background-size: 32px 32px;
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+        }
+        .dark .bg-tech-grid {
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+        }
+
+        /* Enhanced Glassmorphism Backdrop Filter */
         .glass-panel {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
     </style>
 </head>
-<body class="bg-white dark:bg-black text-slate-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300">
+<body class="bg-white dark:bg-black text-slate-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 relative bg-tech-grid overflow-x-hidden">
+
+    <!-- Ambient Background Color Patches (Blurred Monochromatic Organic Blobs) -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[550px] bg-gradient-to-b from-slate-200/50 via-zinc-300/20 to-transparent dark:from-zinc-800/30 dark:via-zinc-900/10 dark:to-transparent rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed top-[35%] right-[-10%] w-[650px] h-[650px] bg-slate-200/40 dark:bg-zinc-800/20 rounded-full blur-[160px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[10%] left-[-10%] w-[700px] h-[700px] bg-zinc-300/40 dark:bg-zinc-800/20 rounded-full blur-[160px] pointer-events-none z-0"></div>
 
     <!-- Sticky Pill Navigation Bar -->
-    <div id="navbar-container" hx-get="partials/navbar.html" hx-trigger="load" hx-swap="outerHTML">
+    <div id="navbar-container" hx-get="partials/navbar.html" hx-trigger="load" hx-swap="outerHTML" class="z-50 relative">
         <div class="h-20 flex items-center justify-center text-slate-400 dark:text-zinc-500 text-xs tracking-widest uppercase">Loading navigation...</div>
     </div>
 
@@ -75,7 +90,7 @@
     </main>
 
     <!-- Footer -->
-    <div id="footer-container" hx-get="partials/footer.html" hx-trigger="load" hx-swap="outerHTML">
+    <div id="footer-container" hx-get="partials/footer.html" hx-trigger="load" hx-swap="outerHTML" class="z-10 relative">
         <div class="py-8 text-center text-slate-400 dark:text-zinc-500 text-xs tracking-widest uppercase">Loading footer...</div>
     </div>
 
