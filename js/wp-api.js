@@ -45,7 +45,7 @@ document.body.addEventListener('htmx:afterSwap', function (evt) {
 
 /**
  * HTMX Event Hook: Intercepts JSON responses from WordPress REST API
- * and converts JSON data into Aurora Frosted Glass Cards before HTMX swaps into DOM.
+ * and converts JSON data into Opaque Cards with Outer Aurora Glow Wrappers.
  */
 document.body.addEventListener('htmx:beforeSwap', function (evt) {
     if (evt.detail.xhr.responseURL.includes('services') || evt.detail.target.id === 'services-grid') {
@@ -60,13 +60,18 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                     const description = item.excerpt?.rendered || item.description || item.content || '';
 
                     return `
-                        <div class="aurora-card p-8 rounded-2xl bg-white/80 dark:bg-black/80 border border-black/10 dark:border-white/15 flex flex-col justify-between h-full group backdrop-blur-xl shadow-xl shadow-black/5 dark:shadow-none">
-                            <div class="relative z-10">
-                                <div class="w-12 h-12 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-extrabold text-lg mb-8 shadow-md">
-                                    ${number}
+                        <div class="aurora-wrapper group relative">
+                            <div class="aurora-glow absolute -inset-2.5 rounded-3xl bg-gradient-to-r from-pink-500 via-blue-500 via-purple-500 to-amber-500 opacity-0 blur-xl group-hover:opacity-35 transition-opacity duration-500 pointer-events-none -z-10"></div>
+                            <div class="aurora-border absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-pink-500 via-blue-500 via-purple-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"></div>
+                            
+                            <div class="p-8 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/15 flex flex-col justify-between h-full shadow-lg dark:shadow-none transition-transform duration-500 group-hover:-translate-y-1 relative z-10">
+                                <div>
+                                    <div class="w-12 h-12 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-extrabold text-lg mb-8 shadow-md">
+                                        ${number}
+                                    </div>
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">${title}</h3>
+                                    <div class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">${description}</div>
                                 </div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">${title}</h3>
-                                <div class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">${description}</div>
                             </div>
                         </div>
                     `;

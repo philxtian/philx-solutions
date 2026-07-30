@@ -6,60 +6,65 @@
             <p class="mt-4 text-slate-600 dark:text-zinc-400 text-base">Fill out your technical requirements and our engineering leads will respond within 24 hours.</p>
         </div>
 
-        <div class="aurora-card bg-white/60 dark:bg-black/60 border border-black/10 dark:border-white/15 backdrop-blur-xl rounded-2xl p-8 sm:p-12 shadow-2xl shadow-black/5 dark:shadow-none">
-            <form id="contact-form" 
-                  hx-post="api/contact-success.html" 
-                  hx-target="#form-response" 
-                  hx-swap="innerHTML"
-                  class="space-y-6">
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label for="name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Full Name *</label>
-                        <input type="text" id="name" name="name" required placeholder="John Doe" 
-                               class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-white/50 dark:bg-black/50 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none backdrop-blur-md transition-colors">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Business Email *</label>
-                        <input type="email" id="email" name="email" required placeholder="john@company.com" 
-                               class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-white/50 dark:bg-black/50 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none backdrop-blur-md transition-colors">
-                    </div>
-                </div>
+        <div class="aurora-wrapper group relative">
+            <div class="aurora-glow absolute -inset-3 rounded-[2rem] bg-gradient-to-r from-pink-500 via-blue-500 via-purple-500 to-amber-500 opacity-0 blur-2xl group-hover:opacity-30 transition-opacity duration-500 pointer-events-none -z-10"></div>
+            <div class="aurora-border absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-pink-500 via-blue-500 via-purple-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"></div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label for="organization" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Organization</label>
-                        <input type="text" id="organization" name="organization" placeholder="Company Name Inc." 
-                               class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-white/50 dark:bg-black/50 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none backdrop-blur-md transition-colors">
+            <div class="bg-white dark:bg-black border border-black/10 dark:border-white/15 rounded-2xl p-8 sm:p-12 shadow-2xl shadow-black/5 dark:shadow-none relative z-10">
+                <form id="contact-form" 
+                      hx-post="api/contact-success.html" 
+                      hx-target="#form-response" 
+                      hx-swap="innerHTML"
+                      class="space-y-6">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe" 
+                                   class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Business Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="john@company.com" 
+                                   class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors">
+                        </div>
                     </div>
-                    <div>
-                        <label for="service" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Service Interested In *</label>
-                        <select id="service" name="service" required 
-                                class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-white/50 dark:bg-black/50 text-slate-900 dark:text-white focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none backdrop-blur-md transition-colors">
-                            <option value="" class="bg-white dark:bg-black text-slate-500 dark:text-zinc-400">Select a service...</option>
-                            <option value="Website Design" class="bg-white dark:bg-black text-slate-900 dark:text-white">Website Design</option>
-                            <option value="Web Development" class="bg-white dark:bg-black text-slate-900 dark:text-white">Web Development</option>
-                            <option value="Mobile Applications" class="bg-white dark:bg-black text-slate-900 dark:text-white">Mobile Applications</option>
-                            <option value="Enterprise & Cloud" class="bg-white dark:bg-black text-slate-900 dark:text-white">Enterprise Software & Microsoft 365</option>
-                        </select>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="organization" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Organization</label>
+                            <input type="text" id="organization" name="organization" placeholder="Company Name Inc." 
+                                   class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label for="service" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Service Interested In *</label>
+                            <select id="service" name="service" required 
+                                    class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors">
+                                <option value="" class="bg-white dark:bg-black text-slate-500 dark:text-zinc-400">Select a service...</option>
+                                <option value="Website Design" class="bg-white dark:bg-black text-slate-900 dark:text-white">Website Design</option>
+                                <option value="Web Development" class="bg-white dark:bg-black text-slate-900 dark:text-white">Web Development</option>
+                                <option value="Mobile Applications" class="bg-white dark:bg-black text-slate-900 dark:text-white">Mobile Applications</option>
+                                <option value="Enterprise & Cloud" class="bg-white dark:bg-black text-slate-900 dark:text-white">Enterprise Software & Microsoft 365</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div>
-                    <label for="message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Project Scope & Requirements *</label>
-                    <textarea id="message" name="message" rows="4" required placeholder="Describe your project goals, timelines, or key requirements..." 
-                              class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-white/50 dark:bg-black/50 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none backdrop-blur-md transition-colors resize-none"></textarea>
-                </div>
+                    <div>
+                        <label for="message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 mb-2">Project Scope & Requirements *</label>
+                        <textarea id="message" name="message" rows="4" required placeholder="Describe your project goals, timelines, or key requirements..." 
+                                  class="w-full px-4 py-3.5 rounded-xl border border-black/10 dark:border-white/20 bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors resize-none"></textarea>
+                    </div>
 
-                <div>
-                    <button type="submit" class="aurora-card w-full py-4 text-sm font-bold text-white bg-black hover:bg-slate-800 dark:text-black dark:bg-white dark:hover:bg-zinc-200 rounded-full border border-black dark:border-white transition-colors shadow-lg">
-                        Submit Lead Inquiry &rarr;
-                    </button>
-                </div>
+                    <div>
+                        <button type="submit" class="w-full py-4 text-sm font-bold text-white bg-black hover:bg-slate-800 dark:text-black dark:bg-white dark:hover:bg-zinc-200 rounded-full border border-black dark:border-white transition-colors shadow-lg">
+                            Submit Lead Inquiry &rarr;
+                        </button>
+                    </div>
 
-                <!-- HTMX Inline Response Feedback Container -->
-                <div id="form-response" class="mt-4"></div>
-            </form>
+                    <!-- HTMX Inline Response Feedback Container -->
+                    <div id="form-response" class="mt-4"></div>
+                </form>
+            </div>
         </div>
     </div>
 </section>
