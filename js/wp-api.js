@@ -88,12 +88,12 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
 
                     return `
                         <div class="aurora-wrapper group relative">
-                            <div class="aurora-glow absolute -inset-2.5 rounded-3xl bg-gradient-to-r from-pink-500 via-blue-500 via-purple-500 to-amber-500 opacity-0 blur-xl group-hover:opacity-35 transition-opacity duration-500 pointer-events-none -z-10"></div>
-                            <div class="aurora-border absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-pink-500 via-blue-500 via-purple-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"></div>
+                            <div class="aurora-glow absolute -inset-2.5 rounded-3xl bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 blur-xl group-hover:opacity-35 transition-opacity duration-500 pointer-events-none -z-10"></div>
+                            <div class="aurora-border absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"></div>
                             
                             <div class="p-8 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/15 flex flex-col justify-between h-full shadow-lg dark:shadow-none transition-transform duration-500 group-hover:-translate-y-1 relative z-10">
                                 <div>
-                                    <div class="w-12 h-12 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-extrabold text-lg mb-8 shadow-md">
+                                    <div class="w-12 h-12 rounded-xl bg-brand text-white flex items-center justify-center font-extrabold text-lg mb-8 shadow-md shadow-brand/25">
                                         ${number}
                                     </div>
                                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">${title}</h3>

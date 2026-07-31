@@ -25,7 +25,20 @@
                     colors: {
                         black: '#000000',
                         white: '#FFFFFF',
-                        charcoal: '#0A0A0C'
+                        charcoal: '#0A0A0C',
+                        brand: {
+                            DEFAULT: '#027DFD',
+                            50: '#F0F7FF',
+                            100: '#E0F0FE',
+                            200: '#BAE0FD',
+                            300: '#7CC5FC',
+                            400: '#36A8FA',
+                            500: '#027DFD',
+                            600: '#0062D6',
+                            700: '#004DB3',
+                            800: '#003882',
+                            900: '#042D63',
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'sans-serif']
@@ -61,12 +74,12 @@
         }
     </style>
 </head>
-<body class="bg-white dark:bg-black text-slate-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 relative bg-tech-grid overflow-x-hidden">
+<body class="bg-white dark:bg-black text-slate-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-brand selection:text-white transition-colors duration-300 relative bg-tech-grid overflow-x-hidden">
 
     <!-- Highly Diffused Soft Atmospheric Aurora Aura Background Patches -->
-    <div class="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-slate-200/40 via-zinc-300/15 to-transparent dark:from-zinc-800/20 dark:via-zinc-900/10 dark:to-transparent rounded-full blur-[160px] pointer-events-none z-0 transition-opacity duration-500"></div>
-    <div class="fixed top-[30%] right-[-5%] w-[750px] h-[750px] bg-gradient-to-tr from-indigo-200/20 via-slate-200/30 to-transparent dark:from-indigo-900/10 dark:via-zinc-800/15 dark:to-transparent rounded-full blur-[180px] pointer-events-none z-0 transition-opacity duration-500"></div>
-    <div class="fixed bottom-[5%] left-[-5%] w-[800px] h-[800px] bg-gradient-to-tr from-slate-300/30 via-zinc-200/20 to-transparent dark:from-zinc-800/15 dark:via-zinc-900/10 dark:to-transparent rounded-full blur-[180px] pointer-events-none z-0 transition-opacity duration-500"></div>
+    <div class="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-brand/20 via-blue-500/10 to-transparent dark:from-brand/25 dark:via-blue-600/10 dark:to-transparent rounded-full blur-[160px] pointer-events-none z-0 transition-opacity duration-500"></div>
+    <div class="fixed top-[30%] right-[-5%] w-[750px] h-[750px] bg-gradient-to-tr from-brand/15 via-blue-600/10 to-transparent dark:from-brand/20 dark:via-blue-700/10 dark:to-transparent rounded-full blur-[180px] pointer-events-none z-0 transition-opacity duration-500"></div>
+    <div class="fixed bottom-[5%] left-[-5%] w-[800px] h-[800px] bg-gradient-to-tr from-brand/15 via-blue-500/10 to-transparent dark:from-brand/20 dark:via-blue-800/10 dark:to-transparent rounded-full blur-[180px] pointer-events-none z-0 transition-opacity duration-500"></div>
 
     <!-- Sticky Pill Navigation Bar -->
     <div id="navbar-container" hx-get="partials/navbar.html" hx-trigger="load" hx-swap="outerHTML" class="z-50 relative">
