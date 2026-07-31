@@ -1,6 +1,6 @@
 /**
- * PHILX Solutions — Antigravity Monochrome Interactive Canvas Background
- * Lightweight, 60fps cursor-reactive particle & constellation grid animation.
+ * PHILX Solutions — Antigravity Monochrome Interactive Canvas & Cursor Spotlight Background
+ * Lightweight, 60fps cursor-reactive particle constellation & ambient spotlight animation.
  */
 
 (function () {
@@ -85,6 +85,18 @@
         const particleAlpha = isDark ? 0.25 : 0.2;
         const lineAlphaMax = isDark ? 0.08 : 0.06;
         const baseColor = isDark ? '255, 255, 255' : '0, 0, 0';
+
+        // Draw subtle monochrome cursor spotlight gradient
+        if (mouse.x > 0 && mouse.y > 0) {
+            const spotGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 240);
+            const spotAlpha = isDark ? 0.07 : 0.04;
+            spotGrad.addColorStop(0, `rgba(${baseColor}, ${spotAlpha})`);
+            spotGrad.addColorStop(1, `rgba(${baseColor}, 0)`);
+            ctx.fillStyle = spotGrad;
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 240, 0, Math.PI * 2);
+            ctx.fill();
+        }
 
         // Draw connecting constellation lines
         for (let i = 0; i < particles.length; i++) {
