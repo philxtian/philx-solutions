@@ -120,10 +120,19 @@
                     const theme = entry.target.getAttribute('data-section-theme');
 
                     if (theme === 'dark') {
-                        // Floating over dark section -> Navbar renders light (white capsule + dark text)
-                        capsule.className = 'w-full backdrop-blur-xl bg-white/90 text-slate-900 border border-black/15 rounded-full px-6 h-16 flex items-center justify-between shadow-2xl transition-all duration-300 relative z-50';
-                        if (logoBlack) logoBlack.classList.remove('hidden');
-                        if (logoWhite) logoWhite.classList.add('hidden');
+                        // Floating over dark section -> Navbar renders light (white bg + dark text)
+                        capsule.classList.remove('bg-black/90', 'text-white', 'border-white/15');
+                        capsule.classList.add('bg-white/90', 'text-slate-900', 'border-black/15');
+
+                        if (logoBlack) {
+                            logoBlack.classList.remove('opacity-0');
+                            logoBlack.classList.add('opacity-100');
+                        }
+                        if (logoWhite) {
+                            logoWhite.classList.remove('opacity-100');
+                            logoWhite.classList.add('opacity-0');
+                        }
+
                         if (title) title.className = 'nav-title flex justify-between font-black text-slate-900 leading-none text-[13px] uppercase';
                         if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-slate-500 leading-none mt-1 uppercase';
                         links.forEach(l => l.className = 'nav-link relative py-1 text-slate-700 hover:text-black transition-colors group');
@@ -131,10 +140,19 @@
                         if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-black hover:bg-slate-800 rounded-full border border-black transition-all shadow-md relative z-30 cursor-pointer uppercase tracking-widest';
                         if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-black/15 bg-slate-100 text-slate-900 transition-colors backdrop-blur-md relative z-30 cursor-pointer';
                     } else if (theme === 'light') {
-                        // Floating over light section -> Navbar inverts to dark (black capsule + white text)
-                        capsule.className = 'w-full backdrop-blur-xl bg-black/90 text-white border border-white/15 rounded-full px-6 h-16 flex items-center justify-between shadow-2xl transition-all duration-300 relative z-50';
-                        if (logoBlack) logoBlack.classList.add('hidden');
-                        if (logoWhite) logoWhite.classList.remove('hidden');
+                        // Floating over light section -> Navbar inverts to dark (black bg + white text)
+                        capsule.classList.remove('bg-white/90', 'text-slate-900', 'border-black/15');
+                        capsule.classList.add('bg-black/90', 'text-white', 'border-white/15');
+
+                        if (logoBlack) {
+                            logoBlack.classList.remove('opacity-100');
+                            logoBlack.classList.add('opacity-0');
+                        }
+                        if (logoWhite) {
+                            logoWhite.classList.remove('opacity-0');
+                            logoWhite.classList.add('opacity-100');
+                        }
+
                         if (title) title.className = 'nav-title flex justify-between font-black text-white leading-none text-[13px] uppercase';
                         if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-zinc-400 leading-none mt-1 uppercase';
                         links.forEach(l => l.className = 'nav-link relative py-1 text-zinc-300 hover:text-white transition-colors group');
