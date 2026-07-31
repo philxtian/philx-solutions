@@ -1,7 +1,7 @@
 /**
  * PHILX Solutions — Headless WordPress REST API, HTMX & Theme Bridge
- * Asynchronous REST API integration for contact form submissions, Lofi editorial layout helpers & dynamic CMS data handling.
- * Strict High-End Monochrome Minimalist Design System.
+ * Asynchronous REST API integration for contact form submissions & dynamic CMS data handling.
+ * Pure High-End Monochrome Minimalist Editorial Layout.
  */
 
 window.PHILX_WP_CONFIG = {
@@ -235,7 +235,7 @@ document.body.addEventListener('htmx:afterRequest', function (evt) {
 
 /**
  * HTMX Event Hook: Intercepts JSON responses from WordPress REST API / services.json
- * and converts JSON data into Pure Monochrome Editorial Case Study Cards without stock imagery.
+ * and converts JSON data into Pure Minimalist Editorial Text Rows without card boxes.
  */
 document.body.addEventListener('htmx:beforeSwap', function (evt) {
     if (evt.detail.xhr.responseURL.includes('services') || evt.detail.target.id === 'services-grid') {
@@ -247,29 +247,23 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                 const htmlContent = servicesData.map((item, index) => {
                     const number = (index + 1).toString().padStart(2, '0');
                     const title = item.title?.rendered || item.title || 'Service Title';
-                    const category = item.category || 'Engineering Capabilities';
+                    const category = item.category || 'Capabilities';
                     const description = item.excerpt?.rendered || item.description || item.content || '';
-                    const tags = item.tags || ['Tailwind CSS', 'WordPress REST', 'HTMX'];
                     const metric = item.metric || 'Enterprise Ready';
 
-                    const tagsHtml = tags.map(tag => `<span class="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/15 rounded-md text-slate-700 dark:text-zinc-300">${tag}</span>`).join(' ');
-
                     return `
-                        <div class="group relative">
-                            <div class="p-8 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/15 flex flex-col justify-between h-full shadow-lg dark:shadow-none transition-all duration-500 hover:border-black/30 dark:hover:border-white/40 group-hover:-translate-y-1 relative z-10 overflow-hidden">
-                                <div>
-                                    <div class="flex items-center justify-between mb-6">
-                                        <span class="text-xs font-mono font-bold text-slate-900 dark:text-white uppercase tracking-widest">${number} // ${category}</span>
-                                        <span class="px-3 py-1 text-[10px] font-bold uppercase rounded-full bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/20 text-slate-800 dark:text-zinc-200">${metric}</span>
-                                    </div>
-
-                                    <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight group-hover:text-slate-600 dark:group-hover:text-zinc-300 transition-colors">${title}</h3>
-                                    <p class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed font-normal mb-8">${description}</p>
+                        <div class="group border-t border-black/10 dark:border-white/10 py-10 transition-colors">
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline">
+                                <div class="md:col-span-3 flex items-center justify-between md:flex-col md:items-start space-y-1">
+                                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 dark:text-zinc-400">${number} // ${category}</span>
+                                    <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 dark:text-zinc-500">${metric}</span>
                                 </div>
-
-                                <div class="pt-6 border-t border-black/10 dark:border-white/15 flex flex-col space-y-5">
-                                    <div class="flex flex-wrap gap-2">${tagsHtml}</div>
-                                    <a href="#contact" class="inline-flex items-center text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-zinc-400 group-hover:translate-x-1.5 transition-transform">
+                                <div class="md:col-span-6">
+                                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight group-hover:opacity-70 transition-opacity">${title}</h3>
+                                    <p class="mt-3 text-slate-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">${description}</p>
+                                </div>
+                                <div class="md:col-span-3 md:text-right">
+                                    <a href="#contact" class="inline-flex items-center text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-white hover:opacity-60 transition-opacity">
                                         Explore Solution &rarr;
                                     </a>
                                 </div>
