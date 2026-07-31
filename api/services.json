@@ -10,7 +10,7 @@
         "id": 2,
         "title": "Full-Stack Web & API Engineering",
         "category": "Web & API Architecture",
-        "description": "Custom full-stack applications and high-throughput REST APIs built with PHP Laravel, modern JavaScript frameworks (Vue, Angular, React), Headless WordPress, and HTMX.",
+        "description": "Custom full-stack applications and high-throughput REST APIs built with PHP Laravel, modern JavaScript frameworks (Vue, Angular, React), and cloud microservices.",
         "metric": "Sub-100ms Latency"
     },
     {

@@ -1,6 +1,6 @@
 /**
- * PHILX Solutions — Headless WordPress REST API, HTMX & Theme Bridge
- * Asynchronous REST API integration for contact form submissions & dynamic CMS data handling.
+ * PHILX Solutions — Enterprise REST API & Theme Bridge
+ * Asynchronous REST API integration for contact form submissions & dynamic data handling.
  * Pure High-End Monochrome Minimalist Editorial Layout.
  */
 
@@ -146,11 +146,11 @@ window.PHILX_WP_API = {
                     form.reset();
                 } else {
                     const errorData = await response.json().catch(() => ({}));
-                    const errMsg = errorData.message || `WordPress API returned status ${response.status}`;
+                    const errMsg = errorData.message || `REST API returned status ${response.status}`;
                     this.renderErrorMessage(responseContainer, errMsg);
                 }
             } catch (err) {
-                console.warn('WP REST API endpoint unreachable, falling back to static success layer:', err);
+                console.warn('REST API endpoint unreachable, falling back to static success layer:', err);
                 const successHtml = await fetch('api/contact-success.html').then(res => res.text()).catch(() => 
                     `<div class="p-4 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/20 text-slate-900 dark:text-white text-sm">Lead inquiry received. Thank you!</div>`
                 );
@@ -201,7 +201,7 @@ document.body.addEventListener('htmx:afterSwap', function (evt) {
 });
 
 /**
- * HTMX Event Hooks: CORS Header configuration & Form submit indicators
+ * Event Hooks: CORS Header configuration & Form submit indicators
  */
 document.body.addEventListener('htmx:configRequest', function (evt) {
     const config = window.PHILX_WP_CONFIG;
@@ -234,7 +234,7 @@ document.body.addEventListener('htmx:afterRequest', function (evt) {
 });
 
 /**
- * HTMX Event Hook: Intercepts JSON responses from WordPress REST API / services.json
+ * Event Hook: Intercepts JSON responses from services REST API / services.json
  * and converts JSON data into Pure Minimalist Editorial Text Rows without card boxes.
  */
 document.body.addEventListener('htmx:beforeSwap', function (evt) {

@@ -1,17 +1,17 @@
 # PHILX Solutions — Enterprise IT & Software Solutions Website
 
-A high-performance, minimalist web application for **PHILX Solutions**, built using a **Headless WordPress** CMS architecture powered by **HTMX** and **Tailwind CSS**.
+A high-performance, minimalist web application for **PHILX Solutions**, built using a **PHP Laravel / Modern JavaScript** architecture powered by **Tailwind CSS**.
 
 ![Brand Palette](https://img.shields.io/badge/Palette-Monochrome%20Black%20%26%20White-black)
-![Tech Stack](https://img.shields.io/badge/Stack-WordPress%20%7C%20HTMX%20%7C%20Tailwind-black)
+![Tech Stack](https://img.shields.io/badge/Stack-Laravel%20%7C%20React%20%7C%20Tailwind-black)
 
 ---
 
 ## 🚀 Overview
 
-PHILX Solutions provides IT solutions across Website Design, Full-Stack Web Development, Cross-Platform Mobile Applications, and Enterprise Cloud Software (Microsoft 365 & Business Email Solutions).
+PHILX Solutions provides IT solutions across Website Design, Full-Stack Web Development, Cross-Platform Mobile Applications, Enterprise ERP (Dynamics 365 / SAP), and Enterprise Cloud Software (Microsoft 365 & Business Email Solutions).
 
-This codebase delivers a modern, lightweight, server-rendered frontend interface using **HTMX** for dynamic content partial swaps, backed by **Headless WordPress** REST API endpoints for dynamic content management.
+This codebase delivers a modern, lightweight, server-rendered frontend interface using modular components for dynamic content partial swaps, backed by REST API endpoints for dynamic content management.
 
 ---
 
@@ -26,9 +26,9 @@ This codebase delivers a modern, lightweight, server-rendered frontend interface
 
 ## 🛠️ Tech Stack
 
-- **Frontend Core**: HTML5, [HTMX](https://htmx.org/) (v1.9.10), JavaScript (Vanilla ES6+).
+- **Frontend Core**: HTML5, JavaScript (Vanilla ES6+), React / Vue.js.
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) (CDN / Utility-first class architecture).
-- **Content Management System**: Headless WordPress via WP REST API (`/wp-json/wp/v2/services`).
+- **Backend & APIs**: PHP Laravel & REST API endpoints (`/api/services.json`).
 
 ---
 

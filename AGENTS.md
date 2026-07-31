@@ -1,11 +1,11 @@
-# Agent Instructions: PHILX Solutions Website (WordPress + HTMX Stack)
+# Agent Instructions: PHILX Solutions Website (Full-Stack Enterprise Architecture)
 
 ## 1. Project Overview & Architecture
 * **Company Name:** PHILX Solutions
-* **Nature of Business:** IT Solution Provider (Website Design, Web Development, Mobile Applications, Enterprise Software like Microsoft 365 & Email Solutions).
-* **Backend:** Headless WordPress (REST API or WPGraphQL) acting as the CMS and data source.
-* **Frontend:** Server-rendered or static HTML/Tailwind templates interacting with WordPress endpoints via **HTMX**.
-* **Brand Vibe / Aesthetic:** Modern, minimalist, clean, tech-forward, and professional. Strict two-color palette (Vibrant Royal Blue `#2563EB` paired with crisp light/dark surfaces).
+* **Nature of Business:** IT Solution Provider (Website Design, Web Development, Mobile Applications, Enterprise Software like Dynamics 365, SAP, Microsoft 365 & Email Solutions).
+* **Backend:** PHP Laravel & Enterprise REST APIs acting as data source.
+* **Frontend:** Modern HTML/Tailwind templates interacting with REST API endpoints.
+* **Brand Vibe / Aesthetic:** Modern, minimalist, clean, tech-forward, and professional. Strict monochrome black-and-white palette.
 
 ---
 
@@ -15,14 +15,14 @@
 
 ---
 
-## 3. WordPress Integration & HTMX Flow
+## 3. Component Architecture & Integration Flow
 1. **Content Fetching / Partials:**
-   * Use WordPress Custom Post Types or ACF (Advanced Custom Fields) for Services and Portfolio items.
-   * Configure HTMX to fetch data dynamically from WordPress REST endpoints (e.g., `hx-get="/wp-json/wp/v2/services"`).
+   * Modular component structure for Services, Competencies, and Contact form.
+   * Fetch data dynamically from REST endpoints (e.g., `hx-get="api/services.json"`).
 2. **Core Components (`partials/`)**
    * **Navigation & Hero:** Static templates styled with Tailwind CSS.
-   * **Services Grid:** Dynamically populated via HTMX partial swaps from WordPress.
-   * **Contact Form:** Submits lead details securely to a custom WordPress REST API endpoint or plugin handler.
+   * **Services Grid:** Dynamically populated via REST API swaps.
+   * **Contact Form:** Submits lead details securely to REST API endpoint.
 
 ---
 
