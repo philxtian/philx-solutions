@@ -1,11 +1,10 @@
 /**
  * PHILX Solutions — Enterprise REST API & Theme Bridge
  * Asynchronous REST API integration for contact form submissions & dynamic data handling.
- * Pure High-End Monochrome Minimalist Editorial Layout.
+ * Minimalist Rounded Boxes & Alternating Black-and-White Architecture.
  */
 
 window.PHILX_WP_CONFIG = {
-    // Base URL for Headless WordPress CMS (e.g. "https://cms.philxsolutions.com")
     wpApiBaseUrl: localStorage.getItem('philx_wp_api_url') || "",
     contactEndpoint: "/wp-json/wp/v2/contact",
     servicesEndpoint: "/wp-json/wp/v2/services",
@@ -16,9 +15,6 @@ window.PHILX_WP_CONFIG = {
     }
 };
 
-/**
- * Minimalist One-Click Copy-to-Clipboard Utility
- */
 window.copyToClipboard = function(text, el) {
     if (!navigator.clipboard) {
         const textarea = document.createElement('textarea');
@@ -35,48 +31,20 @@ window.copyToClipboard = function(text, el) {
         const label = el.querySelector('.copy-label') || el;
         const originalText = label.textContent;
         label.textContent = 'Copied to Clipboard!';
-        el.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+        el.classList.add('bg-black', 'text-white');
         setTimeout(() => {
             label.textContent = originalText;
-            el.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+            el.classList.remove('bg-black', 'text-white');
         }, 2000);
     }
 };
 
-// Global Theme Toggle Function
-window.toggleTheme = function() {
-    if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-    } else {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-    }
-    updateThemeIcons();
-};
-
-// Mobile Menu Toggle Function
 window.toggleMobileMenu = function() {
     const menu = document.getElementById('mobile-menu');
     if (!menu) return;
     menu.classList.toggle('hidden');
 };
 
-function updateThemeIcons() {
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
-    if (!lightIcon || !darkIcon) return;
-
-    if (document.documentElement.classList.contains('dark')) {
-        lightIcon.classList.remove('hidden');
-        darkIcon.classList.add('hidden');
-    } else {
-        lightIcon.classList.add('hidden');
-        darkIcon.classList.remove('hidden');
-    }
-}
-
-// Global Event Delegation for Smooth Anchor Link Navigation
 document.addEventListener('click', function (evt) {
     const targetLink = evt.target.closest('a[href^="#"]');
     if (!targetLink) return;
@@ -96,14 +64,7 @@ document.addEventListener('click', function (evt) {
     }
 });
 
-/**
- * Headless WordPress REST API & Contact Form Submission Manager
- */
 window.PHILX_WP_API = {
-
-    /**
-     * Handle Contact Form Submit asynchronously with WP REST API support
-     */
     async handleContactSubmit(evt) {
         const form = evt.target.closest('form');
         if (!form) return;
@@ -152,7 +113,7 @@ window.PHILX_WP_API = {
             } catch (err) {
                 console.warn('REST API endpoint unreachable, falling back to static success layer:', err);
                 const successHtml = await fetch('api/contact-success.html').then(res => res.text()).catch(() => 
-                    `<div class="p-4 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/20 text-slate-900 dark:text-white text-sm">Lead inquiry received. Thank you!</div>`
+                    `<div class="p-4 rounded-xl bg-zinc-900 border border-white/20 text-white text-sm">Lead inquiry received. Thank you!</div>`
                 );
                 if (responseContainer) responseContainer.innerHTML = successHtml;
                 form.reset();
@@ -179,7 +140,7 @@ window.PHILX_WP_API = {
     renderErrorMessage(container, msg) {
         if (!container) return;
         container.innerHTML = `
-            <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm flex items-start space-x-3 transition-all duration-300">
+            <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm flex items-start space-x-3 transition-all duration-300">
                 <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
@@ -192,17 +153,6 @@ window.PHILX_WP_API = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    updateThemeIcons();
-});
-
-document.body.addEventListener('htmx:afterSwap', function (evt) {
-    updateThemeIcons();
-});
-
-/**
- * Event Hooks: CORS Header configuration & Form submit indicators
- */
 document.body.addEventListener('htmx:configRequest', function (evt) {
     const config = window.PHILX_WP_CONFIG;
     if (config.wpApiBaseUrl && evt.detail.path.includes(config.wpApiBaseUrl)) {
@@ -234,8 +184,7 @@ document.body.addEventListener('htmx:afterRequest', function (evt) {
 });
 
 /**
- * Event Hook: Intercepts JSON responses from services REST API / services.json
- * and converts JSON data into Pure Minimalist Editorial Text Rows without card boxes.
+ * Event Hook: Transforms services JSON into Minimalist Rounded Container Boxes.
  */
 document.body.addEventListener('htmx:beforeSwap', function (evt) {
     if (evt.detail.xhr.responseURL.includes('services') || evt.detail.target.id === 'services-grid') {
@@ -252,18 +201,18 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                     const metric = item.metric || 'Enterprise Ready';
 
                     return `
-                        <div class="group border-t border-black/10 dark:border-white/10 py-10 transition-colors">
+                        <div class="group rounded-2xl border border-black/15 bg-slate-50/70 p-8 sm:p-10 transition-all duration-300 hover:border-black/40 hover:bg-slate-100/80">
                             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline">
                                 <div class="md:col-span-3 flex items-center justify-between md:flex-col md:items-start space-y-1">
-                                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 dark:text-zinc-400">${number} // ${category}</span>
-                                    <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 dark:text-zinc-500">${metric}</span>
+                                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500">${number} // ${category}</span>
+                                    <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">${metric}</span>
                                 </div>
                                 <div class="md:col-span-6">
-                                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight group-hover:opacity-70 transition-opacity">${title}</h3>
-                                    <p class="mt-3 text-slate-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">${description}</p>
+                                    <h3 class="text-2xl font-extrabold text-slate-900 tracking-tight group-hover:opacity-75 transition-opacity">${title}</h3>
+                                    <p class="mt-3 text-slate-600 text-sm leading-relaxed font-normal">${description}</p>
                                 </div>
                                 <div class="md:col-span-3 md:text-right">
-                                    <a href="#contact" class="inline-flex items-center text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-white hover:opacity-60 transition-opacity">
+                                    <a href="#contact" class="inline-flex items-center text-xs font-bold uppercase tracking-widest text-slate-900 hover:opacity-60 transition-opacity">
                                         Explore Solution &rarr;
                                     </a>
                                 </div>
