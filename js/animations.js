@@ -1,5 +1,5 @@
 /**
- * PHILX Solutions — 2026 Kinetic Scroll Reveals & Magnetic Hover Physics
+ * PHILX Solutions — 2026 Kinetic Scroll Reveals, Magnetic Physics & Adaptive Context-Aware Navbar
  * Hardware-accelerated, 60fps micro-interactions strictly in monochrome.
  */
 
@@ -11,7 +11,7 @@
      */
     function initScrollReveals() {
         const revealElements = document.querySelectorAll(
-            'section, .reveal-on-scroll, #services-grid > div, #about .group, #expertise .border-t, #contact form'
+            'section, .reveal-on-scroll, #services-grid > div, #about .group, #expertise > div, #contact form'
         );
 
         if (!('IntersectionObserver' in window)) {
@@ -67,8 +67,8 @@
                 const centerX = boundBox.left + boundBox.width / 2;
                 const centerY = boundBox.top + boundBox.height / 2;
 
-                const deltaX = (e.clientX - centerX) * 0.25;
-                const deltaY = (e.clientY - centerY) * 0.25;
+                const deltaX = (e.clientX - centerX) * 0.22;
+                const deltaY = (e.clientY - centerY) * 0.22;
 
                 if (rafId) cancelAnimationFrame(rafId);
                 rafId = requestAnimationFrame(() => {
@@ -87,6 +87,66 @@
             el.addEventListener('mousemove', onMouseMove, { passive: true });
             el.addEventListener('mouseleave', onMouseLeave, { passive: true });
         });
+    }
+
+    /**
+     * 3. Dynamic Context-Aware Adaptive Navbar Theme Inverter
+     */
+    function initAdaptiveNavbar() {
+        const capsule = document.getElementById('navbar-capsule');
+        if (!capsule) return;
+
+        const sections = document.querySelectorAll('section[data-section-theme], footer[data-section-theme]');
+        if (!sections.length) return;
+
+        const logoBlack = capsule.querySelector('.nav-logo-black');
+        const logoWhite = capsule.querySelector('.nav-logo-white');
+        const title = capsule.querySelector('.nav-title');
+        const subtitle = capsule.querySelector('.nav-subtitle');
+        const links = capsule.querySelectorAll('.nav-link');
+        const underlines = capsule.querySelectorAll('.nav-underline');
+        const cta = capsule.querySelector('.nav-cta');
+        const mobileBtn = capsule.querySelector('.nav-mobile-btn');
+
+        const navObserverOptions = {
+            root: null,
+            rootMargin: '-5% 0px -85% 0px',
+            threshold: 0
+        };
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const theme = entry.target.getAttribute('data-section-theme');
+
+                    if (theme === 'dark') {
+                        // Floating over dark section -> Navbar renders light (white capsule + dark text)
+                        capsule.className = 'w-full backdrop-blur-xl bg-white/90 text-slate-900 border border-black/15 rounded-full px-6 h-16 flex items-center justify-between shadow-2xl transition-all duration-300 relative z-50';
+                        if (logoBlack) logoBlack.classList.remove('hidden');
+                        if (logoWhite) logoWhite.classList.add('hidden');
+                        if (title) title.className = 'nav-title flex justify-between font-black text-slate-900 leading-none text-[13px] uppercase';
+                        if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-slate-500 leading-none mt-1 uppercase';
+                        links.forEach(l => l.className = 'nav-link relative py-1 text-slate-700 hover:text-black transition-colors group');
+                        underlines.forEach(u => u.className = 'nav-underline absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all duration-300 ease-out group-hover:w-full');
+                        if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-black hover:bg-slate-800 rounded-full border border-black transition-all shadow-md relative z-30 cursor-pointer uppercase tracking-widest';
+                        if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-black/15 bg-slate-100 text-slate-900 transition-colors backdrop-blur-md relative z-30 cursor-pointer';
+                    } else if (theme === 'light') {
+                        // Floating over light section -> Navbar inverts to dark (black capsule + white text)
+                        capsule.className = 'w-full backdrop-blur-xl bg-black/90 text-white border border-white/15 rounded-full px-6 h-16 flex items-center justify-between shadow-2xl transition-all duration-300 relative z-50';
+                        if (logoBlack) logoBlack.classList.add('hidden');
+                        if (logoWhite) logoWhite.classList.remove('hidden');
+                        if (title) title.className = 'nav-title flex justify-between font-black text-white leading-none text-[13px] uppercase';
+                        if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-zinc-400 leading-none mt-1 uppercase';
+                        links.forEach(l => l.className = 'nav-link relative py-1 text-zinc-300 hover:text-white transition-colors group');
+                        underlines.forEach(u => u.className = 'nav-underline absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full');
+                        if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-black bg-white hover:bg-zinc-200 rounded-full border border-white transition-all shadow-md relative z-30 cursor-pointer uppercase tracking-widest';
+                        if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-white/15 bg-zinc-900 text-white transition-colors backdrop-blur-md relative z-30 cursor-pointer';
+                    }
+                }
+            });
+        }, navObserverOptions);
+
+        sections.forEach(s => navObserver.observe(s));
     }
 
     // Dynamic CSS Injection for Kinetic Scroll Reveal States
@@ -109,6 +169,7 @@
     function initAll() {
         initScrollReveals();
         initMagneticElements();
+        initAdaptiveNavbar();
     }
 
     if (document.readyState === 'loading') {
