@@ -1,6 +1,7 @@
 /**
  * PHILX Solutions — Headless WordPress REST API, HTMX & Theme Bridge
  * Asynchronous REST API integration for contact form submissions, Lofi editorial layout helpers & dynamic CMS data handling.
+ * Strict High-End Monochrome Design System.
  */
 
 window.PHILX_WP_CONFIG = {
@@ -34,10 +35,10 @@ window.copyToClipboard = function(text, el) {
         const label = el.querySelector('.copy-label') || el;
         const originalText = label.textContent;
         label.textContent = 'Copied to Clipboard!';
-        el.classList.add('bg-emerald-500/20', 'border-emerald-500/50', 'text-emerald-600', 'dark:text-emerald-400');
+        el.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
         setTimeout(() => {
             label.textContent = originalText;
-            el.classList.remove('bg-emerald-500/20', 'border-emerald-500/50', 'text-emerald-600', 'dark:text-emerald-400');
+            el.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
         }, 2000);
     }
 };
@@ -113,7 +114,6 @@ window.PHILX_WP_API = {
         const btnSpinner = document.getElementById('btn-spinner');
         const btnText = document.getElementById('btn-text');
 
-        // If a live WordPress API endpoint is configured, handle async post
         if (config.wpApiBaseUrl && config.wpApiBaseUrl.trim() !== "") {
             evt.preventDefault();
 
@@ -152,7 +152,7 @@ window.PHILX_WP_API = {
             } catch (err) {
                 console.warn('WP REST API endpoint unreachable, falling back to static success layer:', err);
                 const successHtml = await fetch('api/contact-success.html').then(res => res.text()).catch(() => 
-                    `<div class="p-4 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-brand text-slate-900 dark:text-white text-sm">Lead inquiry received. Thank you!</div>`
+                    `<div class="p-4 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/20 text-slate-900 dark:text-white text-sm">Lead inquiry received. Thank you!</div>`
                 );
                 if (responseContainer) responseContainer.innerHTML = successHtml;
                 form.reset();
@@ -235,7 +235,7 @@ document.body.addEventListener('htmx:afterRequest', function (evt) {
 
 /**
  * HTMX Event Hook: Intercepts JSON responses from WordPress REST API / services.json
- * and converts JSON data into Lofi Portfolio-inspired Editorial Case Study Cards.
+ * and converts JSON data into Strict Monochrome Editorial Case Study Cards.
  */
 document.body.addEventListener('htmx:beforeSwap', function (evt) {
     if (evt.detail.xhr.responseURL.includes('services') || evt.detail.target.id === 'services-grid') {
@@ -256,29 +256,25 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                     const tagsHtml = tags.map(tag => `<span class="px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/15 rounded-md text-slate-700 dark:text-zinc-300">${tag}</span>`).join(' ');
 
                     return `
-                        <div class="aurora-wrapper group relative">
-                            <div class="aurora-glow absolute -inset-2.5 rounded-3xl bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 blur-xl group-hover:opacity-35 transition-opacity duration-500 pointer-events-none -z-10"></div>
-                            <div class="aurora-border absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"></div>
-                            
-                            <div class="p-7 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/15 flex flex-col justify-between h-full shadow-lg dark:shadow-none transition-all duration-500 group-hover:-translate-y-1 relative z-10 overflow-hidden">
+                        <div class="group relative">
+                            <div class="p-7 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/15 flex flex-col justify-between h-full shadow-lg dark:shadow-none transition-all duration-500 hover:border-black/30 dark:hover:border-white/40 group-hover:-translate-y-1 relative z-10 overflow-hidden">
                                 <div>
                                     <div class="flex items-center justify-between mb-4">
-                                        <span class="text-xs font-mono font-bold text-brand uppercase tracking-widest">${number} // ${category}</span>
-                                        <span class="px-2.5 py-0.5 text-[9px] font-bold uppercase rounded-full bg-brand/10 text-brand border border-brand/20">${metric}</span>
+                                        <span class="text-xs font-mono font-bold text-slate-900 dark:text-white uppercase tracking-widest">${number} // ${category}</span>
+                                        <span class="px-2.5 py-0.5 text-[9px] font-bold uppercase rounded-full bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/20 text-slate-800 dark:text-zinc-200">${metric}</span>
                                     </div>
 
                                     <div class="overflow-hidden rounded-xl border border-black/10 dark:border-white/15 mb-6 h-44 relative bg-slate-900">
-                                        <img src="${image}" alt="${title}" loading="lazy" class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 group-hover:filter-none transition-all duration-700">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        <img src="${image}" alt="${title}" loading="lazy" class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 transition-all duration-700">
                                     </div>
 
-                                    <h3 class="text-xl font-extrabold text-slate-900 dark:text-white mb-3 tracking-tight group-hover:text-brand transition-colors">${title}</h3>
+                                    <h3 class="text-xl font-extrabold text-slate-900 dark:text-white mb-3 tracking-tight group-hover:text-slate-600 dark:group-hover:text-zinc-300 transition-colors">${title}</h3>
                                     <p class="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed font-normal mb-6">${description}</p>
                                 </div>
 
                                 <div class="pt-4 border-t border-black/5 dark:border-white/10 flex flex-col space-y-4">
                                     <div class="flex flex-wrap gap-1.5">${tagsHtml}</div>
-                                    <a href="#contact" class="inline-flex items-center text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-600 group-hover:translate-x-1 transition-transform">
+                                    <a href="#contact" class="inline-flex items-center text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-zinc-400 group-hover:translate-x-1 transition-transform">
                                         Explore Solution &rarr;
                                     </a>
                                 </div>

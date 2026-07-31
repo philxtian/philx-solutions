@@ -2,34 +2,35 @@
     <div class="w-full backdrop-blur-xl bg-white/80 dark:bg-black/80 border border-black/10 dark:border-white/15 rounded-full px-6 h-16 flex items-center justify-between shadow-xl shadow-black/5 dark:shadow-none transition-all duration-300 relative z-50">
         <!-- Brand Logo & Name -->
         <a href="#" class="flex items-center space-x-3 group relative z-20">
-            <img src="assets/logo-mark.png" alt="PHILX Solutions Logo" class="h-9 w-auto rounded-lg group-hover:scale-105 transition-transform duration-300">
+            <img src="assets/logo-mark-black.png" alt="PHILX Solutions Logo" class="h-9 w-auto rounded-lg dark:hidden group-hover:scale-105 transition-transform duration-300">
+            <img src="assets/logo-mark-white.png" alt="PHILX Solutions Logo" class="h-9 w-auto rounded-lg hidden dark:block group-hover:scale-105 transition-transform duration-300">
             <div class="flex flex-col justify-center">
                 <span class="font-black text-slate-900 dark:text-white tracking-[0.38em] leading-none text-[13px] uppercase">PHILX</span>
-                <span class="text-[9px] font-bold text-brand tracking-[0.25em] uppercase leading-none mt-1">SOLUTIONS</span>
+                <span class="text-[9px] font-bold text-slate-500 dark:text-zinc-400 tracking-[0.25em] uppercase leading-none mt-1">SOLUTIONS</span>
             </div>
         </a>
 
         <!-- Desktop Navigation Links with Animated Underline Transitions -->
         <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold text-slate-600 dark:text-zinc-300 tracking-wider uppercase relative z-20">
-            <a href="#hero" class="relative py-1 hover:text-brand dark:hover:text-brand transition-colors group">
+            <a href="#hero" class="relative py-1 hover:text-black dark:hover:text-white transition-colors group">
                 Home
-                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand transition-all duration-300 ease-out group-hover:w-full"></span>
+                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-black dark:bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
             </a>
-            <a href="#services" class="relative py-1 hover:text-brand dark:hover:text-brand transition-colors group">
+            <a href="#services" class="relative py-1 hover:text-black dark:hover:text-white transition-colors group">
                 Services
-                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand transition-all duration-300 ease-out group-hover:w-full"></span>
+                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-black dark:bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
             </a>
-            <a href="#about" class="relative py-1 hover:text-brand dark:hover:text-brand transition-colors group">
+            <a href="#about" class="relative py-1 hover:text-black dark:hover:text-white transition-colors group">
                 About
-                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand transition-all duration-300 ease-out group-hover:w-full"></span>
+                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-black dark:bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
             </a>
-            <a href="#expertise" class="relative py-1 hover:text-brand dark:hover:text-brand transition-colors group">
+            <a href="#expertise" class="relative py-1 hover:text-black dark:hover:text-white transition-colors group">
                 Expertise
-                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand transition-all duration-300 ease-out group-hover:w-full"></span>
+                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-black dark:bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
             </a>
-            <a href="#contact" class="relative py-1 hover:text-brand dark:hover:text-brand transition-colors group">
+            <a href="#contact" class="relative py-1 hover:text-black dark:hover:text-white transition-colors group">
                 Contact
-                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand transition-all duration-300 ease-out group-hover:w-full"></span>
+                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-black dark:bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
             </a>
         </nav>
 
@@ -57,7 +58,7 @@
             </button>
 
             <!-- CTA Button -->
-            <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-brand hover:bg-brand-600 rounded-full border border-brand transition-all shadow-md shadow-brand/20 relative z-30 cursor-pointer">
+            <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-black hover:bg-slate-800 dark:text-black dark:bg-white dark:hover:bg-zinc-200 rounded-full border border-black dark:border-white transition-all shadow-md relative z-30 cursor-pointer">
                 Get a Quote
             </a>
         </div>
@@ -65,11 +66,11 @@
 
     <!-- Mobile Dropdown Menu Drawer -->
     <div id="mobile-menu" class="hidden md:hidden mt-3 w-full bg-white/95 dark:bg-black/95 border border-black/10 dark:border-white/15 rounded-2xl p-6 backdrop-blur-2xl shadow-2xl space-y-4 text-sm font-semibold text-slate-800 dark:text-zinc-200 uppercase tracking-wider relative z-40 transition-all duration-300">
-        <a href="#hero" class="block py-2 hover:text-brand border-b border-black/5 dark:border-white/10">Home</a>
-        <a href="#services" class="block py-2 hover:text-brand border-b border-black/5 dark:border-white/10">Services</a>
-        <a href="#about" class="block py-2 hover:text-brand border-b border-black/5 dark:border-white/10">About</a>
-        <a href="#expertise" class="block py-2 hover:text-brand border-b border-black/5 dark:border-white/10">Expertise</a>
-        <a href="#contact" class="block py-2 hover:text-brand border-b border-black/5 dark:border-white/10">Contact</a>
-        <a href="#contact" class="block w-full text-center py-3 px-4 mt-2 text-xs font-bold text-white bg-brand hover:bg-brand-600 rounded-full shadow-md shadow-brand/20">Get a Quote &rarr;</a>
+        <a href="#hero" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">Home</a>
+        <a href="#services" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">Services</a>
+        <a href="#about" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">About</a>
+        <a href="#expertise" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">Expertise</a>
+        <a href="#contact" class="block py-2 hover:text-black dark:hover:text-white border-b border-black/5 dark:border-white/10">Contact</a>
+        <a href="#contact" class="block w-full text-center py-3 px-4 mt-2 text-xs font-bold text-white bg-black dark:text-black dark:bg-white rounded-full">Get a Quote &rarr;</a>
     </div>
 </header>

@@ -2,8 +2,8 @@
 
 A high-performance, minimalist web application for **PHILX Solutions**, built using a **Headless WordPress** CMS architecture powered by **HTMX** and **Tailwind CSS**.
 
-![Brand Palette](https://img.shields.bg-blue-600.png?text=Royal+Blue+%232563EB)
-![Tech Stack](https://img.shields.io/badge/Stack-WordPress%20%7C%20HTMX%20%7C%20Tailwind-blue)
+![Brand Palette](https://img.shields.io/badge/Palette-Monochrome%20Black%20%26%20White-black)
+![Tech Stack](https://img.shields.io/badge/Stack-WordPress%20%7C%20HTMX%20%7C%20Tailwind-black)
 
 ---
 
@@ -17,10 +17,10 @@ This codebase delivers a modern, lightweight, server-rendered frontend interface
 
 ## 🎨 Design System & Aesthetic
 
-- **Strict Dual-Color Focus**:
-  - **Primary Accent**: Vibrant Royal Blue (`#2563EB`)
-  - **Surfaces & Typography**: Crisp Light/White surfaces paired with Dark Navy/Charcoal (`#0F172A`) for extreme contrast and readability.
-- **Micro-Interactions**: Smooth hover effects, glassmorphic navigation header (`backdrop-blur-md`), and inline feedback loops.
+- **Strict Monochrome Palette (High-End Black & White)**:
+  - **Backgrounds & Text**: Pure Black (`#000000`) and Pure White (`#FFFFFF`) only.
+  - **Typography & Elements**: Solid black and white surfaces, crisp borders, and high contrast editorial layout hierarchy with zero accent colors or gradients.
+- **Micro-Interactions**: Smooth hover effects, glassmorphic navigation header (`backdrop-blur-xl`), one-click email copy-to-clipboard chips, and inline feedback loops.
 
 ---
 

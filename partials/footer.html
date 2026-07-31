@@ -1,41 +1,40 @@
-<footer id="footer-container" class="bg-white/40 dark:bg-black/40 backdrop-blur-xl text-slate-600 dark:text-zinc-400 py-20 border-t border-black/10 dark:border-white/10 relative z-10 transition-colors duration-300">
+<footer class="py-16 bg-white dark:bg-black border-t border-black/10 dark:border-white/10 transition-colors duration-300 relative z-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div class="space-y-4">
-                <div class="flex items-center space-x-3">
-                    <img src="assets/logo-mark.png" alt="PHILX Solutions Logo" class="h-8 w-auto rounded-lg shadow-sm">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-12 border-b border-black/10 dark:border-white/10">
+            <!-- Brand Logo & Description -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <a href="#" class="flex items-center space-x-3 mb-4 group">
+                    <img src="assets/logo-mark-black.png" alt="PHILX Solutions Logo" class="h-9 w-auto rounded-lg dark:hidden group-hover:scale-105 transition-transform duration-300">
+                    <img src="assets/logo-mark-white.png" alt="PHILX Solutions Logo" class="h-9 w-auto rounded-lg hidden dark:block group-hover:scale-105 transition-transform duration-300">
                     <div class="flex flex-col justify-center">
                         <span class="font-black text-slate-900 dark:text-white tracking-[0.38em] leading-none text-[13px] uppercase">PHILX</span>
-                        <span class="text-[9px] font-bold text-brand tracking-[0.25em] uppercase leading-none mt-1">SOLUTIONS</span>
+                        <span class="text-[9px] font-bold text-slate-500 dark:text-zinc-400 tracking-[0.25em] uppercase leading-none mt-1">SOLUTIONS</span>
                     </div>
-                </div>
-                <p class="text-xs leading-relaxed text-slate-600 dark:text-zinc-400">Enterprise IT Solution Provider delivering web, mobile, and custom cloud software architectures.</p>
+                </a>
+                <p class="text-xs text-slate-500 dark:text-zinc-400 max-w-sm leading-relaxed">
+                    IT Solution Provider specializing in website design, full-stack applications, mobile experiences, and enterprise cloud software ecosystems.
+                </p>
             </div>
-            <div>
-                <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-900 dark:text-white mb-4">Solutions</h4>
-                <ul class="space-y-3 text-xs font-medium">
-                    <li><a href="#services" class="hover:text-brand transition-colors">Website Design</a></li>
-                    <li><a href="#services" class="hover:text-brand transition-colors">Web Development</a></li>
-                    <li><a href="#services" class="hover:text-brand transition-colors">Mobile Applications</a></li>
-                    <li><a href="#services" class="hover:text-brand transition-colors">Microsoft 365 & Cloud</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-900 dark:text-white mb-4">Company</h4>
-                <ul class="space-y-3 text-xs font-medium">
-                    <li><a href="#about" class="hover:text-brand transition-colors">About Us</a></li>
-                    <li><a href="#expertise" class="hover:text-brand transition-colors">Expertise</a></li>
-                    <li><a href="#contact" class="hover:text-brand transition-colors">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-900 dark:text-white mb-4">WordPress REST API</h4>
-                <p class="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">Headless WordPress CMS integration layer active for dynamic HTMX partial content loading.</p>
+
+            <!-- Footer Navigation -->
+            <div class="flex flex-wrap justify-center gap-8 text-xs font-semibold text-slate-600 dark:text-zinc-400 uppercase tracking-wider">
+                <a href="#hero" class="hover:text-black dark:hover:text-white transition-colors">Home</a>
+                <a href="#services" class="hover:text-black dark:hover:text-white transition-colors">Services</a>
+                <a href="#about" class="hover:text-black dark:hover:text-white transition-colors">About</a>
+                <a href="#expertise" class="hover:text-black dark:hover:text-white transition-colors">Expertise</a>
+                <a href="#contact" class="hover:text-black dark:hover:text-white transition-colors">Contact</a>
             </div>
         </div>
-        <div class="pt-8 border-t border-black/10 dark:border-white/10 text-center text-xs text-slate-500 dark:text-zinc-500 flex flex-col sm:flex-row items-center justify-between">
+
+        <!-- Copyright & Status -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-zinc-500 gap-4 text-center sm:text-left">
             <p>&copy; 2026 PHILX Solutions. All rights reserved.</p>
-            <p class="mt-2 sm:mt-0 font-semibold text-brand">Headless WordPress + HTMX Architecture</p>
+            <div class="flex items-center space-x-4">
+                <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/20 text-[10px] font-mono font-bold uppercase text-slate-700 dark:text-zinc-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-black dark:bg-white animate-pulse"></span>
+                    <span>System Operational</span>
+                </span>
+            </div>
         </div>
     </div>
 </footer>
