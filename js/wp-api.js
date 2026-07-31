@@ -1,6 +1,6 @@
 /**
  * PHILX Solutions — Headless WordPress REST API, HTMX & Theme Bridge
- * Asynchronous REST API integration for contact form submissions & dynamic CMS data handling.
+ * Asynchronous REST API integration for contact form submissions, Lofi editorial layout helpers & dynamic CMS data handling.
  */
 
 window.PHILX_WP_CONFIG = {
@@ -12,6 +12,33 @@ window.PHILX_WP_CONFIG = {
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
+    }
+};
+
+/**
+ * Minimalist One-Click Copy-to-Clipboard Utility (Lofi interaction inspired)
+ */
+window.copyToClipboard = function(text, el) {
+    if (!navigator.clipboard) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+    } else {
+        navigator.clipboard.writeText(text);
+    }
+    
+    if (el) {
+        const label = el.querySelector('.copy-label') || el;
+        const originalText = label.textContent;
+        label.textContent = 'Copied to Clipboard!';
+        el.classList.add('bg-emerald-500/20', 'border-emerald-500/50', 'text-emerald-600', 'dark:text-emerald-400');
+        setTimeout(() => {
+            label.textContent = originalText;
+            el.classList.remove('bg-emerald-500/20', 'border-emerald-500/50', 'text-emerald-600', 'dark:text-emerald-400');
+        }, 2000);
     }
 };
 
@@ -207,8 +234,8 @@ document.body.addEventListener('htmx:afterRequest', function (evt) {
 });
 
 /**
- * HTMX Event Hook: Intercepts JSON responses from WordPress REST API
- * and converts JSON data into Opaque Cards with Outer Aurora Glow Wrappers.
+ * HTMX Event Hook: Intercepts JSON responses from WordPress REST API / services.json
+ * and converts JSON data into Lofi Portfolio-inspired Editorial Case Study Cards.
  */
 document.body.addEventListener('htmx:beforeSwap', function (evt) {
     if (evt.detail.xhr.responseURL.includes('services') || evt.detail.target.id === 'services-grid') {
@@ -220,20 +247,40 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                 const htmlContent = servicesData.map((item, index) => {
                     const number = (index + 1).toString().padStart(2, '0');
                     const title = item.title?.rendered || item.title || 'Service Title';
+                    const category = item.category || 'Engineering Capabilities';
                     const description = item.excerpt?.rendered || item.description || item.content || '';
+                    const tags = item.tags || ['Tailwind CSS', 'WordPress REST', 'HTMX'];
+                    const metric = item.metric || 'Enterprise Ready';
+                    const image = item.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';
+
+                    const tagsHtml = tags.map(tag => `<span class="px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/15 rounded-md text-slate-700 dark:text-zinc-300">${tag}</span>`).join(' ');
 
                     return `
                         <div class="aurora-wrapper group relative">
                             <div class="aurora-glow absolute -inset-2.5 rounded-3xl bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 blur-xl group-hover:opacity-35 transition-opacity duration-500 pointer-events-none -z-10"></div>
                             <div class="aurora-border absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"></div>
                             
-                            <div class="p-8 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/15 flex flex-col justify-between h-full shadow-lg dark:shadow-none transition-transform duration-500 group-hover:-translate-y-1 relative z-10">
+                            <div class="p-7 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/15 flex flex-col justify-between h-full shadow-lg dark:shadow-none transition-all duration-500 group-hover:-translate-y-1 relative z-10 overflow-hidden">
                                 <div>
-                                    <div class="w-12 h-12 rounded-xl bg-brand text-white flex items-center justify-center font-extrabold text-lg mb-8 shadow-md shadow-brand/25">
-                                        ${number}
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-xs font-mono font-bold text-brand uppercase tracking-widest">${number} // ${category}</span>
+                                        <span class="px-2.5 py-0.5 text-[9px] font-bold uppercase rounded-full bg-brand/10 text-brand border border-brand/20">${metric}</span>
                                     </div>
-                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">${title}</h3>
-                                    <div class="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">${description}</div>
+
+                                    <div class="overflow-hidden rounded-xl border border-black/10 dark:border-white/15 mb-6 h-44 relative bg-slate-900">
+                                        <img src="${image}" alt="${title}" loading="lazy" class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 group-hover:filter-none transition-all duration-700">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    </div>
+
+                                    <h3 class="text-xl font-extrabold text-slate-900 dark:text-white mb-3 tracking-tight group-hover:text-brand transition-colors">${title}</h3>
+                                    <p class="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed font-normal mb-6">${description}</p>
+                                </div>
+
+                                <div class="pt-4 border-t border-black/5 dark:border-white/10 flex flex-col space-y-4">
+                                    <div class="flex flex-wrap gap-1.5">${tagsHtml}</div>
+                                    <a href="#contact" class="inline-flex items-center text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-600 group-hover:translate-x-1 transition-transform">
+                                        Explore Solution &rarr;
+                                    </a>
                                 </div>
                             </div>
                         </div>

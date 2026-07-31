@@ -1,22 +1,38 @@
 [
     {
         "id": 1,
-        "title": "Website Design",
-        "description": "High-converting, responsive UI/UX design systems optimized for speed, accessibility, and high visual polish."
+        "title": "Website Design & Design Systems",
+        "category": "UI/UX Architecture",
+        "description": "High-converting, responsive UI/UX design systems optimized for speed, accessibility, and high visual polish.",
+        "tags": ["Framer / Tailwind", "Design Tokens", "Accessibility WCAG"],
+        "metric": "99+ Lighthouse Score",
+        "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80"
     },
     {
         "id": 2,
-        "title": "Web Development",
-        "description": "Custom full-stack web applications, Headless WordPress integrations, and high-performance server-rendered architectures."
+        "title": "Headless WordPress & Web Apps",
+        "category": "Full-Stack Engineering",
+        "description": "Custom full-stack web applications, Headless WordPress integrations, and high-performance server-rendered HTMX hypermedia pipelines.",
+        "tags": ["Headless WP REST", "HTMX Hypermedia", "Tailwind CSS"],
+        "metric": "< 100ms API Latency",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
     },
     {
         "id": 3,
-        "title": "Mobile Applications",
-        "description": "Cross-platform mobile applications for iOS & Android engineered for performance and offline reliability."
+        "title": "Mobile App Engineering",
+        "category": "iOS & Android",
+        "description": "Cross-platform mobile applications engineered for native performance, secure API synchronization, and offline data persistence.",
+        "tags": ["React Native / Flutter", "REST API Sync", "Biometric Auth"],
+        "metric": "Cross-Platform Native",
+        "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80"
     },
     {
         "id": 4,
-        "title": "Enterprise Software & Cloud",
-        "description": "Microsoft 365 migrations, secure business email setups, API integration, and cloud productivity software."
+        "title": "Enterprise Cloud & Microsoft 365",
+        "category": "Cloud Infrastructure",
+        "description": "Microsoft 365 tenant migrations, secure business email server setups, API integrations, and enterprise software ecosystems.",
+        "tags": ["Microsoft 365", "Cloud Migration", "Zero-Downtime"],
+        "metric": "99.99% Enterprise Uptime",
+        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80"
     }
 ]

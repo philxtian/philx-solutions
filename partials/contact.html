@@ -1,9 +1,20 @@
 <section id="contact" class="py-32 bg-transparent border-b border-black/10 dark:border-white/10 transition-colors duration-300">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-20">
+        <div class="text-center mb-16">
             <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-brand mb-4">Get In Touch</h2>
-            <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Initiate Consultation</p>
-            <p class="mt-4 text-slate-600 dark:text-zinc-400 text-base">Fill out your technical requirements and our engineering leads will respond within 24 hours.</p>
+            <p class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">Initiate Consultation</p>
+            <p class="mt-4 text-slate-600 dark:text-zinc-400 text-base max-w-xl mx-auto">Fill out your technical requirements or copy our direct engineering inbox below.</p>
+            
+            <!-- One-Click Copy Email Chip -->
+            <div class="mt-6 inline-flex items-center justify-center">
+                <button type="button" onclick="copyToClipboard('hello@philxsolutions.com', this)" 
+                        class="inline-flex items-center space-x-2.5 px-5 py-2.5 rounded-full bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/20 text-slate-800 dark:text-zinc-200 text-xs font-semibold hover:border-brand dark:hover:border-brand hover:text-brand transition-all cursor-pointer group shadow-sm">
+                    <svg class="w-4 h-4 text-slate-500 group-hover:text-brand transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <span class="copy-label">hello@philxsolutions.com</span>
+                </button>
+            </div>
         </div>
 
         <div class="aurora-wrapper group relative">

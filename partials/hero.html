@@ -1,16 +1,33 @@
 <section id="hero" class="relative py-32 lg:py-40 bg-transparent overflow-hidden border-b border-black/10 dark:border-white/10 transition-colors duration-300">
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <!-- Floating Pill Badge (Solid Opaque Surface + Outer Glow) -->
-        <div class="aurora-wrapper inline-block group relative mb-12">
-            <div class="aurora-glow absolute -inset-1.5 rounded-full bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 blur-md group-hover:opacity-40 transition-opacity duration-500 pointer-events-none -z-10"></div>
-            <div class="aurora-border absolute -inset-[1px] rounded-full bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"></div>
-            <div class="inline-flex items-center space-x-3 px-4 py-2 rounded-full bg-white dark:bg-zinc-950 border border-brand/30 text-slate-900 dark:text-white text-xs font-semibold uppercase tracking-[0.2em] shadow-sm relative z-10">
-                <img src="assets/logo-mark.png" alt="PHILX Logo" class="w-4 h-4 rounded-sm object-contain">
-                <span class="text-brand font-bold">Enterprise Digital Transformation & Engineering</span>
+        <!-- Availability Status & One-Click Contact Chip Row -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+            <!-- Live Availability Status Pill -->
+            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Available for Q3/Q4 Projects</span>
             </div>
+
+            <!-- Enterprise Tech Pill -->
+            <div class="aurora-wrapper group relative">
+                <div class="aurora-glow absolute -inset-1 rounded-full bg-gradient-to-r from-brand via-blue-500 to-indigo-600 opacity-0 blur-md group-hover:opacity-40 transition-opacity duration-500 pointer-events-none -z-10"></div>
+                <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-white dark:bg-zinc-950 border border-brand/30 text-slate-900 dark:text-white text-xs font-semibold uppercase tracking-[0.2em] shadow-sm relative z-10">
+                    <img src="assets/logo-mark.png" alt="PHILX Logo" class="w-3.5 h-3.5 rounded-sm object-contain">
+                    <span class="text-brand font-bold">Enterprise Digital Transformation</span>
+                </div>
+            </div>
+
+            <!-- Minimalist Interactive Copy-to-Clipboard Email Chip -->
+            <button type="button" onclick="copyToClipboard('hello@philxsolutions.com', this)" 
+                    class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-zinc-900 border border-black/10 dark:border-white/20 text-slate-700 dark:text-zinc-300 text-xs font-medium hover:border-brand dark:hover:border-brand hover:text-brand dark:hover:text-brand transition-all cursor-pointer group shadow-sm">
+                <svg class="w-3.5 h-3.5 text-slate-500 group-hover:text-brand transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                <span class="copy-label">hello@philxsolutions.com</span>
+            </button>
         </div>
 
-        <!-- High-Contrast Headline -->
+        <!-- Striking Editorial Headline -->
         <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.08] max-w-4xl mx-auto">
             Architecting the Future of <span class="text-brand underline decoration-brand/30 underline-offset-8">Enterprise Software</span>
         </h1>
