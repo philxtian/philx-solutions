@@ -8,16 +8,27 @@
     window.PHILX_INTRO_ACTIVE = true;
 
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
-    const BOUNCE_EASE = 'cubic-bezier(0.34, 1.56, 0.64, 1)'; // 3D Overshoot curve
+    
+    // Inject Custom Keyframes for the Bounce
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes philx-bounce {
+            0% { transform: scale(0); opacity: 0; }
+            55% { transform: scale(1.15); opacity: 1; }
+            75% { transform: scale(0.95); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
 
     const overlay = document.createElement('div');
     overlay.id = 'intro-overlay';
     overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s ease;';
 
     overlay.innerHTML = `
-        <div id="intro-bg-pill" style="position:fixed;top:50%;left:50%;width:150px;height:150px;margin-top:-75px;margin-left:-75px;transform:scale(0);background:#ffffff;border-radius:9999px;z-index:1;will-change:top, left, width, height, transform, margin; transition: transform 0.8s ${BOUNCE_EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE};"></div>
+        <div id="intro-bg-pill" style="position:fixed;top:50%;left:50%;width:150px;height:150px;margin-top:-75px;margin-left:-75px;background:#ffffff;border-radius:9999px;z-index:1;will-change:top, left, width, height, transform, margin; animation: philx-bounce 0.85s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;"></div>
         
-        <div id="intro-static-logo" style="position:fixed;top:50%;left:50%;margin-top:-18px;margin-left:-54px;z-index:2;opacity:0;transform:scale(0);will-change:opacity, transform, top, left, margin; transition: opacity 0.5s ease, transform 0.8s ${BOUNCE_EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}; display:flex;align-items:center;">
+        <div id="intro-static-logo" style="position:fixed;top:50%;left:50%;margin-top:-18px;margin-left:-54px;z-index:2;opacity:0;will-change:opacity, transform, top, left, margin; animation: philx-bounce 0.85s cubic-bezier(0.28, 0.84, 0.42, 1) forwards; display:flex;align-items:center;">
             <div style="display:flex;align-items:center;" class="space-x-3">
                 <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="width:36px;height:36px;object-fit:contain;border-radius:8px;display:block;">
                 <div style="display:flex;flex-direction:column;justify-content:center;width:72px;">
@@ -59,17 +70,22 @@
             item.style.transition = `opacity 0.4s ${EASE}, transform 0.4s ${EASE}`;
         });
 
-        // Phase 1: 3D Bounce reveal dead center
+        // Phase 1: Let the CSS keyframe bounce animation play automatically
         setTimeout(() => {
-            bgPill.style.transform = 'scale(1)';
-            staticLogo.style.opacity = '1';
-            staticLogo.style.transform = 'scale(1)';
-
             // Phase 2: Move to navbar left and morph to short pill
             setTimeout(() => {
-                // Reset transitions back to smooth EASE before moving so it doesn't bounce sideways
-                bgPill.style.transition = `transform 0.5s ${EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}`;
-                staticLogo.style.transition = `opacity 0.4s ease, top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}`;
+                // Clear keyframe animations and apply smooth transitions for the glide
+                bgPill.style.animation = 'none';
+                staticLogo.style.animation = 'none';
+                
+                // Force opacity and scale to 1 after removing animation lock
+                bgPill.style.transform = 'scale(1)';
+                staticLogo.style.opacity = '1';
+                staticLogo.style.transform = 'scale(1)';
+
+                // Apply glide transitions
+                bgPill.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}`;
+                staticLogo.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}`;
 
                 // Measure dynamically AFTER layout has settled
                 const navRect = navbarCapsule.getBoundingClientRect();
@@ -91,6 +107,7 @@
                 staticLogo.style.top = `${targetTop}px`;
                 staticLogo.style.left = `${exactLogoLeft}px`;
                 staticLogo.style.margin = `-18px 0 0 0`; // Anchor cleanly
+
 
 
                 // Phase 3: Expand pill width to fill navbar
