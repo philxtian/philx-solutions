@@ -1,0 +1,614 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "htmx_component_flow",
+        "label": "HTMX Partial Loading Flow",
+        "nodes": [
+          "index_html",
+          "partials_navbar",
+          "partials_hero",
+          "partials_services",
+          "partials_contact",
+          "partials_footer"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0
+      },
+      {
+        "id": "brand_identity_assets",
+        "label": "Brand Visual Identity",
+        "nodes": [
+          "assets_logo_mark_black",
+          "assets_logo_mark_white",
+          "assets_logo_mark",
+          "assets_logo",
+          "partials_navbar",
+          "partials_footer"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "animations.js",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_animations",
+      "community": 1,
+      "norm_label": "animations.js"
+    },
+    {
+      "label": "initScrollReveals()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "js_animations_initscrollreveals",
+      "community": 1,
+      "norm_label": "initscrollreveals()"
+    },
+    {
+      "label": "initMagneticElements()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "js_animations_initmagneticelements",
+      "community": 1,
+      "norm_label": "initmagneticelements()"
+    },
+    {
+      "label": "initAdaptiveNavbar()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L95",
+      "_origin": "ast",
+      "id": "js_animations_initadaptivenavbar",
+      "community": 1,
+      "norm_label": "initadaptivenavbar()"
+    },
+    {
+      "label": "initAll()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L187",
+      "_origin": "ast",
+      "id": "js_animations_initall",
+      "community": 1,
+      "norm_label": "initall()"
+    },
+    {
+      "label": "intro.js",
+      "file_type": "code",
+      "source_file": "js/intro.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_intro",
+      "community": 5,
+      "norm_label": "intro.js"
+    },
+    {
+      "label": "runSequence()",
+      "file_type": "code",
+      "source_file": "js/intro.js",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "js_intro_runsequence",
+      "community": 5,
+      "norm_label": "runsequence()"
+    },
+    {
+      "label": "wp-api.js",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_wp_api",
+      "community": 4,
+      "norm_label": "wp-api.js"
+    },
+    {
+      "label": "handleContactSubmit()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "js_wp_api_handlecontactsubmit",
+      "community": 4,
+      "norm_label": "handlecontactsubmit()"
+    },
+    {
+      "label": "setLoadingState()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L126",
+      "_origin": "ast",
+      "id": "js_wp_api_setloadingstate",
+      "community": 4,
+      "norm_label": "setloadingstate()"
+    },
+    {
+      "label": "renderErrorMessage()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L140",
+      "_origin": "ast",
+      "id": "js_wp_api_rendererrormessage",
+      "community": 4,
+      "norm_label": "rendererrormessage()"
+    },
+    {
+      "label": "Agent Instructions",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "id": "agents_md",
+      "community": 2,
+      "norm_label": "agent instructions"
+    },
+    {
+      "label": "PHILX Solutions README",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "readme_md",
+      "community": 0,
+      "norm_label": "philx solutions readme"
+    },
+    {
+      "label": "Main Layout Shell",
+      "file_type": "code",
+      "source_file": "index.html",
+      "id": "index_html",
+      "community": 0,
+      "norm_label": "main layout shell"
+    },
+    {
+      "label": "Navigation Bar",
+      "file_type": "code",
+      "source_file": "partials/navbar.html",
+      "id": "partials_navbar",
+      "community": 3,
+      "norm_label": "navigation bar"
+    },
+    {
+      "label": "Hero Section",
+      "file_type": "code",
+      "source_file": "partials/hero.html",
+      "id": "partials_hero",
+      "community": 0,
+      "norm_label": "hero section"
+    },
+    {
+      "label": "Services Grid",
+      "file_type": "code",
+      "source_file": "partials/services.html",
+      "id": "partials_services",
+      "community": 0,
+      "norm_label": "services grid"
+    },
+    {
+      "label": "About Section",
+      "file_type": "code",
+      "source_file": "partials/about.html",
+      "id": "partials_about",
+      "community": 0,
+      "norm_label": "about section"
+    },
+    {
+      "label": "Expertise Section",
+      "file_type": "code",
+      "source_file": "partials/expertise.html",
+      "id": "partials_expertise",
+      "community": 0,
+      "norm_label": "expertise section"
+    },
+    {
+      "label": "Contact Form",
+      "file_type": "code",
+      "source_file": "partials/contact.html",
+      "id": "partials_contact",
+      "community": 0,
+      "norm_label": "contact form"
+    },
+    {
+      "label": "Footer",
+      "file_type": "code",
+      "source_file": "partials/footer.html",
+      "id": "partials_footer",
+      "community": 3,
+      "norm_label": "footer"
+    },
+    {
+      "label": "Contact Success Response",
+      "file_type": "code",
+      "source_file": "api/contact-success.html",
+      "verification": "unverified",
+      "id": "api_contact_success",
+      "community": 0,
+      "norm_label": "contact success response"
+    },
+    {
+      "label": "Black Logo Mark",
+      "file_type": "image",
+      "source_file": "assets/logo-mark-black.png",
+      "id": "assets_logo_mark_black",
+      "community": 3,
+      "norm_label": "black logo mark"
+    },
+    {
+      "label": "White Logo Mark",
+      "file_type": "image",
+      "source_file": "assets/logo-mark-white.png",
+      "id": "assets_logo_mark_white",
+      "community": 3,
+      "norm_label": "white logo mark"
+    },
+    {
+      "label": "Default Logo Mark",
+      "file_type": "image",
+      "source_file": "assets/logo-mark.png",
+      "id": "assets_logo_mark",
+      "community": 8,
+      "norm_label": "default logo mark"
+    },
+    {
+      "label": "Full Transparent Logo",
+      "file_type": "image",
+      "source_file": "assets/logo-full-transparent.png",
+      "id": "assets_logo_full_transparent",
+      "community": 7,
+      "norm_label": "full transparent logo"
+    },
+    {
+      "label": "Transparent Logo",
+      "file_type": "image",
+      "source_file": "assets/logo-transparent.png",
+      "id": "assets_logo_transparent",
+      "community": 9,
+      "norm_label": "transparent logo"
+    },
+    {
+      "label": "Main Logo",
+      "file_type": "image",
+      "source_file": "assets/logo.png",
+      "id": "assets_logo",
+      "community": 6,
+      "norm_label": "main logo"
+    },
+    {
+      "label": "UI/UX Pro Max Skill",
+      "file_type": "concept",
+      "source_file": ".agents/skills/design/ui-ux-pro-max/SKILL.md",
+      "id": "agents_skills_design_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "community": 2,
+      "norm_label": "ui/ux pro max skill"
+    },
+    {
+      "label": "Caveman Skill",
+      "file_type": "concept",
+      "source_file": ".agents/skills/workflow/caveman/SKILL.md",
+      "id": "agents_skills_workflow_caveman_skill_caveman",
+      "community": 2,
+      "norm_label": "caveman skill"
+    },
+    {
+      "label": "API Design Skill",
+      "file_type": "concept",
+      "source_file": ".agents/skills/backend/api-design/SKILL.md",
+      "id": "agents_skills_backend_api_design_skill_api_design",
+      "community": 2,
+      "norm_label": "api design skill"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initadaptivenavbar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L187",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initall",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initmagneticelements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initscrollreveals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L188",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initscrollreveals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L189",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initmagneticelements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L190",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initadaptivenavbar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/intro.js",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_intro",
+      "target": "js_intro_runsequence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api",
+      "target": "js_wp_api_handlecontactsubmit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api",
+      "target": "js_wp_api_rendererrormessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api",
+      "target": "js_wp_api_setloadingstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api_handlecontactsubmit",
+      "target": "js_wp_api_rendererrormessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api_handlecontactsubmit",
+      "target": "js_wp_api_setloadingstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_md",
+      "target": "agents_skills_backend_api_design_skill_api_design"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_md",
+      "target": "agents_skills_design_ui_ux_pro_max_skill_ui_ux_pro_max"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_md",
+      "target": "agents_skills_workflow_caveman_skill_caveman"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "README.md",
+      "source": "readme_md",
+      "target": "index_html"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_about"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_contact"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_expertise"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_footer"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_hero"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_navbar"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_services"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "partials/navbar.html",
+      "source": "partials_navbar",
+      "target": "assets_logo_mark_black"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "partials/navbar.html",
+      "source": "partials_navbar",
+      "target": "assets_logo_mark_white"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "partials/contact.html",
+      "source": "partials_contact",
+      "target": "api_contact_success"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "partials/footer.html",
+      "source": "partials_footer",
+      "target": "assets_logo_mark_black"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "htmx_component_flow",
+      "label": "HTMX Partial Loading Flow",
+      "nodes": [
+        "index_html",
+        "partials_navbar",
+        "partials_hero",
+        "partials_services",
+        "partials_contact",
+        "partials_footer"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "brand_identity_assets",
+      "label": "Brand Visual Identity",
+      "nodes": [
+        "assets_logo_mark_black",
+        "assets_logo_mark_white",
+        "assets_logo_mark",
+        "assets_logo",
+        "partials_navbar",
+        "partials_footer"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9
+    }
+  ],
+  "built_at_commit": "243bd6320b8b9873db38dcda06a0c40b8f2742d8"
+}
