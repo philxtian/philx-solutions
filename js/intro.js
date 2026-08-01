@@ -22,19 +22,21 @@
     overlay.id = 'intro-overlay';
     overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s ease;';
 
-    // Start with a tiny 30px ball in the center, logo perfectly centered but invisible
+    // Start with a tiny 30px ball in the center, only the logo icon perfectly centered
     overlay.innerHTML = `
         <div id="intro-bg-pill" style="position:fixed;top:50%;left:50%;width:30px;height:30px;margin-top:-15px;margin-left:-15px;background:#ffffff;border-radius:9999px;z-index:1;will-change:top, left, width, height, margin; animation: philx-bounce 0.7s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;"></div>
         
-        <div id="intro-static-logo" style="position:fixed;top:50%;left:50%;width:120px;height:36px;margin-top:-18px;margin-left:-60px;z-index:2;opacity:0;will-change:opacity, top, left, margin; display:flex;align-items:center;">
+        <div id="intro-static-logo" style="position:fixed;top:50%;left:50%;height:36px;margin-top:-18px;margin-left:-18px;z-index:2;opacity:0;will-change:opacity, top, left, margin; display:flex;align-items:center;">
             <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="width:36px;height:36px;object-fit:contain;border-radius:8px;display:block;flex-shrink:0;">
-            <div style="width:12px;flex-shrink:0;"></div>
-            <div style="display:flex;flex-direction:column;justify-content:center;width:72px;flex-shrink:0;">
-                <div style="display:flex;justify-content:space-between;font-weight:900;color:#000000;line-height:1;font-size:13px;text-transform:uppercase;">
-                    <span>P</span><span>H</span><span>I</span><span>L</span><span>X</span>
-                </div>
-                <div style="display:flex;justify-content:space-between;font-size:9px;font-weight:700;color:#64748b;line-height:1;margin-top:4px;text-transform:uppercase;">
-                    <span>S</span><span>O</span><span>L</span><span>U</span><span>T</span><span>I</span><span>O</span><span>N</span><span>S</span>
+            <div id="intro-logo-text" style="display:flex;align-items:center;opacity:0;overflow:hidden;width:0;will-change:width, opacity;">
+                <div style="width:12px;flex-shrink:0;"></div>
+                <div style="display:flex;flex-direction:column;justify-content:center;width:72px;flex-shrink:0;">
+                    <div style="display:flex;justify-content:space-between;font-weight:900;color:#000000;line-height:1;font-size:13px;text-transform:uppercase;">
+                        <span>P</span><span>H</span><span>I</span><span>L</span><span>X</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:9px;font-weight:700;color:#64748b;line-height:1;margin-top:4px;text-transform:uppercase;">
+                        <span>S</span><span>O</span><span>L</span><span>U</span><span>T</span><span>I</span><span>O</span><span>N</span><span>S</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,7 +77,7 @@
             bgPill.style.height = '150px';
             bgPill.style.margin = '-75px 0 0 -75px';
 
-            // Phase 2: Fade in perfectly centered Logo
+            // Phase 2: Fade in perfectly centered Logo Icon
             setTimeout(() => {
                 staticLogo.style.transition = 'opacity 0.4s ease';
                 staticLogo.style.opacity = '1';
@@ -103,6 +105,15 @@
                     staticLogo.style.top = `${targetTop}px`;
                     staticLogo.style.left = `${exactLogoLeft}px`;
                     staticLogo.style.margin = `-18px 0 0 0`;
+
+                    // Smoothly unroll the text alongside the logo
+                    const logoText = document.getElementById('intro-logo-text');
+                    if (logoText) {
+                        logoText.style.transition = `width 0.6s ${EASE}, opacity 0.6s ${EASE}`;
+                        logoText.style.width = '84px'; // 12px gap + 72px text width
+                        logoText.style.opacity = '1';
+                    }
+
 
                     // Phase 4: Expand pill width to fill navbar
                     setTimeout(() => {
