@@ -132,6 +132,12 @@
         .group.relative:hover .card-spotlight {
             opacity: 1;
         }
+
+        /* 3D Depth Support for Cards */
+        .group.relative {
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
     </style>
     <!-- Intro Sequence Script (Instant Overlay Mount) -->
     <script src="js/intro.js"></script>

@@ -4,6 +4,47 @@
   "graph": {
     "hyperedges": [
       {
+        "id": "enterprise_tech_stack",
+        "label": "Enterprise Technology Stack",
+        "nodes": [
+          "partials_expertise",
+          "partials_services"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.8,
+        "source_file": "partials/expertise.html"
+      },
+      {
+        "id": "philx_tech_stack",
+        "label": "PHILX Solutions Tech Stack",
+        "nodes": [
+          "laravel",
+          "htmx",
+          "tailwind_css",
+          "agents_md_philx_solutions"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "AGENTS.md"
+      },
+      {
+        "id": "agent_skill_system",
+        "label": "Agent Skill System",
+        "nodes": [
+          "agents_skills_backend_everything_claude_code_skill",
+          "agents_skills_design_emil_design_eng_skill",
+          "agents_skills_design_pick_ui_library_skill",
+          "agents_skills_workflow_code_simplify_skill",
+          "agents_skills_workflow_git_committer_skill"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "AGENTS.md"
+      },
+      {
         "id": "htmx_component_flow",
         "label": "HTMX Partial Loading Flow",
         "nodes": [
@@ -42,10 +83,10 @@
       "source_file": "js/animations.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "animations.js",
-      "id": "js_animations",
-      "community_name": "animations.js"
+      "community_name": "animations.js",
+      "id": "js_animations"
     },
     {
       "label": "initScrollReveals()",
@@ -53,10 +94,10 @@
       "source_file": "js/animations.js",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "initscrollreveals()",
-      "id": "js_animations_initscrollreveals",
-      "community_name": "animations.js"
+      "community_name": "animations.js",
+      "id": "js_animations_initscrollreveals"
     },
     {
       "label": "initMagneticElements()",
@@ -64,10 +105,10 @@
       "source_file": "js/animations.js",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "initmagneticelements()",
-      "id": "js_animations_initmagneticelements",
-      "community_name": "animations.js"
+      "community_name": "animations.js",
+      "id": "js_animations_initmagneticelements"
     },
     {
       "label": "initAdaptiveNavbar()",
@@ -75,10 +116,10 @@
       "source_file": "js/animations.js",
       "source_location": "L95",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "initadaptivenavbar()",
-      "id": "js_animations_initadaptivenavbar",
-      "community_name": "animations.js"
+      "community_name": "animations.js",
+      "id": "js_animations_initadaptivenavbar"
     },
     {
       "label": "initAll()",
@@ -86,103 +127,19 @@
       "source_file": "js/animations.js",
       "source_location": "L187",
       "_origin": "ast",
-      "community": 1,
-      "norm_label": "initall()",
-      "id": "js_animations_initall",
-      "community_name": "animations.js"
-    },
-    {
-      "label": "intro.js",
-      "file_type": "code",
-      "source_file": "js/intro.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 5,
-      "norm_label": "intro.js",
-      "id": "js_intro",
-      "community_name": "intro.js"
-    },
-    {
-      "label": "runSequence()",
-      "file_type": "code",
-      "source_file": "js/intro.js",
-      "source_location": "L42",
-      "_origin": "ast",
-      "community": 5,
-      "norm_label": "runsequence()",
-      "id": "js_intro_runsequence",
-      "community_name": "intro.js"
-    },
-    {
-      "label": "wp-api.js",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 4,
-      "norm_label": "wp-api.js",
-      "id": "js_wp_api",
-      "community_name": "wp-api.js"
-    },
-    {
-      "label": "handleContactSubmit()",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L68",
-      "_origin": "ast",
-      "community": 4,
-      "norm_label": "handlecontactsubmit()",
-      "id": "js_wp_api_handlecontactsubmit",
-      "community_name": "wp-api.js"
-    },
-    {
-      "label": "setLoadingState()",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L126",
-      "_origin": "ast",
-      "community": 4,
-      "norm_label": "setloadingstate()",
-      "id": "js_wp_api_setloadingstate",
-      "community_name": "wp-api.js"
-    },
-    {
-      "label": "renderErrorMessage()",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L140",
-      "_origin": "ast",
-      "community": 4,
-      "norm_label": "rendererrormessage()",
-      "id": "js_wp_api_rendererrormessage",
-      "community_name": "wp-api.js"
-    },
-    {
-      "label": "Agent Instructions",
-      "file_type": "document",
-      "source_file": "AGENTS.md",
       "community": 2,
-      "norm_label": "agent instructions",
-      "id": "agents_md",
-      "community_name": "Agent Instructions"
+      "norm_label": "initall()",
+      "community_name": "animations.js",
+      "id": "js_animations_initall"
     },
     {
       "label": "PHILX Solutions README",
       "file_type": "document",
       "source_file": "README.md",
-      "community": 0,
+      "community": 1,
       "norm_label": "philx solutions readme",
-      "id": "readme_md",
-      "community_name": "Main Layout Shell"
-    },
-    {
-      "label": "Main Layout Shell",
-      "file_type": "code",
-      "source_file": "index.html",
-      "community": 0,
-      "norm_label": "main layout shell",
-      "id": "index_html",
-      "community_name": "Main Layout Shell"
+      "community_name": "Main Layout Shell",
+      "id": "readme_md"
     },
     {
       "label": "Navigation Bar",
@@ -190,53 +147,8 @@
       "source_file": "partials/navbar.html",
       "community": 3,
       "norm_label": "navigation bar",
-      "id": "partials_navbar",
-      "community_name": "Navigation Bar"
-    },
-    {
-      "label": "Hero Section",
-      "file_type": "code",
-      "source_file": "partials/hero.html",
-      "community": 0,
-      "norm_label": "hero section",
-      "id": "partials_hero",
-      "community_name": "Main Layout Shell"
-    },
-    {
-      "label": "Services Grid",
-      "file_type": "code",
-      "source_file": "partials/services.html",
-      "community": 0,
-      "norm_label": "services grid",
-      "id": "partials_services",
-      "community_name": "Main Layout Shell"
-    },
-    {
-      "label": "About Section",
-      "file_type": "code",
-      "source_file": "partials/about.html",
-      "community": 0,
-      "norm_label": "about section",
-      "id": "partials_about",
-      "community_name": "Main Layout Shell"
-    },
-    {
-      "label": "Expertise Section",
-      "file_type": "code",
-      "source_file": "partials/expertise.html",
-      "community": 0,
-      "norm_label": "expertise section",
-      "id": "partials_expertise",
-      "community_name": "Main Layout Shell"
-    },
-    {
-      "label": "Contact Form",
-      "file_type": "code",
-      "source_file": "partials/contact.html",
-      "community": 0,
-      "norm_label": "contact form",
-      "id": "partials_contact",
-      "community_name": "Main Layout Shell"
+      "community_name": "Navigation Bar",
+      "id": "partials_navbar"
     },
     {
       "label": "Footer",
@@ -244,18 +156,18 @@
       "source_file": "partials/footer.html",
       "community": 3,
       "norm_label": "footer",
-      "id": "partials_footer",
-      "community_name": "Navigation Bar"
+      "community_name": "Navigation Bar",
+      "id": "partials_footer"
     },
     {
       "label": "Contact Success Response",
       "file_type": "code",
       "source_file": "api/contact-success.html",
       "verification": "unverified",
-      "community": 0,
+      "community": 15,
       "norm_label": "contact success response",
-      "id": "api_contact_success",
-      "community_name": "Main Layout Shell"
+      "community_name": "Main Layout Shell",
+      "id": "api_contact_success"
     },
     {
       "label": "Black Logo Mark",
@@ -263,8 +175,8 @@
       "source_file": "assets/logo-mark-black.png",
       "community": 3,
       "norm_label": "black logo mark",
-      "id": "assets_logo_mark_black",
-      "community_name": "Navigation Bar"
+      "community_name": "Navigation Bar",
+      "id": "assets_logo_mark_black"
     },
     {
       "label": "White Logo Mark",
@@ -272,71 +184,419 @@
       "source_file": "assets/logo-mark-white.png",
       "community": 3,
       "norm_label": "white logo mark",
-      "id": "assets_logo_mark_white",
-      "community_name": "Navigation Bar"
+      "community_name": "Navigation Bar",
+      "id": "assets_logo_mark_white"
     },
     {
       "label": "Default Logo Mark",
       "file_type": "image",
       "source_file": "assets/logo-mark.png",
-      "community": 8,
+      "community": 18,
       "norm_label": "default logo mark",
-      "id": "assets_logo_mark",
-      "community_name": "Default Logo Mark"
+      "community_name": "Default Logo Mark",
+      "id": "assets_logo_mark"
     },
     {
       "label": "Full Transparent Logo",
       "file_type": "image",
       "source_file": "assets/logo-full-transparent.png",
-      "community": 7,
+      "community": 17,
       "norm_label": "full transparent logo",
-      "id": "assets_logo_full_transparent",
-      "community_name": "Full Transparent Logo"
+      "community_name": "Full Transparent Logo",
+      "id": "assets_logo_full_transparent"
     },
     {
       "label": "Transparent Logo",
       "file_type": "image",
       "source_file": "assets/logo-transparent.png",
-      "community": 9,
+      "community": 19,
       "norm_label": "transparent logo",
-      "id": "assets_logo_transparent",
-      "community_name": "Transparent Logo"
+      "community_name": "Transparent Logo",
+      "id": "assets_logo_transparent"
     },
     {
       "label": "Main Logo",
       "file_type": "image",
       "source_file": "assets/logo.png",
-      "community": 6,
+      "community": 16,
       "norm_label": "main logo",
-      "id": "assets_logo",
-      "community_name": "Main Logo"
+      "community_name": "Main Logo",
+      "id": "assets_logo"
     },
     {
       "label": "UI/UX Pro Max Skill",
       "file_type": "concept",
       "source_file": ".agents/skills/design/ui-ux-pro-max/SKILL.md",
-      "community": 2,
+      "community": 12,
       "norm_label": "ui/ux pro max skill",
-      "id": "agents_skills_design_ui_ux_pro_max_skill_ui_ux_pro_max",
-      "community_name": "Agent Instructions"
+      "community_name": "Agent Instructions",
+      "id": "agents_skills_design_ui_ux_pro_max_skill_ui_ux_pro_max"
     },
     {
       "label": "Caveman Skill",
       "file_type": "concept",
       "source_file": ".agents/skills/workflow/caveman/SKILL.md",
-      "community": 2,
+      "community": 13,
       "norm_label": "caveman skill",
-      "id": "agents_skills_workflow_caveman_skill_caveman",
-      "community_name": "Agent Instructions"
+      "community_name": "Agent Instructions",
+      "id": "agents_skills_workflow_caveman_skill_caveman"
     },
     {
       "label": "API Design Skill",
       "file_type": "concept",
       "source_file": ".agents/skills/backend/api-design/SKILL.md",
-      "community": 2,
+      "community": 11,
       "norm_label": "api design skill",
-      "id": "agents_skills_backend_api_design_skill_api_design",
-      "community_name": "Agent Instructions"
+      "community_name": "Agent Instructions",
+      "id": "agents_skills_backend_api_design_skill_api_design"
+    },
+    {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "community": 0,
+      "norm_label": "agents.md",
+      "id": "agents_md"
+    },
+    {
+      "label": "PHILX Solutions Project",
+      "file_type": "concept",
+      "source_file": "AGENTS.md",
+      "community": 0,
+      "norm_label": "philx solutions project",
+      "id": "agents_md_philx_solutions"
+    },
+    {
+      "label": "Graphify Knowledge Graph Integration",
+      "file_type": "concept",
+      "source_file": "AGENTS.md",
+      "community": 0,
+      "norm_label": "graphify knowledge graph integration",
+      "id": "agents_md_graphify_integration"
+    },
+    {
+      "label": "Everything Claude Code Skill",
+      "file_type": "document",
+      "source_file": ".agents/skills/backend/everything-claude-code/SKILL.md",
+      "community": 0,
+      "norm_label": "everything claude code skill",
+      "id": "agents_skills_backend_everything_claude_code_skill"
+    },
+    {
+      "label": "Design Engineering Skill",
+      "file_type": "document",
+      "source_file": ".agents/skills/design/emil-design-eng/SKILL.md",
+      "community": 6,
+      "norm_label": "design engineering skill",
+      "id": "agents_skills_design_emil_design_eng_skill"
+    },
+    {
+      "label": "Pick UI Library Skill",
+      "file_type": "document",
+      "source_file": ".agents/skills/design/pick-ui-library/SKILL.md",
+      "community": 6,
+      "norm_label": "pick ui library skill",
+      "id": "agents_skills_design_pick_ui_library_skill"
+    },
+    {
+      "label": "Code Simplification Skill",
+      "file_type": "document",
+      "source_file": ".agents/skills/workflow/code-simplify/SKILL.md",
+      "community": 14,
+      "norm_label": "code simplification skill",
+      "id": "agents_skills_workflow_code_simplify_skill"
+    },
+    {
+      "label": "Git Committer Skill",
+      "file_type": "document",
+      "source_file": ".agents/skills/workflow/git-committer/SKILL.md",
+      "community": 0,
+      "norm_label": "git committer skill",
+      "id": "agents_skills_workflow_git_committer_skill"
+    },
+    {
+      "label": "HTMX",
+      "file_type": "concept",
+      "source_file": ".agents/skills/backend/everything-claude-code/SKILL.md",
+      "community": 0,
+      "norm_label": "htmx",
+      "id": "htmx"
+    },
+    {
+      "label": "Tailwind CSS",
+      "file_type": "concept",
+      "source_file": "AGENTS.md",
+      "community": 0,
+      "norm_label": "tailwind css",
+      "id": "tailwind_css"
+    },
+    {
+      "label": "PHP Laravel",
+      "file_type": "concept",
+      "source_file": "AGENTS.md",
+      "community": 0,
+      "norm_label": "php laravel",
+      "id": "laravel"
+    },
+    {
+      "label": "Emil Kowalski Design Philosophy",
+      "file_type": "concept",
+      "source_file": ".agents/skills/design/emil-design-eng/SKILL.md",
+      "community": 6,
+      "norm_label": "emil kowalski design philosophy",
+      "id": "emil_kowalski_philosophy"
+    },
+    {
+      "label": "intro.js",
+      "file_type": "code",
+      "source_file": "js/intro.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "intro.js",
+      "id": "js_intro"
+    },
+    {
+      "label": "mountOverlay()",
+      "file_type": "code",
+      "source_file": "js/intro.js",
+      "source_location": "L45",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "mountoverlay()",
+      "id": "js_intro_mountoverlay"
+    },
+    {
+      "label": "runSequence()",
+      "file_type": "code",
+      "source_file": "js/intro.js",
+      "source_location": "L54",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "runsequence()",
+      "id": "js_intro_runsequence"
+    },
+    {
+      "label": "init()",
+      "file_type": "code",
+      "source_file": "js/intro.js",
+      "source_location": "L150",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "init()",
+      "id": "js_intro_init"
+    },
+    {
+      "label": "HTMX Library",
+      "file_type": "code",
+      "source_file": "https://unpkg.com/htmx.org@1.9.10",
+      "community": 20,
+      "norm_label": "htmx library",
+      "id": "htmx_org"
+    },
+    {
+      "label": "Tailwind CSS",
+      "file_type": "code",
+      "source_file": "https://cdn.tailwindcss.com",
+      "community": 21,
+      "norm_label": "tailwind css",
+      "id": "tailwindcss"
+    },
+    {
+      "label": "index.html",
+      "file_type": "code",
+      "source_file": "index.html",
+      "community": 1,
+      "norm_label": "index.html",
+      "id": "index_html"
+    },
+    {
+      "label": "Hero Partial",
+      "file_type": "code",
+      "source_file": "partials/hero.html",
+      "community": 1,
+      "norm_label": "hero partial",
+      "id": "partials_hero"
+    },
+    {
+      "label": "Services Partial",
+      "file_type": "code",
+      "source_file": "partials/services.html",
+      "community": 1,
+      "norm_label": "services partial",
+      "id": "partials_services"
+    },
+    {
+      "label": "About Partial",
+      "file_type": "code",
+      "source_file": "partials/about.html",
+      "community": 1,
+      "norm_label": "about partial",
+      "id": "partials_about"
+    },
+    {
+      "label": "Expertise Partial",
+      "file_type": "code",
+      "source_file": "partials/expertise.html",
+      "community": 1,
+      "norm_label": "expertise partial",
+      "id": "partials_expertise"
+    },
+    {
+      "label": "Contact Partial",
+      "file_type": "code",
+      "source_file": "partials/contact.html",
+      "community": 1,
+      "norm_label": "contact partial",
+      "id": "partials_contact"
+    },
+    {
+      "label": "PHILX Solutions",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "community": 1,
+      "norm_label": "philx solutions",
+      "id": "philx_solutions"
+    },
+    {
+      "label": "smooth-scroll.js",
+      "file_type": "code",
+      "source_file": "js/smooth-scroll.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "smooth-scroll.js",
+      "id": "js_smooth_scroll"
+    },
+    {
+      "label": "easeInOutCubic()",
+      "file_type": "code",
+      "source_file": "js/smooth-scroll.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "easeinoutcubic()",
+      "id": "js_smooth_scroll_easeinoutcubic"
+    },
+    {
+      "label": "initSmoothScroll()",
+      "file_type": "code",
+      "source_file": "js/smooth-scroll.js",
+      "source_location": "L17",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "initsmoothscroll()",
+      "id": "js_smooth_scroll_initsmoothscroll"
+    },
+    {
+      "label": "blob-tracker.js",
+      "file_type": "code",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "blob-tracker.js",
+      "id": "js_blob_tracker"
+    },
+    {
+      "label": "updateBlobs()",
+      "file_type": "code",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "updateblobs()",
+      "id": "js_blob_tracker_updateblobs"
+    },
+    {
+      "label": "render()",
+      "file_type": "code",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L19",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "render()",
+      "id": "js_blob_tracker_render"
+    },
+    {
+      "label": "scroll-reveal.js",
+      "file_type": "code",
+      "source_file": "js/scroll-reveal.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "scroll-reveal.js",
+      "id": "js_scroll_reveal"
+    },
+    {
+      "label": "initScrollReveals()",
+      "file_type": "code",
+      "source_file": "js/scroll-reveal.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "initscrollreveals()",
+      "id": "js_scroll_reveal_initscrollreveals"
+    },
+    {
+      "label": "wp-api.js",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "wp-api.js",
+      "id": "js_wp_api"
+    },
+    {
+      "label": "handleContactSubmit()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L68",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "handlecontactsubmit()",
+      "id": "js_wp_api_handlecontactsubmit"
+    },
+    {
+      "label": "setLoadingState()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L126",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "setloadingstate()",
+      "id": "js_wp_api_setloadingstate"
+    },
+    {
+      "label": "renderErrorMessage()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L140",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "rendererrormessage()",
+      "id": "js_wp_api_rendererrormessage"
+    },
+    {
+      "label": "card-spotlight.js",
+      "file_type": "code",
+      "source_file": "js/card-spotlight.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_card_spotlight",
+      "community": 9,
+      "norm_label": "card-spotlight.js"
+    },
+    {
+      "label": "init3DTilt()",
+      "file_type": "code",
+      "source_file": "js/card-spotlight.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "js_card_spotlight_init3dtilt",
+      "community": 9,
+      "norm_label": "init3dtilt()"
     }
   ],
   "links": [
@@ -421,15 +681,268 @@
       "target": "js_animations_initadaptivenavbar"
     },
     {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "README.md",
+      "source": "readme_md",
+      "target": "index_html"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "partials/navbar.html",
+      "source": "partials_navbar",
+      "target": "assets_logo_mark_black"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "partials/navbar.html",
+      "source": "partials_navbar",
+      "target": "assets_logo_mark_white"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "partials/footer.html",
+      "source": "partials_footer",
+      "target": "assets_logo_mark_black"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_md",
+      "target": "agents_md_graphify_integration"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_md",
+      "target": "agents_md_philx_solutions"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_md",
+      "target": "agents_skills_backend_everything_claude_code_skill"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": ".agents/skills/workflow/git-committer/SKILL.md",
+      "source": "agents_skills_workflow_git_committer_skill",
+      "target": "agents_md"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_md_philx_solutions",
+      "target": "laravel"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source": "agents_md_philx_solutions",
+      "target": "tailwind_css"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/backend/everything-claude-code/SKILL.md",
+      "source": "agents_skills_backend_everything_claude_code_skill",
+      "target": "htmx"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/design/emil-design-eng/SKILL.md",
+      "source": "agents_skills_design_emil_design_eng_skill",
+      "target": "emil_kowalski_philosophy"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".agents/skills/design/pick-ui-library/SKILL.md",
+      "source": "agents_skills_design_pick_ui_library_skill",
+      "target": "agents_skills_design_emil_design_eng_skill"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "js/intro.js",
-      "source_location": "L42",
+      "source_location": "L150",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_intro",
+      "target": "js_intro_init"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/intro.js",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_intro",
+      "target": "js_intro_mountoverlay"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/intro.js",
+      "source_location": "L54",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
       "source": "js_intro",
       "target": "js_intro_runsequence"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/intro.js",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_intro_runsequence",
+      "target": "js_intro_mountoverlay"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/intro.js",
+      "source_location": "L152",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_intro_init",
+      "target": "js_intro_runsequence"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_about"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_contact"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_expertise"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_hero"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "partials_services"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "index.html",
+      "source": "index_html",
+      "target": "philx_solutions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/smooth-scroll.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_smooth_scroll",
+      "target": "js_smooth_scroll_easeinoutcubic"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/smooth-scroll.js",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_smooth_scroll",
+      "target": "js_smooth_scroll_initsmoothscroll"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_blob_tracker",
+      "target": "js_blob_tracker_render"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_blob_tracker",
+      "target": "js_blob_tracker_updateblobs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/scroll-reveal.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_scroll_reveal",
+      "target": "js_scroll_reveal_initscrollreveals"
     },
     {
       "relation": "contains",
@@ -489,127 +1002,59 @@
       "target": "js_wp_api_setloadingstate"
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "AGENTS.md",
-      "source": "agents_md",
-      "target": "agents_skills_backend_api_design_skill_api_design"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "AGENTS.md",
-      "source": "agents_md",
-      "target": "agents_skills_design_ui_ux_pro_max_skill_ui_ux_pro_max"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "AGENTS.md",
-      "source": "agents_md",
-      "target": "agents_skills_workflow_caveman_skill_caveman"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.9,
-      "source_file": "README.md",
-      "source": "readme_md",
-      "target": "index_html"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source": "index_html",
-      "target": "partials_about"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source": "index_html",
-      "target": "partials_contact"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source": "index_html",
-      "target": "partials_expertise"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source": "index_html",
-      "target": "partials_footer"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source": "index_html",
-      "target": "partials_hero"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source": "index_html",
-      "target": "partials_navbar"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source": "index_html",
-      "target": "partials_services"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "partials/navbar.html",
-      "source": "partials_navbar",
-      "target": "assets_logo_mark_black"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "partials/navbar.html",
-      "source": "partials_navbar",
-      "target": "assets_logo_mark_white"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "partials/contact.html",
-      "source": "partials_contact",
-      "target": "api_contact_success"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "partials/footer.html",
-      "source": "partials_footer",
-      "target": "assets_logo_mark_black"
+      "source_file": "js/card-spotlight.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_card_spotlight",
+      "target": "js_card_spotlight_init3dtilt",
+      "confidence_score": 1.0
     }
   ],
   "hyperedges": [
+    {
+      "id": "enterprise_tech_stack",
+      "label": "Enterprise Technology Stack",
+      "nodes": [
+        "partials_expertise",
+        "partials_services"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "partials/expertise.html"
+    },
+    {
+      "id": "philx_tech_stack",
+      "label": "PHILX Solutions Tech Stack",
+      "nodes": [
+        "laravel",
+        "htmx",
+        "tailwind_css",
+        "agents_md_philx_solutions"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "id": "agent_skill_system",
+      "label": "Agent Skill System",
+      "nodes": [
+        "agents_skills_backend_everything_claude_code_skill",
+        "agents_skills_design_emil_design_eng_skill",
+        "agents_skills_design_pick_ui_library_skill",
+        "agents_skills_workflow_code_simplify_skill",
+        "agents_skills_workflow_git_committer_skill"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
     {
       "id": "htmx_component_flow",
       "label": "HTMX Partial Loading Flow",
@@ -641,5 +1086,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "243bd6320b8b9873db38dcda06a0c40b8f2742d8"
+  "built_at_commit": "6cf3053e561dae1c37aa72fcf4c2fc58fad0b563"
 }
