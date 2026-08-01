@@ -31,10 +31,10 @@ window.copyToClipboard = function(text, el) {
         const label = el.querySelector('.copy-label') || el;
         const originalText = label.textContent;
         label.textContent = 'Copied to Clipboard!';
-        el.classList.add('bg-black', 'text-white');
+        el.classList.add('bg-white/20');
         setTimeout(() => {
             label.textContent = originalText;
-            el.classList.remove('bg-black', 'text-white');
+            el.classList.remove('bg-white/20');
         }, 2000);
     }
 };

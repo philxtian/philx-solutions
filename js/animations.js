@@ -120,29 +120,9 @@
                     const theme = entry.target.getAttribute('data-section-theme');
 
                     if (theme === 'dark') {
-                        // Floating over dark section -> Navbar renders light mode iOS27 glass
-                        capsule.classList.remove('bg-white/[0.05]', 'border-white/[0.1]', 'shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]', 'bg-black/90', 'text-white', 'border-white/15');
-                        capsule.classList.add('bg-white/[0.4]', 'backdrop-blur-3xl', 'border', 'border-white/[0.6]', 'shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]', 'text-slate-900');
-
-                        if (logoBlack) {
-                            logoBlack.classList.remove('opacity-0');
-                            logoBlack.classList.add('opacity-100');
-                        }
-                        if (logoWhite) {
-                            logoWhite.classList.remove('opacity-100');
-                            logoWhite.classList.add('opacity-0');
-                        }
-
-                        if (title) title.className = 'nav-title flex justify-between font-black text-slate-900 leading-none text-[13px] uppercase';
-                        if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-slate-500 leading-none mt-1 uppercase';
-                        links.forEach(l => l.className = 'nav-link relative py-1 text-slate-700 hover:text-black transition-colors group');
-                        underlines.forEach(u => u.className = 'nav-underline absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all duration-300 ease-out group-hover:w-full');
-                        if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-black hover:bg-slate-800 rounded-full border border-black transition-all shadow-md relative z-30 cursor-pointer uppercase tracking-widest';
-                        if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-black/15 bg-slate-100 text-slate-900 transition-colors backdrop-blur-md relative z-30 cursor-pointer';
-                    } else if (theme === 'light') {
-                        // Floating over light section -> Navbar inverts to dark (black bg + white text)
-                        capsule.classList.remove('bg-white/90', 'text-slate-900', 'border-black/15');
-                        capsule.classList.add('bg-black/90', 'text-white', 'border-white/15');
+                        // Floating over dark section -> Navbar renders dark section translucent glass & crisp white text
+                        capsule.classList.remove('bg-white/70', 'border-white/90', 'shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]', 'bg-white/90', 'text-slate-900', 'text-gray-900', 'border-black/15');
+                        capsule.classList.add('bg-white/[0.05]', 'backdrop-blur-3xl', 'border', 'border-white/[0.1]', 'shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]', 'text-white');
 
                         if (logoBlack) {
                             logoBlack.classList.remove('opacity-100');
@@ -154,11 +134,31 @@
                         }
 
                         if (title) title.className = 'nav-title flex justify-between font-black text-white leading-none text-[13px] uppercase';
-                        if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-zinc-400 leading-none mt-1 uppercase';
-                        links.forEach(l => l.className = 'nav-link relative py-1 text-zinc-300 hover:text-white transition-colors group');
+                        if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-white/80 leading-none mt-1 uppercase';
+                        links.forEach(l => l.className = 'nav-link relative py-1 text-white/90 hover:text-white transition-colors group');
                         underlines.forEach(u => u.className = 'nav-underline absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full');
-                        if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-black bg-white hover:bg-zinc-200 rounded-full border border-white transition-all shadow-md relative z-30 cursor-pointer uppercase tracking-widest';
-                        if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-white/15 bg-zinc-900 text-white transition-colors backdrop-blur-md relative z-30 cursor-pointer';
+                        if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-white/10 backdrop-blur-md border border-white/20 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 relative z-30 cursor-pointer uppercase tracking-widest';
+                        if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-white/20 bg-white/10 text-white shadow-lg hover:bg-white/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-pointer';
+                    } else if (theme === 'light') {
+                        // Floating over light/white section -> Navbar renders light iOS27 glass & high-contrast dark text
+                        capsule.classList.remove('bg-white/[0.05]', 'border-white/[0.1]', 'shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]', 'bg-black/90', 'text-white', 'border-white/15');
+                        capsule.classList.add('bg-white/70', 'backdrop-blur-3xl', 'border', 'border-white/90', 'shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]', 'text-gray-900');
+
+                        if (logoBlack) {
+                            logoBlack.classList.remove('opacity-0');
+                            logoBlack.classList.add('opacity-100');
+                        }
+                        if (logoWhite) {
+                            logoWhite.classList.remove('opacity-100');
+                            logoWhite.classList.add('opacity-0');
+                        }
+
+                        if (title) title.className = 'nav-title flex justify-between font-black text-gray-900 leading-none text-[13px] uppercase';
+                        if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-gray-600 leading-none mt-1 uppercase';
+                        links.forEach(l => l.className = 'nav-link relative py-1 text-gray-800 hover:text-black transition-colors group');
+                        underlines.forEach(u => u.className = 'nav-underline absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all duration-300 ease-out group-hover:w-full');
+                        if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-gray-900 bg-gray-900/10 backdrop-blur-md border border-gray-900/20 rounded-full shadow-lg hover:bg-gray-900/20 transition-all duration-300 relative z-30 cursor-pointer uppercase tracking-widest';
+                        if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-gray-900/20 bg-gray-900/10 text-gray-900 shadow-lg hover:bg-gray-900/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-pointer';
                     }
                 }
             });

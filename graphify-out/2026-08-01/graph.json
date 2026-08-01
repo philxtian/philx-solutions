@@ -78,61 +78,6 @@
   },
   "nodes": [
     {
-      "label": "animations.js",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "animations.js",
-      "community_name": "animations.js",
-      "id": "js_animations"
-    },
-    {
-      "label": "initScrollReveals()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initscrollreveals()",
-      "community_name": "animations.js",
-      "id": "js_animations_initscrollreveals"
-    },
-    {
-      "label": "initMagneticElements()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L48",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initmagneticelements()",
-      "community_name": "animations.js",
-      "id": "js_animations_initmagneticelements"
-    },
-    {
-      "label": "initAdaptiveNavbar()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L95",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initadaptivenavbar()",
-      "community_name": "animations.js",
-      "id": "js_animations_initadaptivenavbar"
-    },
-    {
-      "label": "initAll()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L187",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initall()",
-      "community_name": "animations.js",
-      "id": "js_animations_initall"
-    },
-    {
       "label": "PHILX Solutions README",
       "file_type": "document",
       "source_file": "README.md",
@@ -579,6 +524,56 @@
       "id": "js_wp_api_rendererrormessage"
     },
     {
+      "label": "animations.js",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_animations",
+      "community": 2,
+      "norm_label": "animations.js"
+    },
+    {
+      "label": "initScrollReveals()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "js_animations_initscrollreveals",
+      "community": 2,
+      "norm_label": "initscrollreveals()"
+    },
+    {
+      "label": "initMagneticElements()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "js_animations_initmagneticelements",
+      "community": 2,
+      "norm_label": "initmagneticelements()"
+    },
+    {
+      "label": "initAdaptiveNavbar()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L95",
+      "_origin": "ast",
+      "id": "js_animations_initadaptivenavbar",
+      "community": 2,
+      "norm_label": "initadaptivenavbar()"
+    },
+    {
+      "label": "initAll()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L187",
+      "_origin": "ast",
+      "id": "js_animations_initall",
+      "community": 2,
+      "norm_label": "initall()"
+    },
+    {
       "label": "card-spotlight.js",
       "file_type": "code",
       "source_file": "js/card-spotlight.js",
@@ -600,86 +595,6 @@
     }
   ],
   "links": [
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L95",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initadaptivenavbar"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L187",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initall"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L48",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initmagneticelements"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initscrollreveals"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L188",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations_initall",
-      "target": "js_animations_initscrollreveals"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L189",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations_initall",
-      "target": "js_animations_initmagneticelements"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L190",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations_initall",
-      "target": "js_animations_initadaptivenavbar"
-    },
     {
       "relation": "references",
       "confidence": "INFERRED",
@@ -1004,6 +919,86 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initadaptivenavbar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L187",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initall",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initmagneticelements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initscrollreveals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L188",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initscrollreveals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L189",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initmagneticelements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L190",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initadaptivenavbar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "js/card-spotlight.js",
       "source_location": "L4",
       "weight": 1.0,
@@ -1086,5 +1081,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "6cf3053e561dae1c37aa72fcf4c2fc58fad0b563"
+  "built_at_commit": "c0687b44a2410a234eb86f0b2c756ef8c0a02af9"
 }

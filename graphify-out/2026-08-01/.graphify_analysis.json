@@ -148,21 +148,6 @@
       "degree": 3
     },
     {
-      "id": "js_animations_initscrollreveals",
-      "label": "initScrollReveals()",
-      "degree": 2
-    },
-    {
-      "id": "js_animations_initmagneticelements",
-      "label": "initMagneticElements()",
-      "degree": 2
-    },
-    {
-      "id": "js_animations_initadaptivenavbar",
-      "label": "initAdaptiveNavbar()",
-      "degree": 2
-    },
-    {
       "id": "partials_navbar",
       "label": "Navigation Bar",
       "degree": 2
@@ -175,6 +160,21 @@
     {
       "id": "agents_skills_backend_everything_claude_code_skill",
       "label": "Everything Claude Code Skill",
+      "degree": 2
+    },
+    {
+      "id": "agents_skills_design_emil_design_eng_skill",
+      "label": "Design Engineering Skill",
+      "degree": 2
+    },
+    {
+      "id": "js_intro_mountoverlay",
+      "label": "mountOverlay()",
+      "degree": 2
+    },
+    {
+      "id": "js_intro_init",
+      "label": "init()",
       "degree": 2
     }
   ],
