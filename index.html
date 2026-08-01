@@ -87,6 +87,17 @@
             animation: morphBlob 11s ease-in-out infinite reverse;
             will-change: transform;
         }
+
+        /* Fast Morphing Blob Keyframes for Light Sections */
+        @keyframes morph-fast {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: scale(1) translate(0, 0); }
+            33% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: scale(1.1) translate(30px, -40px); }
+            66% { border-radius: 100% 50% 50% 100% / 100% 100% 50% 50%; transform: scale(0.9) translate(-20px, 30px); }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: scale(1) translate(0, 0); }
+        }
+        .animate-morph-fast {
+            animation: morph-fast 7s ease-in-out infinite;
+        }
     </style>
     <!-- Intro Sequence Script (Instant Overlay Mount) -->
     <script src="js/intro.js"></script>
@@ -137,5 +148,6 @@
     <script src="js/wp-api.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/smooth-scroll.js"></script>
+    <script src="js/blob-tracker.js"></script>
 </body>
 </html>
