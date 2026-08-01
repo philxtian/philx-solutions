@@ -1,6 +1,10 @@
 /**
- * PHILX Solutions — 2026 Elite Interactive Portfolio Intro Sequence
- * 3-Phase Morph: Organic Center Expansion -> Dark Logo Reveal -> Fluid Circle-to-Pill Morph
+ * PHILX Solutions — 2026 Multi-Stage Luxury Intro Sequence
+ * Pacing (Total ~2.2s):
+ * Phase 1: Center Circle Expansion (0.8s)
+ * Phase 2: Logo Entry & Relocation to Navbar Left Anchor (0.6s)
+ * Phase 3: Left-to-Right Pill Morph & Content Unroll (0.6s)
+ * Phase 4: Settle & Sticky Navbar Handover (0.2s)
  */
 
 (function () {
@@ -15,9 +19,9 @@
         overlay.id = 'intro-overlay';
         overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);';
 
-        // Initial Circle Element
+        // Preceding Circle HTML
         overlay.innerHTML = `
-            <div id="intro-morph-capsule" style="width:130px;height:130px;border-radius:9999px;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;transform:scale(0);transition:transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.85s cubic-bezier(0.16, 1, 0.3, 1), height 0.85s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.85s cubic-bezier(0.16, 1, 0.3, 1);will-change:transform, width, height;overflow:hidden;position:relative;">
+            <div id="intro-morph-capsule" style="width:140px;height:140px;border-radius:9999px;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:flex-start;padding-left:20px;transform:scale(0);transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), width 0.65s cubic-bezier(0.16, 1, 0.3, 1), height 0.65s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.65s cubic-bezier(0.16, 1, 0.3, 1);will-change:transform, width, height;overflow:hidden;position:absolute;">
                 <div id="intro-logo-content" style="opacity:0;transform:scale(0.85);transition:opacity 0.45s ease-out, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);display:flex;align-items:center;flex-shrink:0;">
                     <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="height:36px;width:auto;border-radius:8px;">
                     <div style="display:flex;flex-direction:column;justify-content:center;width:72px;margin-left:12px;flex-shrink:0;">
@@ -46,43 +50,42 @@
                 return;
             }
 
-            // Phase 1: Organic Center Circle Expansion
+            // Phase 1 (0.0s - 0.8s): Deliberate Center Circle Reveal
             setTimeout(() => {
                 capsule.style.transform = 'scale(1)';
 
-                // Phase 2: Crisp Dark Logo Reveal Inside Circle
+                // Phase 2 (0.8s - 1.4s): Logo Entry & Left Relocation
                 setTimeout(() => {
                     logoContent.style.opacity = '1';
                     logoContent.style.transform = 'scale(1)';
 
-                    // Phase 3: Fluid Circle-to-Pill Transformation & Docking
                     setTimeout(() => {
-                        const targetRect = navbarCapsule.getBoundingClientRect();
+                        const targetNavbarRect = navbarCapsule.getBoundingClientRect();
                         const capsuleRect = capsule.getBoundingClientRect();
 
-                        const capsuleCenterX = capsuleRect.left + capsuleRect.width / 2;
-                        const capsuleCenterY = capsuleRect.top + capsuleRect.height / 2;
+                        // Target position: Align left edge of circle with left edge of navbar capsule
+                        const deltaX = targetNavbarRect.left - capsuleRect.left;
+                        const deltaY = targetNavbarRect.top - capsuleRect.top;
 
-                        const targetCenterX = targetRect.left + targetRect.width / 2;
-                        const targetCenterY = targetRect.top + targetRect.height / 2;
-
-                        const deltaX = targetCenterX - capsuleCenterX;
-                        const deltaY = targetCenterY - capsuleCenterY;
-
-                        // Fluid Morph: Stretch width & height to match navbar capsule while translating to top
-                        capsule.style.transition = 'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), width 0.85s cubic-bezier(0.16, 1, 0.3, 1), height 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out';
+                        capsule.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
                         capsule.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
-                        capsule.style.width = `${targetRect.width}px`;
-                        capsule.style.height = `${targetRect.height}px`;
 
-                        // Phase 4: Seamless handover to sticky navbar & overlay dissolve
+                        // Phase 3 (1.4s - 2.0s): Left-to-Right Pill Morph & Horizontal Expansion
                         setTimeout(() => {
-                            overlay.style.opacity = '0';
+                            capsule.style.transition = 'width 0.65s cubic-bezier(0.16, 1, 0.3, 1), height 0.65s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out';
+                            capsule.style.width = `${targetNavbarRect.width}px`;
+                            capsule.style.height = `${targetNavbarRect.height}px`;
+                            capsule.style.borderRadius = '9999px';
+
+                            // Phase 4 (2.0s - 2.2s): Settle & Sticky Navbar Handover
                             setTimeout(() => {
-                                overlay.remove();
-                            }, 750);
-                        }, 450);
-                    }, 550);
+                                overlay.style.opacity = '0';
+                                setTimeout(() => {
+                                    overlay.remove();
+                                }, 750);
+                            }, 450);
+                        }, 550);
+                    }, 350);
                 }, 350);
             }, 100);
         }
