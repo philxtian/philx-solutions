@@ -484,44 +484,24 @@
       "id": "js_scroll_reveal_initscrollreveals"
     },
     {
-      "label": "wp-api.js",
+      "label": "card-spotlight.js",
       "file_type": "code",
-      "source_file": "js/wp-api.js",
+      "source_file": "js/card-spotlight.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "wp-api.js",
-      "id": "js_wp_api"
+      "community": 9,
+      "norm_label": "card-spotlight.js",
+      "id": "js_card_spotlight"
     },
     {
-      "label": "handleContactSubmit()",
+      "label": "init3DTilt()",
       "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L68",
+      "source_file": "js/card-spotlight.js",
+      "source_location": "L4",
       "_origin": "ast",
-      "community": 5,
-      "norm_label": "handlecontactsubmit()",
-      "id": "js_wp_api_handlecontactsubmit"
-    },
-    {
-      "label": "setLoadingState()",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L126",
-      "_origin": "ast",
-      "community": 5,
-      "norm_label": "setloadingstate()",
-      "id": "js_wp_api_setloadingstate"
-    },
-    {
-      "label": "renderErrorMessage()",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L140",
-      "_origin": "ast",
-      "community": 5,
-      "norm_label": "rendererrormessage()",
-      "id": "js_wp_api_rendererrormessage"
+      "community": 9,
+      "norm_label": "init3dtilt()",
+      "id": "js_card_spotlight_init3dtilt"
     },
     {
       "label": "animations.js",
@@ -574,24 +554,44 @@
       "norm_label": "initall()"
     },
     {
-      "label": "card-spotlight.js",
+      "label": "wp-api.js",
       "file_type": "code",
-      "source_file": "js/card-spotlight.js",
+      "source_file": "js/wp-api.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "js_card_spotlight",
-      "community": 9,
-      "norm_label": "card-spotlight.js"
+      "id": "js_wp_api",
+      "community": 5,
+      "norm_label": "wp-api.js"
     },
     {
-      "label": "init3DTilt()",
+      "label": "handleContactSubmit()",
       "file_type": "code",
-      "source_file": "js/card-spotlight.js",
-      "source_location": "L4",
+      "source_file": "js/wp-api.js",
+      "source_location": "L68",
       "_origin": "ast",
-      "id": "js_card_spotlight_init3dtilt",
-      "community": 9,
-      "norm_label": "init3dtilt()"
+      "id": "js_wp_api_handlecontactsubmit",
+      "community": 5,
+      "norm_label": "handlecontactsubmit()"
+    },
+    {
+      "label": "setLoadingState()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L126",
+      "_origin": "ast",
+      "id": "js_wp_api_setloadingstate",
+      "community": 5,
+      "norm_label": "setloadingstate()"
+    },
+    {
+      "label": "renderErrorMessage()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L140",
+      "_origin": "ast",
+      "id": "js_wp_api_rendererrormessage",
+      "community": 5,
+      "norm_label": "rendererrormessage()"
     }
   ],
   "links": [
@@ -862,59 +862,13 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L68",
+      "source_file": "js/card-spotlight.js",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
-      "source": "js_wp_api",
-      "target": "js_wp_api_handlecontactsubmit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L140",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_wp_api",
-      "target": "js_wp_api_rendererrormessage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L126",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_wp_api",
-      "target": "js_wp_api_setloadingstate"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L111",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_wp_api_handlecontactsubmit",
-      "target": "js_wp_api_rendererrormessage"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L81",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_wp_api_handlecontactsubmit",
-      "target": "js_wp_api_setloadingstate"
+      "source": "js_card_spotlight",
+      "target": "js_card_spotlight_init3dtilt"
     },
     {
       "relation": "contains",
@@ -999,12 +953,58 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "js/card-spotlight.js",
-      "source_location": "L4",
+      "source_file": "js/wp-api.js",
+      "source_location": "L68",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "js_card_spotlight",
-      "target": "js_card_spotlight_init3dtilt",
+      "source": "js_wp_api",
+      "target": "js_wp_api_handlecontactsubmit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api",
+      "target": "js_wp_api_rendererrormessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api",
+      "target": "js_wp_api_setloadingstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api_handlecontactsubmit",
+      "target": "js_wp_api_rendererrormessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_wp_api_handlecontactsubmit",
+      "target": "js_wp_api_setloadingstate",
       "confidence_score": 1.0
     }
   ],
@@ -1081,5 +1081,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "c0687b44a2410a234eb86f0b2c756ef8c0a02af9"
+  "built_at_commit": "02f6dcd7d6a5c368e6a8eeaf6faa0aa767d5f116"
 }

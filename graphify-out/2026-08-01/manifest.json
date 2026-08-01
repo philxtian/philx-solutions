@@ -5,9 +5,9 @@
     "semantic_hash": "efedb65a1bbd8b0ced351662ef9acbe7"
   },
   "js/animations.js": {
-    "mtime": 1785615726.1329458,
-    "ast_hash": "02cc8170ab4dd1b75a083c0932cef69a",
-    "semantic_hash": "02cc8170ab4dd1b75a083c0932cef69a"
+    "mtime": 1785615974.360401,
+    "ast_hash": "5d4d62760ef3d9be6032194e013a5505",
+    "semantic_hash": "5d4d62760ef3d9be6032194e013a5505"
   },
   "js/intro.js": {
     "mtime": 1785611050.1140583,
@@ -15,9 +15,9 @@
     "semantic_hash": "4cea5b6534ddfe8335970ef4a5888893"
   },
   "js/wp-api.js": {
-    "mtime": 1785615274.2925391,
-    "ast_hash": "d7a86aa7f9c51f2be118da922e681c32",
-    "semantic_hash": "d7a86aa7f9c51f2be118da922e681c32"
+    "mtime": 1785615995.3133724,
+    "ast_hash": "3fef9aff5170f8672003201c4644b90a",
+    "semantic_hash": "3fef9aff5170f8672003201c4644b90a"
   },
   ".agents/skills/backend/api-design/SKILL.md": {
     "mtime": 1784814280.3325667,
