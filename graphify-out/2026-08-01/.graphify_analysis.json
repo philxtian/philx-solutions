@@ -138,13 +138,13 @@
       "degree": 3
     },
     {
-      "id": "js_intro_runsequence",
-      "label": "runSequence()",
+      "id": "js_wp_api_handlecontactsubmit",
+      "label": "handleContactSubmit()",
       "degree": 3
     },
     {
-      "id": "js_wp_api_handlecontactsubmit",
-      "label": "handleContactSubmit()",
+      "id": "js_intro_runsequence",
+      "label": "runSequence()",
       "degree": 3
     },
     {
@@ -168,13 +168,13 @@
       "degree": 2
     },
     {
-      "id": "js_intro_mountoverlay",
-      "label": "mountOverlay()",
+      "id": "js_animations_initscrollreveals",
+      "label": "initScrollReveals()",
       "degree": 2
     },
     {
-      "id": "js_intro_init",
-      "label": "init()",
+      "id": "js_animations_initmagneticelements",
+      "label": "initMagneticElements()",
       "degree": 2
     }
   ],

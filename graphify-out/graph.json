@@ -394,36 +394,6 @@
       "id": "js_smooth_scroll_initsmoothscroll"
     },
     {
-      "label": "blob-tracker.js",
-      "file_type": "code",
-      "source_file": "js/blob-tracker.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 7,
-      "norm_label": "blob-tracker.js",
-      "id": "js_blob_tracker"
-    },
-    {
-      "label": "updateBlobs()",
-      "file_type": "code",
-      "source_file": "js/blob-tracker.js",
-      "source_location": "L8",
-      "_origin": "ast",
-      "community": 7,
-      "norm_label": "updateblobs()",
-      "id": "js_blob_tracker_updateblobs"
-    },
-    {
-      "label": "render()",
-      "file_type": "code",
-      "source_file": "js/blob-tracker.js",
-      "source_location": "L19",
-      "_origin": "ast",
-      "community": 7,
-      "norm_label": "render()",
-      "id": "js_blob_tracker_render"
-    },
-    {
       "label": "scroll-reveal.js",
       "file_type": "code",
       "source_file": "js/scroll-reveal.js",
@@ -559,9 +529,9 @@
       "source_file": "js/intro.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "js_intro",
       "community": 4,
-      "norm_label": "intro.js"
+      "norm_label": "intro.js",
+      "id": "js_intro"
     },
     {
       "label": "mountOverlay()",
@@ -569,9 +539,9 @@
       "source_file": "js/intro.js",
       "source_location": "L47",
       "_origin": "ast",
-      "id": "js_intro_mountoverlay",
       "community": 4,
-      "norm_label": "mountoverlay()"
+      "norm_label": "mountoverlay()",
+      "id": "js_intro_mountoverlay"
     },
     {
       "label": "runSequence()",
@@ -579,9 +549,9 @@
       "source_file": "js/intro.js",
       "source_location": "L56",
       "_origin": "ast",
-      "id": "js_intro_runsequence",
       "community": 4,
-      "norm_label": "runsequence()"
+      "norm_label": "runsequence()",
+      "id": "js_intro_runsequence"
     },
     {
       "label": "init()",
@@ -589,9 +559,39 @@
       "source_file": "js/intro.js",
       "source_location": "L163",
       "_origin": "ast",
-      "id": "js_intro_init",
       "community": 4,
-      "norm_label": "init()"
+      "norm_label": "init()",
+      "id": "js_intro_init"
+    },
+    {
+      "label": "blob-tracker.js",
+      "file_type": "code",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_blob_tracker",
+      "community": 7,
+      "norm_label": "blob-tracker.js"
+    },
+    {
+      "label": "updateBlobs()",
+      "file_type": "code",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "js_blob_tracker_updateblobs",
+      "community": 7,
+      "norm_label": "updateblobs()"
+    },
+    {
+      "label": "render()",
+      "file_type": "code",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "js_blob_tracker_render",
+      "community": 7,
+      "norm_label": "render()"
     }
   ],
   "links": [
@@ -772,28 +772,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "js/blob-tracker.js",
-      "source_location": "L19",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_blob_tracker",
-      "target": "js_blob_tracker_render"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/blob-tracker.js",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_blob_tracker",
-      "target": "js_blob_tracker_updateblobs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "js/scroll-reveal.js",
       "source_location": "L4",
       "weight": 1.0,
@@ -957,9 +935,9 @@
       "source_location": "L163",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro",
-      "target": "js_intro_init",
-      "confidence_score": 1.0
+      "target": "js_intro_init"
     },
     {
       "relation": "contains",
@@ -968,9 +946,9 @@
       "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro",
-      "target": "js_intro_mountoverlay",
-      "confidence_score": 1.0
+      "target": "js_intro_mountoverlay"
     },
     {
       "relation": "contains",
@@ -979,9 +957,9 @@
       "source_location": "L56",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro",
-      "target": "js_intro_runsequence",
-      "confidence_score": 1.0
+      "target": "js_intro_runsequence"
     },
     {
       "relation": "calls",
@@ -991,9 +969,9 @@
       "source_location": "L57",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro_runsequence",
-      "target": "js_intro_mountoverlay",
-      "confidence_score": 1.0
+      "target": "js_intro_mountoverlay"
     },
     {
       "relation": "calls",
@@ -1003,8 +981,30 @@
       "source_location": "L165",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro_init",
-      "target": "js_intro_runsequence",
+      "target": "js_intro_runsequence"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_blob_tracker",
+      "target": "js_blob_tracker_render",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/blob-tracker.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_blob_tracker",
+      "target": "js_blob_tracker_updateblobs",
       "confidence_score": 1.0
     }
   ],
@@ -1081,5 +1081,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "161d1e27c9c17dab5d7997ec969252a4575c9616"
+  "built_at_commit": "c951076332e52b1dfefea38c82292b0ebed5120b"
 }
