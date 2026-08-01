@@ -9,19 +9,18 @@
 (function () {
     'use strict';
 
+    // 1. Testing Mode: Session Guard disabled to trigger intro sequence on every reload/refresh
+    /*
     const INTRO_SESSION_KEY = 'philx_intro_seen';
-
-    // 1. Session Guard: Abort immediately if already played in this session
     if (sessionStorage.getItem(INTRO_SESSION_KEY) === 'true') {
         return;
     }
+    */
 
-    // 2. Execution Guard: Prevent duplicate instances
+    // 2. Execution Guard: Prevent duplicate instances during a single page load cycle
     if (window.PHILX_INTRO_ACTIVE) return;
     window.PHILX_INTRO_ACTIVE = true;
 
-    // Lock session state immediately
-    sessionStorage.setItem(INTRO_SESSION_KEY, 'true');
 
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
