@@ -29,6 +29,9 @@
                 if (targetElement) {
                     e.preventDefault(); 
                     
+                    // Force the browser to drop focus to unfreeze CSS hover/underline animations
+                    this.blur();
+                    
                     if (isScrolling) return; 
                     isScrolling = true;
                     
