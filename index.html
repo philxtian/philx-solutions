@@ -98,6 +98,44 @@
         .animate-morph-fast {
             animation: morph-fast 7s ease-in-out infinite;
         }
+
+        /* Initial hidden state for scroll elements (Spring Reveal Physics) */
+        .reveal-hidden {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: opacity, transform;
+        }
+        
+        /* Active state triggered by JS */
+        .reveal-active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        /* Stagger delays for child elements */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Interactive Spotlight Hover Effect on Glass Cards */
+        .spotlight-card {
+            position: relative;
+        }
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.15), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
     </style>
     <!-- Intro Sequence Script (Instant Overlay Mount) -->
     <script src="js/intro.js"></script>
@@ -149,5 +187,6 @@
     <script src="js/animations.js"></script>
     <script src="js/smooth-scroll.js"></script>
     <script src="js/blob-tracker.js" defer></script>
+    <script src="js/scroll-reveal.js" defer></script>
 </body>
 </html>
