@@ -69,13 +69,14 @@
             item.style.transition = `opacity 0.4s ${EASE}, transform 0.4s ${EASE}`;
         });
 
-        // Phase 1: Wait for tiny ball to bounce in, then expand to 150px circle
+        // Phase 1: Wait for tiny ball to bounce in, then expand to 90px tight circle
         setTimeout(() => {
             bgPill.style.animation = 'none'; // Clear keyframe
             bgPill.style.transition = `width 0.5s ${EASE}, height 0.5s ${EASE}, margin 0.5s ${EASE}`;
-            bgPill.style.width = '150px';
-            bgPill.style.height = '150px';
-            bgPill.style.margin = '-75px 0 0 -75px';
+            bgPill.style.width = '90px';
+            bgPill.style.height = '90px';
+            bgPill.style.margin = '-45px 0 0 -45px';
+
 
             // Phase 2: Fade in perfectly centered Logo Icon
             setTimeout(() => {
