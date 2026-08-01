@@ -36,3 +36,8 @@
     *   Text/Typography: Pure White (`#FFFFFF`) only.
     *   UI Elements (Buttons/Borders): Pure White (`#FFFFFF`) only. NO BLUE AT ALL.
 *   **Execution:** Remove all gradients and glows. All elements must be flat, sharp, and monochromatic. Use whitespace aggressively for hierarchy.
+
+## 6. Graphify Knowledge Graph Integration
+- **Token Efficiency:** This project utilizes Graphify to map codebase structures and entity relationships locally.
+- **Pre-flight Query Rule:** Before instructing agents to read raw code files, documentation folders, or deep hierarchies for architectural questions, query the local knowledge graph (`graphify-out/graph.json` or use the `/graphify` skill) to minimize context token consumption.
+- **Post-Change Sync:** Always run `graphify .` after completing major structural code additions, component changes, or file restructurings to keep the local graph current.
