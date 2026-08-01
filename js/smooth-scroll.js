@@ -61,7 +61,5 @@
         initSmoothScroll();
     }
     
-    if (document.body) {
-        document.body.addEventListener('htmx:afterSwap', initSmoothScroll);
-    }
+    document.body.addEventListener('htmx:afterSwap', initSmoothScroll);
 })();
