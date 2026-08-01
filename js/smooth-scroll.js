@@ -13,17 +13,17 @@
         const links = document.querySelectorAll('a[href^="#"]');
         
         links.forEach(link => {
-            // Remove any old listeners to prevent duplicates
-            const newLink = link.cloneNode(true);
-            link.parentNode.replaceChild(newLink, link);
+            // Safely prevent duplicate listeners without destroying the DOM node
+            if (link.dataset.scrollBound === 'true') return;
+            link.dataset.scrollBound = 'true';
             
-            newLink.addEventListener('click', function(e) {
+            link.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
                 if (!targetId || targetId === '#') return;
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    e.preventDefault(); // Stop CSS/native anchor jumps
+                    e.preventDefault(); 
                     
                     const navbarCapsule = document.getElementById('navbar-capsule');
                     const offset = navbarCapsule ? navbarCapsule.getBoundingClientRect().height + 24 : 80;
@@ -32,21 +32,20 @@
                     const startPosition = window.pageYOffset;
                     const distance = targetPosition - startPosition;
                     
-                    const duration = 800; // 800ms duration for premium feel
+                    const duration = 800; 
                     let startTime = null;
                     
-                    // Frame-by-frame GPU animation
                     function animation(currentTime) {
                         if (startTime === null) startTime = currentTime;
                         const timeElapsed = currentTime - startTime;
                         
                         const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
-                        window.scrollTo(0, run); // Standard instant scroll to coordinates
+                        window.scrollTo(0, run); 
                         
                         if (timeElapsed < duration) {
                             requestAnimationFrame(animation);
                         } else {
-                            window.scrollTo(0, targetPosition); // Snap to exact pixel at end
+                            window.scrollTo(0, targetPosition); 
                         }
                     }
                     
