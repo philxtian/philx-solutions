@@ -204,7 +204,7 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                         <div class="group rounded-3xl border border-black/15 bg-slate-50/70 p-8 sm:p-10 transition-all duration-300 hover:border-black/40 hover:bg-slate-100/80">
                             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline">
                                 <div class="md:col-span-4 flex items-center justify-between md:flex-col md:items-start space-y-1">
-                                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500">${number} // ${category}</span>
+                                    <span class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">${category}</span>
                                     <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">${metric}</span>
                                 </div>
                                 <div class="md:col-span-8">
