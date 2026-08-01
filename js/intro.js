@@ -1,9 +1,9 @@
 /**
- * PHILX Solutions — 2026 Intro Keyframe Sequence & Stable Layout Morph
+ * PHILX Solutions — 2026 Static Logo Keyframe Intro Architecture
  * ARCHITECTURE:
- *   - Independent Background Capsule & Static Logo Layer separation.
- *   - Logo is relocated to its exact final destination coordinates before pill expansion.
- *   - Keyframe sequence morphs background container horizontally without shifting logo layout box.
+ *   - Logo element is anchored at its EXACT final navbar coordinates from frame ONE.
+ *   - Dedicated absolute background overlay handles the circle-to-pill horizontal expansion beneath it.
+ *   - Zero layout shifts, zero flex changes, and zero horizontal movement on the logo container.
  */
 
 (function () {
@@ -15,7 +15,7 @@
 
         const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
-        // 1. Inject Keyframe CSS for Background Expansion
+        // 1. Keyframe CSS Injection for Dedicated Background Expansion
         const style = document.createElement('style');
         style.id = 'intro-keyframes-style';
         style.textContent = `
@@ -30,16 +30,16 @@
         `;
         document.head.appendChild(style);
 
-        // 2. Create Overlay Container
+        // 2. Create Intro Overlay Layer
         const overlay = document.createElement('div');
         overlay.id = 'intro-overlay';
         overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);';
 
-        // 3. Create Independent Background Capsule and Logo Layer
+        // 3. Create Dedicated Background Capsule & Static Logo Container
         overlay.innerHTML = `
-            <div id="intro-bg-capsule" style="position:fixed;top:50%;left:50%;width:180px;height:180px;margin-top:-90px;margin-left:-90px;border-radius:9999px;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);transform:scale(0);transform-origin:center center;will-change:transform, top, left, width, height;overflow:hidden;z-index:1;"></div>
+            <div id="intro-bg-capsule" style="position:fixed;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);border-radius:9999px;z-index:1;will-change:width, transform, opacity;overflow:hidden;"></div>
             
-            <div id="intro-logo-layer" style="position:fixed;z-index:2;pointer-events:none;display:flex;align-items:center;will-change:top, left, opacity, transform;opacity:0;">
+            <div id="intro-logo-layer" style="position:fixed;z-index:2;pointer-events:none;display:flex;align-items:center;will-change:opacity, transform;opacity:0;">
                 <div style="display:flex;align-items:center;" class="space-x-3">
                     <div style="width:36px;height:36px;position:relative;flex-shrink:0;">
                         <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="width:36px;height:36px;object-fit:contain;border-radius:8px;display:block;">
@@ -73,78 +73,58 @@
                 return;
             }
 
+            // Measure exact final navbar coordinates
             const navbarLogo = navbarCapsule.querySelector('a');
             const navRect = navbarCapsule.getBoundingClientRect();
             const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
 
-            const targetLogoWidth = logoRect ? logoRect.width : 120;
-            const targetLogoHeight = logoRect ? logoRect.height : 36;
+            const finalLogoTop = logoRect ? logoRect.top : (navRect.top + (navRect.height - 36) / 2);
+            const finalLogoLeft = logoRect ? logoRect.left : (navRect.left + 24);
+            const logoWidth = logoRect ? logoRect.width : 120;
+            const paddingLeft = Math.max(16, finalLogoLeft - navRect.left);
 
-            const screenCenterX = window.innerWidth / 2;
-            const screenCenterY = window.innerHeight / 2;
+            const initialPillWidth = Math.max(navRect.height, paddingLeft + logoWidth + paddingLeft);
 
-            // Initial center coordinates for static logo layer
-            logoLayer.style.top = `${screenCenterY - targetLogoHeight / 2}px`;
-            logoLayer.style.left = `${screenCenterX - targetLogoWidth / 2}px`;
-            logoLayer.style.transform = 'scale(0.85)';
+            // Frame 1: Anchor Logo Layer at its exact final navbar coordinates immediately
+            logoLayer.style.top = `${finalLogoTop}px`;
+            logoLayer.style.left = `${finalLogoLeft}px`;
+            logoLayer.style.transform = 'scale(0.9)';
 
-            // Phase 1 (0.05s - 0.75s): Centered White Circle & Logo Reveal
+            // Frame 1: Position dedicated background shape underneath at navbar left
+            capsule.style.top = `${navRect.top}px`;
+            capsule.style.left = `${navRect.left}px`;
+            capsule.style.height = `${navRect.height}px`;
+            capsule.style.width = `${initialPillWidth}px`;
+            capsule.style.transform = 'scale(0)';
+            capsule.style.transformOrigin = `${finalLogoLeft - navRect.left + 18}px center`;
+
+            // Phase 1 (0.05s - 0.75s): Dedicated Circle/Pill Reveal & Crisp Logo Fade-In at Fixed Coordinates
             setTimeout(() => {
-                capsule.style.transition = `transform 0.7s ${EASE}`;
+                capsule.style.transition = `transform 0.65s ${EASE}`;
                 capsule.style.transform = 'scale(1)';
 
-                logoLayer.style.transition = `opacity 0.45s ease-out, transform 0.6s ${EASE}`;
+                logoLayer.style.transition = `opacity 0.5s ease-out, transform 0.5s ${EASE}`;
                 logoLayer.style.opacity = '1';
                 logoLayer.style.transform = 'scale(1)';
 
-                // Phase 2 (0.75s - 1.35s): Relocate Logo to Destination & Dock Capsule Circle/Pill to Navbar Left
+                // Phase 2 (0.75s - 1.45s): Circle-to-Pill Horizontal Reveal via Keyframe Animation
                 setTimeout(() => {
-                    const currentNavRect = navbarCapsule.getBoundingClientRect();
-                    const currentLogoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
+                    const navRectFinal = navbarCapsule.getBoundingClientRect();
 
-                    const finalLogoTop = currentLogoRect ? currentLogoRect.top : (currentNavRect.top + (currentNavRect.height - 36) / 2);
-                    const finalLogoLeft = currentLogoRect ? currentLogoRect.left : (currentNavRect.left + 24);
-                    const logoWidth = currentLogoRect ? currentLogoRect.width : 120;
-                    const paddingLeft = Math.max(16, finalLogoLeft - currentNavRect.left);
+                    capsule.style.setProperty('--pill-start-width', `${initialPillWidth}px`);
+                    capsule.style.setProperty('--pill-target-width', `${navRectFinal.width}px`);
+                    capsule.style.animation = `introPillExpand 0.7s ${EASE} forwards`;
 
-                    // Calculate initial pill width enclosing the logo completely without text overflow
-                    const initialPillWidth = Math.max(currentNavRect.height, paddingLeft + logoWidth + paddingLeft);
+                    // Logo remains 100% frozen & static at (finalLogoTop, finalLogoLeft) throughout expansion.
 
-                    // 1. Move logo layer directly to exact navbar destination coordinates
-                    logoLayer.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}`;
-                    logoLayer.style.top = `${finalLogoTop}px`;
-                    logoLayer.style.left = `${finalLogoLeft}px`;
-
-                    // 2. Move background capsule to navbar left as a matching initial pill containing the logo
-                    capsule.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, border-radius 0.6s ${EASE}`;
-                    capsule.style.top = `${currentNavRect.top}px`;
-                    capsule.style.left = `${currentNavRect.left}px`;
-                    capsule.style.marginTop = '0px';
-                    capsule.style.marginLeft = '0px';
-                    capsule.style.width = `${initialPillWidth}px`;
-                    capsule.style.height = `${currentNavRect.height}px`;
-                    capsule.style.borderRadius = '9999px';
-
-                    // Phase 3 (1.35s - 1.95s): Horizontal Pill Expansion (Circle-to-Pill Reveal via Keyframe Sequence)
+                    // Phase 3 (1.45s - 2.2s): Seamless Sticky Navbar Handover & Cleanup
                     setTimeout(() => {
-                        const navRectFinal = navbarCapsule.getBoundingClientRect();
-
-                        // Keyframe sequence for horizontal expansion of background container
-                        capsule.style.setProperty('--pill-start-width', `${initialPillWidth}px`);
-                        capsule.style.setProperty('--pill-target-width', `${navRectFinal.width}px`);
-                        capsule.style.animation = `introPillExpand 0.6s ${EASE} forwards`;
-
-                        // Logo is 100% static & frozen at its destination coordinates during background reveal.
-
-                        // Phase 4 (1.95s - 2.7s): Handover & Fade Out
+                        overlay.style.opacity = '0';
                         setTimeout(() => {
-                            overlay.style.opacity = '0';
-                            setTimeout(() => {
-                                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                                if (style.parentNode) style.parentNode.removeChild(style);
-                            }, 750);
-                        }, 600);
-                    }, 600);
+                            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                            if (style.parentNode) style.parentNode.removeChild(style);
+                        }, 750);
+                    }, 700);
                 }, 700);
             }, 50);
         }
@@ -160,5 +140,6 @@
         }
     });
 })();
+
 
 
