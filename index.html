@@ -119,21 +119,17 @@
         .delay-300 { transition-delay: 300ms; }
 
         /* Interactive Spotlight Hover Effect on Glass Cards */
-        .spotlight-card {
-            position: relative;
-        }
-        .spotlight-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.15), transparent 40%);
+        .card-spotlight {
+            background: radial-gradient(
+                800px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+                rgba(255, 255, 255, 0.16),
+                transparent 40%
+            );
             opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 2;
+            transition: opacity 0.5s ease;
         }
-        .spotlight-card:hover::before {
+        .group:hover .card-spotlight,
+        .group.relative:hover .card-spotlight {
             opacity: 1;
         }
     </style>
@@ -188,5 +184,6 @@
     <script src="js/smooth-scroll.js"></script>
     <script src="js/blob-tracker.js" defer></script>
     <script src="js/scroll-reveal.js" defer></script>
+    <script src="js/card-spotlight.js" defer></script>
 </body>
 </html>

@@ -201,8 +201,9 @@ document.body.addEventListener('htmx:beforeSwap', function (evt) {
                     const metric = item.metric || 'Enterprise Ready';
 
                     return `
-                        <div class="group bg-white/[0.4] backdrop-blur-3xl border border-white/[0.6] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] rounded-3xl overflow-hidden p-8 sm:p-10 transition-all duration-500 ease-out hover:bg-white/[0.65] hover:-translate-y-1 hover:shadow-[0_16px_40px_0_rgba(31,38,135,0.15)]">
-                            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline">
+                        <div class="group relative bg-white/[0.4] backdrop-blur-3xl border border-white/[0.6] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] rounded-3xl overflow-hidden p-8 sm:p-10 transition-all duration-500 ease-out hover:bg-white/[0.65] hover:-translate-y-1 hover:shadow-[0_16px_40px_0_rgba(31,38,135,0.15)] reveal-hidden">
+                            <div class="card-spotlight absolute inset-0 pointer-events-none z-0"></div>
+                            <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline">
                                 <div class="md:col-span-4 flex items-center justify-between md:flex-col md:items-start space-y-1">
                                     <span class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">${category}</span>
                                     <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">${metric}</span>
