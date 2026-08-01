@@ -68,6 +68,10 @@
                 const navRect = navbarCapsule.getBoundingClientRect();
                 const safeHeight = Math.min(navRect.height, 80); // Failsafe limit
                 const targetTop = navRect.top + (safeHeight / 2); // Center Y of navbar
+                
+                // Dynamically find the real logo to match its exact X coordinate
+                const realLogo = navbarCapsule.querySelector('a') || navbarCapsule.querySelector('img');
+                const exactLogoLeft = realLogo ? realLogo.getBoundingClientRect().left : (navRect.left + 24);
 
                 // Move Pill
                 bgPill.style.top = `${targetTop}px`;
@@ -76,9 +80,9 @@
                 bgPill.style.height = `${safeHeight}px`;
                 bgPill.style.width = '200px'; 
                 
-                // Move Logo
+                // Move Logo EXACTLY to the real logo's left coordinate
                 staticLogo.style.top = `${targetTop}px`;
-                staticLogo.style.left = `${navRect.left + 24}px`;
+                staticLogo.style.left = `${exactLogoLeft}px`;
                 staticLogo.style.margin = `-18px 0 0 0`; // Anchor cleanly
 
                 // Phase 3: Expand pill width to fill navbar
@@ -87,6 +91,7 @@
 
                     // Phase 4: Reveal Navigation Items
                     setTimeout(() => {
+                        const navItems = navbarCapsule.querySelectorAll('.nav-link, .nav-cta, .nav-mobile-btn');
                         navItems.forEach((item, idx) => {
                             setTimeout(() => {
                                 item.style.opacity = '1';
@@ -109,6 +114,7 @@
                     }, 400); 
                 }, 600); 
             }, 800); 
+
         }, 50);
     }
 
