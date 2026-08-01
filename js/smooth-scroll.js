@@ -26,7 +26,7 @@
                     e.preventDefault(); 
                     
                     const navbarCapsule = document.getElementById('navbar-capsule');
-                    const offset = navbarCapsule ? navbarCapsule.getBoundingClientRect().height + 24 : 80;
+                    const offset = 0;
                     
                     const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
                     const startPosition = window.pageYOffset;
