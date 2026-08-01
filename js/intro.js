@@ -1,61 +1,46 @@
 /**
- * PHILX Solutions — 2026 Static Logo Keyframe Intro Architecture
+ * PHILX Solutions — 2026 Luxury Circle-to-Pill Morph Intro Sequence
  * ARCHITECTURE:
- *   - Strict SessionStorage Guard: Plays exactly once per session.
- *   - Instant Overlay Mount: Pure black overlay mounts at load to cover initial HTML parsing/placeholders.
- *   - Logo element is anchored at its EXACT final navbar coordinates from frame ONE.
- *   - Dedicated absolute background overlay handles the circle-to-pill horizontal expansion beneath it.
+ *   - Strict SessionStorage Lock: Plays strictly ONCE per session.
+ *   - Monochromatic Aesthetics: Pure Black (#000000) & Pure White (#FFFFFF) only.
+ *   - Morph Transition: Centered white circle with black logo smoothly glides & expands into top sticky navbar pill.
  */
 
 (function () {
     'use strict';
 
-    const INTRO_STORAGE_KEY = 'philx_intro_played';
+    const INTRO_SESSION_KEY = 'philx_intro_seen';
 
-    // 1. Strict SessionStorage Check — Run strictly ONCE per session
-    if (sessionStorage.getItem(INTRO_STORAGE_KEY) === 'true') {
+    // 1. Session Guard: Abort immediately if already played in this session
+    if (sessionStorage.getItem(INTRO_SESSION_KEY) === 'true') {
         return;
     }
 
-    if (window.PHILX_INTRO_RUNNING) return;
-    window.PHILX_INTRO_RUNNING = true;
+    // 2. Execution Guard: Prevent duplicate instances
+    if (window.PHILX_INTRO_ACTIVE) return;
+    window.PHILX_INTRO_ACTIVE = true;
 
-    // Mark as played immediately for current session
-    sessionStorage.setItem(INTRO_STORAGE_KEY, 'true');
+    // Lock session state immediately
+    sessionStorage.setItem(INTRO_SESSION_KEY, 'true');
 
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
-    // 2. Keyframe CSS Injection for Dedicated Background Expansion
-    const style = document.createElement('style');
-    style.id = 'intro-keyframes-style';
-    style.textContent = `
-        @keyframes introPillExpand {
-            from {
-                width: var(--pill-start-width);
-            }
-            to {
-                width: var(--pill-target-width);
-            }
-        }
-    `;
-    document.head.appendChild(style);
-
-    // 3. Create Intro Overlay Layer
+    // 3. Create Fullscreen Monochromatic Overlay
     const overlay = document.createElement('div');
     overlay.id = 'intro-overlay';
     overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);';
 
-    // 4. Create Dedicated Background Capsule & Static Logo Container
+    // 4. Create Centered Morphing Pill & Logo Elements
     overlay.innerHTML = `
-        <div id="intro-bg-capsule" style="position:fixed;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);border-radius:9999px;z-index:1;will-change:width, transform, opacity;overflow:hidden;"></div>
+        <div id="intro-morph-pill" style="position:fixed;top:50%;left:50%;width:140px;height:140px;margin-top:-70px;margin-left:-70px;border-radius:9999px;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);transform:scale(0);transform-origin:center center;transition:transform 0.65s ${EASE}, top 0.75s ${EASE}, left 0.75s ${EASE}, margin 0.75s ${EASE}, width 0.75s ${EASE}, height 0.75s ${EASE}, border-radius 0.75s ${EASE};will-change:transform, top, left, width, height;z-index:1;overflow:hidden;"></div>
         
-        <div id="intro-logo-layer" style="position:fixed;z-index:2;pointer-events:none;display:flex;align-items:center;will-change:opacity, transform;opacity:0;">
+        <div id="intro-morph-logo" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.85);opacity:0;transition:opacity 0.45s ease-out, transform 0.65s ${EASE}, top 0.75s ${EASE}, left 0.75s ${EASE};will-change:opacity, transform, top, left;z-index:2;pointer-events:none;display:flex;align-items:center;">
             <div style="display:flex;align-items:center;" class="space-x-3">
                 <div style="width:36px;height:36px;position:relative;flex-shrink:0;">
                     <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="width:36px;height:36px;object-fit:contain;border-radius:8px;display:block;">
                 </div>
                 <div style="display:flex;flex-direction:column;justify-content:center;width:72px;flex-shrink:0;">
-                    <div style="display:flex;justify-content:space-between;font-weight:900;color:#09090b;line-height:1;font-size:13px;text-transform:uppercase;letter-spacing:0;">
+                    <div style="display:flex;justify-content:space-between;font-weight:900;color:#000000;line-height:1;font-size:13px;text-transform:uppercase;letter-spacing:0;">
                         <span>P</span><span>H</span><span>I</span><span>L</span><span>X</span>
                     </div>
                     <div style="display:flex;justify-content:space-between;font-size:9px;font-weight:700;color:#64748b;line-height:1;margin-top:4px;text-transform:uppercase;letter-spacing:0;">
@@ -72,6 +57,7 @@
         }
     }
 
+    // Mount pure black screen immediately
     if (document.body) {
         mountOverlay();
     } else {
@@ -81,73 +67,56 @@
     function runSequence() {
         mountOverlay();
 
-        const capsule = document.getElementById('intro-bg-capsule');
-        const logoLayer = document.getElementById('intro-logo-layer');
+        const pill = document.getElementById('intro-morph-pill');
+        const logo = document.getElementById('intro-morph-logo');
         const navbarCapsule = document.getElementById('navbar-capsule');
 
-        if (!capsule || !logoLayer || !navbarCapsule) {
+        if (!pill || !logo || !navbarCapsule) {
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                    if (style.parentNode) style.parentNode.removeChild(style);
                 }, 750);
             }, 400);
             return;
         }
 
-        // Measure exact final navbar coordinates
-        const navbarLogo = navbarCapsule.querySelector('a');
-        const navRect = navbarCapsule.getBoundingClientRect();
-        const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
-
-        const finalLogoTop = logoRect ? logoRect.top : (navRect.top + (navRect.height - 36) / 2);
-        const finalLogoLeft = logoRect ? logoRect.left : (navRect.left + 24);
-        const logoWidth = logoRect ? logoRect.width : 120;
-        const paddingLeft = Math.max(16, finalLogoLeft - navRect.left);
-
-        const initialPillWidth = Math.max(navRect.height, paddingLeft + logoWidth + paddingLeft);
-
-        // Frame 1: Anchor Logo Layer at its exact final navbar coordinates immediately
-        logoLayer.style.top = `${finalLogoTop}px`;
-        logoLayer.style.left = `${finalLogoLeft}px`;
-        logoLayer.style.transform = 'scale(0.9)';
-
-        // Frame 1: Position dedicated background shape underneath at navbar left
-        capsule.style.top = `${navRect.top}px`;
-        capsule.style.left = `${navRect.left}px`;
-        capsule.style.height = `${navRect.height}px`;
-        capsule.style.width = `${initialPillWidth}px`;
-        capsule.style.transform = 'scale(0)';
-        capsule.style.transformOrigin = `${finalLogoLeft - navRect.left + 18}px center`;
-
-        // Phase 1 (0.05s - 0.75s): Dedicated Circle/Pill Reveal & Crisp Logo Fade-In at Fixed Coordinates
+        // Phase 1 (0.05s - 0.75s): Centered White Circle Reveal & Logo Fade-In
         setTimeout(() => {
-            capsule.style.transition = `transform 0.65s ${EASE}`;
-            capsule.style.transform = 'scale(1)';
+            pill.style.transform = 'scale(1)';
+            logo.style.opacity = '1';
+            logo.style.transform = 'translate(-50%, -50%) scale(1)';
 
-            logoLayer.style.transition = `opacity 0.5s ease-out, transform 0.5s ${EASE}`;
-            logoLayer.style.opacity = '1';
-            logoLayer.style.transform = 'scale(1)';
-
-            // Phase 2 (0.75s - 1.45s): Circle-to-Pill Horizontal Reveal via Keyframe Animation
+            // Phase 2 (0.75s - 1.5s): Direct Circle-to-Pill Morph to Sticky Navbar
             setTimeout(() => {
-                const navRectFinal = navbarCapsule.getBoundingClientRect();
+                const navbarLogo = navbarCapsule.querySelector('a');
+                const navRect = navbarCapsule.getBoundingClientRect();
+                const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
 
-                capsule.style.setProperty('--pill-start-width', `${initialPillWidth}px`);
-                capsule.style.setProperty('--pill-target-width', `${navRectFinal.width}px`);
-                capsule.style.animation = `introPillExpand 0.7s ${EASE} forwards`;
+                const targetLogoTop = logoRect ? logoRect.top : (navRect.top + (navRect.height - 36) / 2);
+                const targetLogoLeft = logoRect ? logoRect.left : (navRect.left + 24);
 
-                // Logo remains 100% frozen & static at (finalLogoTop, finalLogoLeft) throughout expansion.
+                // Morph Pill Container directly into navbar bounding box
+                pill.style.top = `${navRect.top}px`;
+                pill.style.left = `${navRect.left}px`;
+                pill.style.marginTop = '0px';
+                pill.style.marginLeft = '0px';
+                pill.style.width = `${navRect.width}px`;
+                pill.style.height = `${navRect.height}px`;
+                pill.style.borderRadius = '9999px';
 
-                // Phase 3 (1.45s - 2.2s): Seamless Sticky Navbar Handover & Cleanup
+                // Morph Logo directly into navbar logo coordinates
+                logo.style.top = `${targetLogoTop}px`;
+                logo.style.left = `${targetLogoLeft}px`;
+                logo.style.transform = 'translate(0, 0) scale(1)';
+
+                // Phase 3 (1.5s - 2.25s): Seamless Handover & Fade Out
                 setTimeout(() => {
                     overlay.style.opacity = '0';
                     setTimeout(() => {
                         if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                        if (style.parentNode) style.parentNode.removeChild(style);
                     }, 750);
-                }, 700);
+                }, 750);
             }, 700);
         }, 50);
     }
@@ -170,6 +139,7 @@
         init();
     }
 })();
+
 
 
 
