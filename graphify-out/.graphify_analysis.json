@@ -28,16 +28,17 @@
       "js_animations_initscrollreveals"
     ],
     "3": [
+      "js_intro",
+      "js_intro_generateblobconstellationhtml",
+      "js_intro_init",
+      "js_intro_mountoverlay",
+      "js_intro_runsequence"
+    ],
+    "4": [
       "assets_logo_mark_black",
       "assets_logo_mark_white",
       "partials_footer",
       "partials_navbar"
-    ],
-    "4": [
-      "js_intro",
-      "js_intro_init",
-      "js_intro_mountoverlay",
-      "js_intro_runsequence"
     ],
     "5": [
       "js_wp_api",
@@ -106,8 +107,8 @@
     "0": 0.25,
     "1": 0.25,
     "2": 0.7,
-    "3": 0.5,
-    "4": 0.8333333333333334,
+    "3": 0.6,
+    "4": 0.5,
     "5": 0.8333333333333334,
     "6": 0.6666666666666666,
     "7": 0.6666666666666666,

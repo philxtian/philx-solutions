@@ -90,7 +90,7 @@
       "label": "Navigation Bar",
       "file_type": "code",
       "source_file": "partials/navbar.html",
-      "community": 3,
+      "community": 4,
       "norm_label": "navigation bar",
       "community_name": "Navigation Bar",
       "id": "partials_navbar"
@@ -99,7 +99,7 @@
       "label": "Footer",
       "file_type": "code",
       "source_file": "partials/footer.html",
-      "community": 3,
+      "community": 4,
       "norm_label": "footer",
       "community_name": "Navigation Bar",
       "id": "partials_footer"
@@ -118,7 +118,7 @@
       "label": "Black Logo Mark",
       "file_type": "image",
       "source_file": "assets/logo-mark-black.png",
-      "community": 3,
+      "community": 4,
       "norm_label": "black logo mark",
       "community_name": "Navigation Bar",
       "id": "assets_logo_mark_black"
@@ -127,7 +127,7 @@
       "label": "White Logo Mark",
       "file_type": "image",
       "source_file": "assets/logo-mark-white.png",
-      "community": 3,
+      "community": 4,
       "norm_label": "white logo mark",
       "community_name": "Navigation Bar",
       "id": "assets_logo_mark_white"
@@ -529,9 +529,9 @@
       "source_file": "js/blob-tracker.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "js_blob_tracker",
       "community": 7,
-      "norm_label": "blob-tracker.js"
+      "norm_label": "blob-tracker.js",
+      "id": "js_blob_tracker"
     },
     {
       "label": "updateBlobs()",
@@ -539,9 +539,9 @@
       "source_file": "js/blob-tracker.js",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "js_blob_tracker_updateblobs",
       "community": 7,
-      "norm_label": "updateblobs()"
+      "norm_label": "updateblobs()",
+      "id": "js_blob_tracker_updateblobs"
     },
     {
       "label": "render()",
@@ -549,9 +549,9 @@
       "source_file": "js/blob-tracker.js",
       "source_location": "L44",
       "_origin": "ast",
-      "id": "js_blob_tracker_render",
       "community": 7,
-      "norm_label": "render()"
+      "norm_label": "render()",
+      "id": "js_blob_tracker_render"
     },
     {
       "label": "intro.js",
@@ -560,37 +560,47 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "js_intro",
-      "community": 4,
+      "community": 3,
       "norm_label": "intro.js"
+    },
+    {
+      "label": "generateBlobConstellationHtml()",
+      "file_type": "code",
+      "source_file": "js/intro.js",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "js_intro_generateblobconstellationhtml",
+      "community": 3,
+      "norm_label": "generateblobconstellationhtml()"
     },
     {
       "label": "mountOverlay()",
       "file_type": "code",
       "source_file": "js/intro.js",
-      "source_location": "L47",
+      "source_location": "L76",
       "_origin": "ast",
       "id": "js_intro_mountoverlay",
-      "community": 4,
+      "community": 3,
       "norm_label": "mountoverlay()"
     },
     {
       "label": "runSequence()",
       "file_type": "code",
       "source_file": "js/intro.js",
-      "source_location": "L56",
+      "source_location": "L85",
       "_origin": "ast",
       "id": "js_intro_runsequence",
-      "community": 4,
+      "community": 3,
       "norm_label": "runsequence()"
     },
     {
       "label": "init()",
       "file_type": "code",
       "source_file": "js/intro.js",
-      "source_location": "L163",
+      "source_location": "L188",
       "_origin": "ast",
       "id": "js_intro_init",
-      "community": 4,
+      "community": 3,
       "norm_label": "init()"
     }
   ],
@@ -935,9 +945,9 @@
       "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_blob_tracker",
-      "target": "js_blob_tracker_render",
-      "confidence_score": 1.0
+      "target": "js_blob_tracker_render"
     },
     {
       "relation": "contains",
@@ -946,15 +956,26 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_blob_tracker",
-      "target": "js_blob_tracker_updateblobs",
+      "target": "js_blob_tracker_updateblobs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/intro.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_intro",
+      "target": "js_intro_generateblobconstellationhtml",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "js/intro.js",
-      "source_location": "L163",
+      "source_location": "L188",
       "weight": 1.0,
       "_origin": "ast",
       "source": "js_intro",
@@ -965,7 +986,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "js/intro.js",
-      "source_location": "L47",
+      "source_location": "L76",
       "weight": 1.0,
       "_origin": "ast",
       "source": "js_intro",
@@ -976,7 +997,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "js/intro.js",
-      "source_location": "L56",
+      "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
       "source": "js_intro",
@@ -988,7 +1009,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "js/intro.js",
-      "source_location": "L57",
+      "source_location": "L86",
       "weight": 1.0,
       "_origin": "ast",
       "source": "js_intro_runsequence",
@@ -1000,7 +1021,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "js/intro.js",
-      "source_location": "L165",
+      "source_location": "L190",
       "weight": 1.0,
       "_origin": "ast",
       "source": "js_intro_init",
@@ -1081,5 +1102,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "92adb642cf6de709b1a6d792a38566e42996a9e9"
+  "built_at_commit": "7cf633394ab4fd2739b8cafefcd1c6267ae5f04d"
 }
