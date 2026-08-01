@@ -1,15 +1,15 @@
 /**
- * PHILX Solutions — 2026 Luxury Circle-to-Pill Morph Intro Sequence
+ * PHILX Solutions — 2026 Navbar Positioned Left-to-Right Pill Reveal & Staggered Nav Animation
  * ARCHITECTURE:
- *   - Strict SessionStorage Lock: Plays strictly ONCE per session.
- *   - Monochromatic Aesthetics: Pure Black (#000000) & Pure White (#FFFFFF) only.
- *   - Morph Transition: Centered white circle with black logo smoothly glides & expands into top sticky navbar pill.
+ *   - Frame-One Anchoring: Circle & Logo initialize at target navbar left position (no screen-center jump).
+ *   - Left-to-Right Pill Expansion: Background pill expands horizontally to full navbar width.
+ *   - Staggered Sequential Reveal: Individual navbar links & CTA button fade and slide in sequentially.
  */
 
 (function () {
     'use strict';
 
-    // 1. Testing Mode: Session Guard disabled to trigger intro sequence on every reload/refresh
+    // Session Guard disabled for active testing mode
     /*
     const INTRO_SESSION_KEY = 'philx_intro_seen';
     if (sessionStorage.getItem(INTRO_SESSION_KEY) === 'true') {
@@ -17,23 +17,21 @@
     }
     */
 
-    // 2. Execution Guard: Prevent duplicate instances during a single page load cycle
     if (window.PHILX_INTRO_ACTIVE) return;
     window.PHILX_INTRO_ACTIVE = true;
 
-
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
-    // 3. Create Fullscreen Monochromatic Overlay
+    // Fullscreen Pure Black Overlay
     const overlay = document.createElement('div');
     overlay.id = 'intro-overlay';
     overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);';
 
-    // 4. Create Centered Morphing Pill & Logo Elements
+    // Expanding Pill & Stationary Logo Elements
     overlay.innerHTML = `
-        <div id="intro-morph-pill" style="position:fixed;top:50%;left:50%;width:140px;height:140px;margin-top:-70px;margin-left:-70px;border-radius:9999px;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);transform:scale(0);transform-origin:center center;transition:transform 0.65s ${EASE}, top 0.75s ${EASE}, left 0.75s ${EASE}, margin 0.75s ${EASE}, width 0.75s ${EASE}, height 0.75s ${EASE}, border-radius 0.75s ${EASE};will-change:transform, top, left, width, height;z-index:1;overflow:hidden;"></div>
+        <div id="intro-bg-pill" style="position:fixed;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);border-radius:9999px;transform:scale(0);transform-origin:left center;will-change:width, transform;z-index:1;overflow:hidden;"></div>
         
-        <div id="intro-morph-logo" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.85);opacity:0;transition:opacity 0.45s ease-out, transform 0.65s ${EASE}, top 0.75s ${EASE}, left 0.75s ${EASE};will-change:opacity, transform, top, left;z-index:2;pointer-events:none;display:flex;align-items:center;">
+        <div id="intro-static-logo" style="position:fixed;z-index:2;pointer-events:none;display:flex;align-items:center;opacity:0;transform:scale(0.9);will-change:opacity, transform;">
             <div style="display:flex;align-items:center;" class="space-x-3">
                 <div style="width:36px;height:36px;position:relative;flex-shrink:0;">
                     <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="width:36px;height:36px;object-fit:contain;border-radius:8px;display:block;">
@@ -56,7 +54,6 @@
         }
     }
 
-    // Mount pure black screen immediately
     if (document.body) {
         mountOverlay();
     } else {
@@ -66,11 +63,11 @@
     function runSequence() {
         mountOverlay();
 
-        const pill = document.getElementById('intro-morph-pill');
-        const logo = document.getElementById('intro-morph-logo');
+        const bgPill = document.getElementById('intro-bg-pill');
+        const staticLogo = document.getElementById('intro-static-logo');
         const navbarCapsule = document.getElementById('navbar-capsule');
 
-        if (!pill || !logo || !navbarCapsule) {
+        if (!bgPill || !staticLogo || !navbarCapsule) {
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
@@ -80,43 +77,76 @@
             return;
         }
 
-        // Phase 1 (0.05s - 0.75s): Centered White Circle Reveal & Logo Fade-In
+        // Measure exact navbar & logo bounding box
+        const navbarLogo = navbarCapsule.querySelector('a');
+        const navRect = navbarCapsule.getBoundingClientRect();
+        const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
+
+        const targetLogoTop = logoRect ? logoRect.top : (navRect.top + (navRect.height - 36) / 2);
+        const targetLogoLeft = logoRect ? logoRect.left : (navRect.left + 24);
+        const logoWidth = logoRect ? logoRect.width : 120;
+        const paddingLeft = Math.max(16, targetLogoLeft - navRect.left);
+
+        const initialPillWidth = Math.max(navRect.height, paddingLeft + logoWidth + paddingLeft);
+
+        // Frame 1: Position white background pill at exact top-left of navbar position
+        bgPill.style.top = `${navRect.top}px`;
+        bgPill.style.left = `${navRect.left}px`;
+        bgPill.style.height = `${navRect.height}px`;
+        bgPill.style.width = `${initialPillWidth}px`;
+        bgPill.style.transform = 'scale(0)';
+
+        // Frame 1: Anchor static logo layer at exact target navbar coordinates
+        staticLogo.style.top = `${targetLogoTop}px`;
+        staticLogo.style.left = `${targetLogoLeft}px`;
+
+        // Initially hide navbar links & CTA for staggered sequential reveal
+        const navItems = navbarCapsule.querySelectorAll('.nav-link, .nav-cta, .nav-mobile-btn');
+        navItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translate3d(0, 10px, 0)';
+            item.style.transition = `opacity 0.4s ${EASE}, transform 0.4s ${EASE}`;
+        });
+
+        // Phase 1 (0.05s - 0.65s): Scale in circle/pill & fade in logo at navbar left
         setTimeout(() => {
-            pill.style.transform = 'scale(1)';
-            logo.style.opacity = '1';
-            logo.style.transform = 'translate(-50%, -50%) scale(1)';
+            bgPill.style.transition = `transform 0.6s ${EASE}`;
+            bgPill.style.transform = 'scale(1)';
 
-            // Phase 2 (0.75s - 1.5s): Direct Circle-to-Pill Morph to Sticky Navbar
+            staticLogo.style.transition = `opacity 0.45s ease-out, transform 0.45s ${EASE}`;
+            staticLogo.style.opacity = '1';
+            staticLogo.style.transform = 'scale(1)';
+
+            // Phase 2 (0.65s - 1.35s): Left-to-Right Horizontal Expansion of Pill
             setTimeout(() => {
-                const navbarLogo = navbarCapsule.querySelector('a');
-                const navRect = navbarCapsule.getBoundingClientRect();
-                const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
+                const navRectFinal = navbarCapsule.getBoundingClientRect();
+                bgPill.style.transition = `width 0.7s ${EASE}`;
+                bgPill.style.width = `${navRectFinal.width}px`;
 
-                const targetLogoTop = logoRect ? logoRect.top : (navRect.top + (navRect.height - 36) / 2);
-                const targetLogoLeft = logoRect ? logoRect.left : (navRect.left + 24);
-
-                // Morph Pill Container directly into navbar bounding box
-                pill.style.top = `${navRect.top}px`;
-                pill.style.left = `${navRect.left}px`;
-                pill.style.marginTop = '0px';
-                pill.style.marginLeft = '0px';
-                pill.style.width = `${navRect.width}px`;
-                pill.style.height = `${navRect.height}px`;
-                pill.style.borderRadius = '9999px';
-
-                // Morph Logo directly into navbar logo coordinates
-                logo.style.top = `${targetLogoTop}px`;
-                logo.style.left = `${targetLogoLeft}px`;
-                logo.style.transform = 'translate(0, 0) scale(1)';
-
-                // Phase 3 (1.5s - 2.25s): Seamless Handover & Fade Out
+                // Phase 3 (0.95s): Staggered Sequential Reveal of Navbar Items
                 setTimeout(() => {
-                    overlay.style.opacity = '0';
+                    navItems.forEach((item, idx) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translate3d(0, 0, 0)';
+                        }, idx * 75);
+                    });
+
+                    // Phase 4 (1.6s - 2.35s): Seamless Overlay Fade-Out & Cleanup
                     setTimeout(() => {
-                        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                    }, 750);
-                }, 750);
-            }, 700);
+                        overlay.style.opacity = '0';
+                        setTimeout(() => {
+                            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                            // Reset inline styles on navbar items to restore normal CSS hovers
+                            navItems.forEach(item => {
+                                item.style.opacity = '';
+                                item.style.transform = '';
+                                item.style.transition = '';
+                            });
+                        }, 750);
+                    }, 650);
+                }, 300);
+            }, 600);
         }, 50);
     }
 
@@ -138,6 +168,7 @@
         init();
     }
 })();
+
 
 
 
