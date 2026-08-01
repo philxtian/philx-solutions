@@ -74,39 +74,28 @@
             bgPill.style.transform = 'translate(-50%, -50%) scale(1)';
             staticLogo.style.opacity = '1';
 
-            // Phase 2: Move circle and logo to the left side (navbar position)
+            // Phase 2: Move circle and logo directly to top-left navbar position (forming 200px pill)
             setTimeout(() => {
                 const navbarLogo = navbarCapsule.querySelector('a');
                 const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
-                const actualNavHeight = (navRect.height > 0 && navRect.height < 200) ? navRect.height : 64;
-                const targetTop = navRect.top + (actualNavHeight / 2);
-                const targetLeftPill = navRect.left + (CIRCLE_SIZE / 2);
-                const targetLeftLogo = logoRect ? logoRect.left : (navRect.left + 24);
+                const logoTop = logoRect ? logoRect.top : (navRect.top + (navRect.height - 36) / 2);
+                const logoLeft = logoRect ? logoRect.left : (navRect.left + 24);
 
-                bgPill.style.top = `${targetTop}px`;
-                bgPill.style.left = `${targetLeftPill}px`;
+                bgPill.style.transform = 'translate(0, 0)';
+                bgPill.style.top = `${navRect.top}px`;
+                bgPill.style.left = `${navRect.left}px`;
+                bgPill.style.height = `${navRect.height}px`;
+                bgPill.style.width = '200px';
 
-                staticLogo.style.top = logoRect ? `${logoRect.top}px` : `${targetTop}px`;
-                staticLogo.style.left = `${targetLeftLogo}px`;
-                staticLogo.style.transform = logoRect ? 'translate(0, 0)' : 'translate(0, -50%)';
+                staticLogo.style.transform = 'translate(0, 0)';
+                staticLogo.style.top = `${logoTop}px`;
+                staticLogo.style.left = `${logoLeft}px`;
 
-                // Phase 3: Expand pill width and morph height seamlessly to fill navbar bounding box
+                // Phase 3: Expand pill width to the right to fill full navbar width
                 setTimeout(() => {
                     const finalNavRect = navbarCapsule.getBoundingClientRect();
-                    const finalLogo = navbarCapsule.querySelector('a');
-                    const finalLogoRect = finalLogo ? finalLogo.getBoundingClientRect() : null;
-
-                    bgPill.style.transform = 'translate(0, 0)';
-                    bgPill.style.top = `${finalNavRect.top}px`;
-                    bgPill.style.left = `${finalNavRect.left}px`;
                     bgPill.style.width = `${finalNavRect.width}px`;
-                    bgPill.style.height = `${finalNavRect.height}px`;
 
-                    if (finalLogoRect) {
-                        staticLogo.style.transform = 'translate(0, 0)';
-                        staticLogo.style.top = `${finalLogoRect.top}px`;
-                        staticLogo.style.left = `${finalLogoRect.left}px`;
-                    }
 
                     // Phase 4: Staggered sequential reveal of Navigation Items
                     setTimeout(() => {
