@@ -120,9 +120,9 @@
                     const theme = entry.target.getAttribute('data-section-theme');
 
                     if (theme === 'dark') {
-                        // Floating over dark section -> Navbar renders light (white bg + dark text)
-                        capsule.classList.remove('bg-black/90', 'text-white', 'border-white/15');
-                        capsule.classList.add('bg-white/90', 'text-slate-900', 'border-black/15');
+                        // Floating over dark section -> Navbar renders light mode iOS27 glass
+                        capsule.classList.remove('bg-white/[0.05]', 'border-white/[0.1]', 'shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]', 'bg-black/90', 'text-white', 'border-white/15');
+                        capsule.classList.add('bg-white/[0.4]', 'backdrop-blur-3xl', 'border', 'border-white/[0.6]', 'shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]', 'text-slate-900');
 
                         if (logoBlack) {
                             logoBlack.classList.remove('opacity-0');

@@ -2,10 +2,11 @@
     'use strict';
     
     function init3DTilt() {
-        const cards = document.querySelectorAll('.group.relative');
+        const cards = document.querySelectorAll('.group.relative:not(form):not(.no-tilt)');
         
         cards.forEach(card => {
             if (card.dataset.tiltBound === 'true') return;
+            if (card.querySelector('form') || card.classList.contains('no-tilt')) return;
             card.dataset.tiltBound = 'true';
             
             // Ensure parent container has perspective for 3D depth

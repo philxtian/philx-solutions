@@ -61,41 +61,42 @@
       "js_smooth_scroll_initsmoothscroll"
     ],
     "9": [
+      "js_card_spotlight",
+      "js_card_spotlight_init3dtilt"
+    ],
+    "10": [
       "js_scroll_reveal",
       "js_scroll_reveal_initscrollreveals"
     ],
-    "10": [
+    "11": [
       "agents_skills_backend_api_design_skill_api_design"
     ],
-    "11": [
+    "12": [
       "agents_skills_design_ui_ux_pro_max_skill_ui_ux_pro_max"
     ],
-    "12": [
+    "13": [
       "agents_skills_workflow_caveman_skill_caveman"
     ],
-    "13": [
+    "14": [
       "agents_skills_workflow_code_simplify_skill"
     ],
-    "14": [
+    "15": [
       "api_contact_success"
     ],
-    "15": [
+    "16": [
       "assets_logo"
     ],
-    "16": [
+    "17": [
       "assets_logo_full_transparent"
     ],
-    "17": [
+    "18": [
       "assets_logo_mark"
     ],
-    "18": [
+    "19": [
       "assets_logo_transparent"
     ],
-    "19": [
-      "htmx_org"
-    ],
     "20": [
-      "js_card_spotlight"
+      "htmx_org"
     ],
     "21": [
       "tailwindcss"
