@@ -1,40 +1,61 @@
 (function() {
     'use strict';
     
+    // Smooth easing math (easeInOutCubic)
+    function easeInOutCubic(t, b, c, d) {
+        t /= d/2;
+        if (t < 1) return c/2*t*t*t + b;
+        t -= 2;
+        return c/2*(t*t*t + 2) + b;
+    }
+
     function initSmoothScroll() {
-        // Find all anchor links that point to a section on the same page (e.g., href="#services")
         const links = document.querySelectorAll('a[href^="#"]');
         
         links.forEach(link => {
-            link.addEventListener('click', function(e) {
+            // Remove any old listeners to prevent duplicates
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+            
+            newLink.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
-                
-                // Ignore empty links or just "#" 
                 if (!targetId || targetId === '#') return;
                 
                 const targetElement = document.querySelector(targetId);
-                
                 if (targetElement) {
-                    e.preventDefault(); // Stop Safari's delayed native CSS anchor jump
+                    e.preventDefault(); // Stop CSS/native anchor jumps
                     
-                    // Get the navbar height to offset the scroll so it doesn't cover section headers
                     const navbarCapsule = document.getElementById('navbar-capsule');
                     const offset = navbarCapsule ? navbarCapsule.getBoundingClientRect().height + 24 : 80;
                     
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                    const startPosition = window.pageYOffset;
+                    const distance = targetPosition - startPosition;
                     
-                    // Force an instant, hardware-accelerated JS smooth scroll
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+                    const duration = 800; // 800ms duration for premium feel
+                    let startTime = null;
+                    
+                    // Frame-by-frame GPU animation
+                    function animation(currentTime) {
+                        if (startTime === null) startTime = currentTime;
+                        const timeElapsed = currentTime - startTime;
+                        
+                        const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+                        window.scrollTo(0, run); // Standard instant scroll to coordinates
+                        
+                        if (timeElapsed < duration) {
+                            requestAnimationFrame(animation);
+                        } else {
+                            window.scrollTo(0, targetPosition); // Snap to exact pixel at end
+                        }
+                    }
+                    
+                    requestAnimationFrame(animation);
                 }
             });
         });
     }
 
-    // Run when DOM is ready or after HTMX swaps
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initSmoothScroll);
     } else {
