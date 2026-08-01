@@ -1,25 +1,21 @@
 /**
- * PHILX Solutions — Center-to-Left Pill Reveal & Staggered Nav
+ * PHILX Solutions — 2026 Center-to-Left Pill Morph Sequence & Dynamic Height Failsafe
  */
 (function () {
     'use strict';
-
-    // Execution Guard: Prevent duplicate instances
+    
     if (window.PHILX_INTRO_ACTIVE) return;
     window.PHILX_INTRO_ACTIVE = true;
 
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
-
-    // 1. Create Fullscreen Pure Black Overlay
     const overlay = document.createElement('div');
     overlay.id = 'intro-overlay';
     overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s ease;';
 
-    // 2. Create Elements (Starting Centered)
     overlay.innerHTML = `
-        <div id="intro-bg-pill" style="position:fixed;top:50%;left:50%;transform:translate(-50%, -50%) scale(0);background:#ffffff;border-radius:9999px;z-index:1;will-change:top, left, width, height, transform; transition: transform 0.5s ${EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE};"></div>
+        <div id="intro-bg-pill" style="position:fixed;top:50%;left:50%;width:150px;height:150px;margin-top:-75px;margin-left:-75px;transform:scale(0);background:#ffffff;border-radius:9999px;z-index:1;will-change:top, left, width, height, transform, margin; transition: transform 0.5s ${EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE};"></div>
         
-        <div id="intro-static-logo" style="position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);z-index:2;opacity:0;transition: opacity 0.4s ease, top 0.6s ${EASE}, left 0.6s ${EASE}, transform 0.6s ${EASE}; display:flex;align-items:center;">
+        <div id="intro-static-logo" style="position:fixed;top:50%;left:50%;margin-top:-18px;margin-left:-54px;z-index:2;opacity:0;transition: opacity 0.4s ease, top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}; display:flex;align-items:center;">
             <div style="display:flex;align-items:center;" class="space-x-3">
                 <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="width:36px;height:36px;object-fit:contain;border-radius:8px;display:block;">
                 <div style="display:flex;flex-direction:column;justify-content:center;width:72px;">
@@ -39,7 +35,7 @@
             (document.body || document.documentElement).appendChild(overlay);
         }
     }
-
+    
     if (document.body) mountOverlay();
     else document.addEventListener('DOMContentLoaded', mountOverlay);
 
@@ -54,64 +50,55 @@
             return;
         }
 
-        const navRect = navbarCapsule.getBoundingClientRect();
         const navItems = navbarCapsule.querySelectorAll('.nav-link, .nav-cta, .nav-mobile-btn');
-
-        // Hide nav items for staggered reveal later
         navItems.forEach(item => {
             item.style.opacity = '0';
             item.style.transform = 'translateY(10px)';
             item.style.transition = `opacity 0.4s ${EASE}, transform 0.4s ${EASE}`;
         });
 
-        // Hardcoded fixed circle size for initial centered splash (generous 150px size to comfortably fit full logo)
-        const CIRCLE_SIZE = 150;
-        bgPill.style.width = `${CIRCLE_SIZE}px`;
-        bgPill.style.height = `${CIRCLE_SIZE}px`;
-
-        // Phase 1: Reveal circle and logo dead center
+        // Phase 1: Reveal circle and logo dead center (No translate transforms, using negative margins)
         setTimeout(() => {
-            bgPill.style.transform = 'translate(-50%, -50%) scale(1)';
+            bgPill.style.transform = 'scale(1)';
             staticLogo.style.opacity = '1';
 
-            // Phase 2: Move circle and logo directly to top-left navbar position (forming 200px pill)
+            // Phase 2: Move to navbar left and morph to short pill
             setTimeout(() => {
-                const navbarLogo = navbarCapsule.querySelector('a');
-                const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
-                const logoTop = logoRect ? logoRect.top : (navRect.top + (navRect.height - 36) / 2);
-                const logoLeft = logoRect ? logoRect.left : (navRect.left + 24);
+                // Measure dynamically AFTER layout has settled
+                const navRect = navbarCapsule.getBoundingClientRect();
+                const safeHeight = Math.min(navRect.height, 80); // Failsafe limit
+                const targetTop = navRect.top + (safeHeight / 2); // Center Y of navbar
 
-                bgPill.style.transform = 'translate(0, 0)';
-                bgPill.style.top = `${navRect.top}px`;
+                // Move Pill
+                bgPill.style.top = `${targetTop}px`;
                 bgPill.style.left = `${navRect.left}px`;
-                bgPill.style.height = `${navRect.height}px`;
-                bgPill.style.width = '200px';
+                bgPill.style.margin = `-${safeHeight / 2}px 0 0 0`; // Reset left margin, anchor to left
+                bgPill.style.height = `${safeHeight}px`;
+                bgPill.style.width = '200px'; 
+                
+                // Move Logo
+                staticLogo.style.top = `${targetTop}px`;
+                staticLogo.style.left = `${navRect.left + 24}px`;
+                staticLogo.style.margin = `-18px 0 0 0`; // Anchor cleanly
 
-                staticLogo.style.transform = 'translate(0, 0)';
-                staticLogo.style.top = `${logoTop}px`;
-                staticLogo.style.left = `${logoLeft}px`;
-
-                // Phase 3: Expand pill width to the right to fill full navbar width
+                // Phase 3: Expand pill width to fill navbar
                 setTimeout(() => {
-                    const finalNavRect = navbarCapsule.getBoundingClientRect();
-                    bgPill.style.width = `${finalNavRect.width}px`;
+                    bgPill.style.width = `${navRect.width}px`;
 
-
-                    // Phase 4: Staggered sequential reveal of Navigation Items
+                    // Phase 4: Reveal Navigation Items
                     setTimeout(() => {
                         navItems.forEach((item, idx) => {
                             setTimeout(() => {
                                 item.style.opacity = '1';
                                 item.style.transform = 'translateY(0)';
-                            }, idx * 75); // 75ms delay between each item
+                            }, idx * 75); 
                         });
 
-                        // Phase 5: Fade out the black overlay and clean up the DOM
+                        // Phase 5: Fade overlay and cleanup
                         setTimeout(() => {
                             overlay.style.opacity = '0';
                             setTimeout(() => {
                                 if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                                // Clean up inline styles so CSS hover states work normally
                                 navItems.forEach(item => {
                                     item.style.opacity = '';
                                     item.style.transform = '';
@@ -119,21 +106,15 @@
                                 });
                             }, 750);
                         }, 650);
-
-                    }, 400); // Trigger nav reveal slightly before pill expansion finishes
-
-                }, 600); // Wait for the left-move animation to finish
-
-            }, 800); // Hold center position briefly before moving
+                    }, 400); 
+                }, 600); 
+            }, 800); 
         }, 50);
     }
 
-
-
     function init() {
-        if (document.getElementById('navbar-capsule')) {
-            runSequence();
-        } else {
+        if (document.getElementById('navbar-capsule')) runSequence();
+        else {
             document.body.addEventListener('htmx:afterSwap', function (evt) {
                 if (evt.detail.target.id === 'navbar-container' || document.getElementById('navbar-capsule')) {
                     runSequence();
@@ -142,9 +123,6 @@
         }
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
 })();
