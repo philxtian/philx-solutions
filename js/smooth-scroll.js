@@ -9,15 +9,16 @@
         return c/2*(t*t*t + 2) + b;
     }
 
+    let isScrolling = false; // Global lock to prevent overlapping calculations
+
     function initSmoothScroll() {
         const links = document.querySelectorAll('a[href^="#"]');
         
         links.forEach(link => {
-            // Safely prevent duplicate listeners without destroying the DOM node
             if (link.dataset.scrollBound === 'true') return;
             link.dataset.scrollBound = 'true';
             
-            link.addEventListener('click', function(e) {
+            const triggerScroll = function(e) {
                 const targetId = this.getAttribute('href');
                 if (!targetId || targetId === '#') return;
                 
@@ -25,13 +26,20 @@
                 if (targetElement) {
                     e.preventDefault(); 
                     
-                    const navbarCapsule = document.getElementById('navbar-capsule');
-                    const offset = 0;
+                    if (isScrolling) return; // Ignore secondary events if already moving
+                    isScrolling = true;
                     
+                    const offset = 0; 
                     const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
                     const startPosition = window.pageYOffset;
                     const distance = targetPosition - startPosition;
                     
+                    // If we are already at the target, unlock and exit
+                    if (distance === 0) {
+                        isScrolling = false;
+                        return;
+                    }
+
                     const duration = 800; 
                     let startTime = null;
                     
@@ -46,12 +54,18 @@
                             requestAnimationFrame(animation);
                         } else {
                             window.scrollTo(0, targetPosition); 
+                            isScrolling = false; // Release lock when finished
                         }
                     }
                     
                     requestAnimationFrame(animation);
                 }
-            });
+            };
+
+            // Bind to instant touch/pointer events, with click as a fallback
+            link.addEventListener('click', triggerScroll);
+            link.addEventListener('touchstart', triggerScroll, { passive: false });
+            link.addEventListener('pointerdown', triggerScroll);
         });
     }
 
