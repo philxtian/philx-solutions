@@ -22,9 +22,9 @@
     overlay.id = 'intro-overlay';
     overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s ease;';
 
-    // Start with a 3D glass sphere in the center matching navbar frosted glass styling, backed by a vibrant refracting color blob
+    // Start with a 3D glass sphere in the center, backed by a compact 3-color refracting blob (sky-blue, emerald green, deep teal)
     overlay.innerHTML = `
-        <div id="intro-blob" class="w-[320px] h-[320px] rounded-full bg-gradient-to-tr from-cyan-400/80 via-teal-500/70 to-blue-600/80 blur-[80px] animate-morph-fast transform-gpu will-change-transform" style="position:fixed;top:50%;left:50%;margin-top:-160px;margin-left:-160px;z-index:0;opacity:0.95;will-change:top, left, margin, opacity; transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1), left 0.6s cubic-bezier(0.16, 1, 0.3, 1), margin 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;"></div>
+        <div id="intro-blob" class="w-24 h-24 rounded-full bg-gradient-to-tr from-sky-400/90 via-emerald-400/85 to-teal-500/90 blur-[28px] animate-morph-fast transform-gpu will-change-transform" style="position:fixed;top:50%;left:50%;margin-top:-48px;margin-left:-48px;z-index:0;opacity:1;will-change:top, left, margin, opacity; transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1), left 0.6s cubic-bezier(0.16, 1, 0.3, 1), margin 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;"></div>
 
         <div id="intro-bg-pill" class="w-24 h-24 rounded-full bg-white/[0.05] backdrop-blur-3xl border border-white/[0.1] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] transform-gpu will-change-transform" style="position:fixed;top:50%;left:50%;margin-top:-48px;margin-left:-48px;z-index:1;animation: philx-bounce 0.7s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;"></div>
         
@@ -86,7 +86,7 @@
                 staticLogo.style.transition = 'opacity 0.4s ease';
                 staticLogo.style.opacity = '1';
 
-                // Phase 3: Move to navbar left and morph to short pill, tracking intro blob
+                // Phase 3: Move precisely to upper-left logo placement
                 setTimeout(() => {
                     const navRect = navbarCapsule.getBoundingClientRect();
                     const safeHeight = Math.min(navRect.height, 80); 
@@ -98,21 +98,21 @@
                     bgPill.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, border-radius 0.6s ${EASE}`;
                     staticLogo.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}`;
 
-                    // Move Pill
+                    // Move Pill to upper-left logo placement
                     bgPill.style.top = `${targetTop}px`;
-                    bgPill.style.left = `${navRect.left}px`;
+                    bgPill.style.left = `${exactLogoLeft - 12}px`;
                     bgPill.style.margin = `-${safeHeight / 2}px 0 0 0`; 
                     bgPill.style.height = `${safeHeight}px`;
-                    bgPill.style.width = '200px'; 
+                    bgPill.style.width = '175px'; 
 
-                    // Track backing intro blob to navbar position
+                    // Track backing intro blob precisely behind upper-left logo placement
                     if (introBlob) {
                         introBlob.style.top = `${targetTop}px`;
-                        introBlob.style.left = `${navRect.left + (navRect.width / 2)}px`;
-                        introBlob.style.margin = '-160px 0 0 -160px';
+                        introBlob.style.left = `${exactLogoLeft + 65}px`;
+                        introBlob.style.margin = '-48px 0 0 -48px';
                     }
                     
-                    // Move Logo
+                    // Move Logo to upper-left position
                     staticLogo.style.top = `${targetTop}px`;
                     staticLogo.style.left = `${exactLogoLeft}px`;
                     staticLogo.style.margin = `-18px 0 0 0`;
@@ -126,9 +126,9 @@
                     }
 
 
-                    // Phase 4: Expand pill width to fill navbar
+                    // Phase 4: Settle precisely at upper-left logo placement
                     setTimeout(() => {
-                        bgPill.style.width = `${navRect.width}px`;
+                        bgPill.style.width = '175px';
 
                         // Phase 5: Reveal Navigation Items & Cleanup, dissolving intro blob into section ambient glow
                         setTimeout(() => {
