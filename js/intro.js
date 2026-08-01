@@ -64,8 +64,8 @@
             item.style.transition = `opacity 0.4s ${EASE}, transform 0.4s ${EASE}`;
         });
 
-        // Hardcoded fixed circle size for initial centered splash (avoids unrendered DOM height bugs)
-        const CIRCLE_SIZE = 80;
+        // Hardcoded fixed circle size for initial centered splash (generous 150px size to comfortably fit full logo)
+        const CIRCLE_SIZE = 150;
         bgPill.style.width = `${CIRCLE_SIZE}px`;
         bgPill.style.height = `${CIRCLE_SIZE}px`;
 
@@ -76,24 +76,37 @@
 
             // Phase 2: Move circle and logo to the left side (navbar position)
             setTimeout(() => {
+                const navbarLogo = navbarCapsule.querySelector('a');
+                const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
                 const actualNavHeight = (navRect.height > 0 && navRect.height < 200) ? navRect.height : 64;
                 const targetTop = navRect.top + (actualNavHeight / 2);
                 const targetLeftPill = navRect.left + (CIRCLE_SIZE / 2);
-                const targetLeftLogo = navRect.left + 24; // Align with left padding
+                const targetLeftLogo = logoRect ? logoRect.left : (navRect.left + 24);
 
                 bgPill.style.top = `${targetTop}px`;
                 bgPill.style.left = `${targetLeftPill}px`;
 
-                staticLogo.style.top = `${targetTop}px`;
+                staticLogo.style.top = logoRect ? `${logoRect.top}px` : `${targetTop}px`;
                 staticLogo.style.left = `${targetLeftLogo}px`;
-                staticLogo.style.transform = 'translate(0, -50%)'; // Shift transform origin to left edge
+                staticLogo.style.transform = logoRect ? 'translate(0, 0)' : 'translate(0, -50%)';
 
-                // Phase 3: Expand pill width and morph height seamlessly to fill navbar
+                // Phase 3: Expand pill width and morph height seamlessly to fill navbar bounding box
                 setTimeout(() => {
-                    bgPill.style.transform = 'translate(0, -50%) scale(1)';
-                    bgPill.style.left = `${navRect.left}px`;
-                    bgPill.style.width = `${navRect.width}px`;
-                    bgPill.style.height = `${actualNavHeight}px`;
+                    const finalNavRect = navbarCapsule.getBoundingClientRect();
+                    const finalLogo = navbarCapsule.querySelector('a');
+                    const finalLogoRect = finalLogo ? finalLogo.getBoundingClientRect() : null;
+
+                    bgPill.style.transform = 'translate(0, 0)';
+                    bgPill.style.top = `${finalNavRect.top}px`;
+                    bgPill.style.left = `${finalNavRect.left}px`;
+                    bgPill.style.width = `${finalNavRect.width}px`;
+                    bgPill.style.height = `${finalNavRect.height}px`;
+
+                    if (finalLogoRect) {
+                        staticLogo.style.transform = 'translate(0, 0)';
+                        staticLogo.style.top = `${finalLogoRect.top}px`;
+                        staticLogo.style.left = `${finalLogoRect.left}px`;
+                    }
 
                     // Phase 4: Staggered sequential reveal of Navigation Items
                     setTimeout(() => {
@@ -125,6 +138,7 @@
             }, 800); // Hold center position briefly before moving
         }, 50);
     }
+
 
 
     function init() {
