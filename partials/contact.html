@@ -1,5 +1,11 @@
-<section id="contact" data-section-theme="dark" class="py-28 bg-black/90 backdrop-blur-xl text-white border-b border-white/10 transition-colors duration-300">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="contact" data-section-theme="dark" class="relative py-28 bg-black text-white border-b border-white/10 transition-colors duration-300 overflow-hidden">
+    <!-- Section-Scoped Ambient Gradient (Dark Section: Bright Mint & Neon Sky Glows) -->
+    <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-gradient-to-bl from-teal-400/20 via-emerald-500/15 to-transparent rounded-full blur-[150px] animate-morph-reverse"></div>
+        <div class="absolute bottom-[-10%] left-[-5%] w-[750px] h-[750px] bg-gradient-to-tr from-indigo-500/20 via-sky-500/15 to-transparent rounded-full blur-[150px] animate-morph-slow"></div>
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-zinc-400 mb-3">Get In Touch</h2>
             <p class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight uppercase">Initiate Consultation</p>
@@ -18,65 +24,69 @@
         </div>
 
         <div class="group relative">
-            <div class="bg-zinc-950 border border-white/15 rounded-3xl p-8 sm:p-12 shadow-2xl relative z-10">
+            <div class="bg-zinc-950/90 border border-white/15 rounded-3xl p-8 sm:p-12 shadow-2xl relative z-10">
                 <form id="contact-form" 
                       hx-post="api/contact-success.html" 
                       hx-target="#form-response" 
                       hx-swap="innerHTML"
-                      onsubmit="window.PHILX_WP_API && window.PHILX_WP_API.handleContactSubmit(event)"
                       class="space-y-6">
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Full Name -->
                         <div>
-                            <label for="name" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Full Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="John Doe" 
-                                   class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-zinc-900 text-white placeholder-zinc-500 focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors">
+                            <label for="name" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Alexander Wright"
+                                   class="w-full px-4 py-3 bg-black border border-white/15 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white text-sm transition-colors">
                         </div>
+
+                        <!-- Email Address -->
                         <div>
-                            <label for="email" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Business Email *</label>
-                            <input type="email" id="email" name="email" required placeholder="john@company.com" 
-                                   class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-zinc-900 text-white placeholder-zinc-500 focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors">
+                            <label for="email" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Corporate Email</label>
+                            <input type="email" id="email" name="email" required placeholder="alex@company.com"
+                                   class="w-full px-4 py-3 bg-black border border-white/15 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white text-sm transition-colors">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Company / Organization -->
                         <div>
-                            <label for="organization" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Organization</label>
-                            <input type="text" id="organization" name="organization" placeholder="Company Name Inc." 
-                                   class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-zinc-900 text-white placeholder-zinc-500 focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors">
+                            <label for="company" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Company / Organization</label>
+                            <input type="text" id="company" name="company" placeholder="Nexus Enterprise Corp"
+                                   class="w-full px-4 py-3 bg-black border border-white/15 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white text-sm transition-colors">
                         </div>
+
+                        <!-- Interest / Solution -->
                         <div>
-                            <label for="service" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Service Interested In *</label>
-                            <select id="service" name="service" required 
-                                    class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-zinc-900 text-white focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors">
-                                <option value="" class="bg-black text-zinc-400">Select a service...</option>
-                                <option value="Enterprise ERP & POS" class="bg-black text-white">Enterprise ERP & POS Systems</option>
-                                <option value="Full-Stack Web & API" class="bg-black text-white">Full-Stack Web & API Engineering</option>
-                                <option value="Cloud Infrastructure" class="bg-black text-white">Cloud Infrastructure & Migration</option>
-                                <option value="IT Operations & Governance" class="bg-black text-white">IT Operations & Governance (ITIL/ITSM)</option>
+                            <label for="solution" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Solution Area</label>
+                            <select id="solution" name="solution"
+                                    class="w-full px-4 py-3 bg-black border border-white/15 rounded-xl text-white focus:outline-none focus:border-white text-sm transition-colors">
+                                <option value="erp">Enterprise ERP & POS Architecture</option>
+                                <option value="web-api">Full-Stack Web & REST API Engineering</option>
+                                <option value="cloud">Cloud Infrastructure & Migration</option>
+                                <option value="itsm">ITSM & ITIL Service Governance</option>
+                                <option value="other">General Engineering Inquiry</option>
                             </select>
                         </div>
                     </div>
 
+                    <!-- Message Body -->
                     <div>
-                        <label for="message" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Project Scope *</label>
-                        <textarea id="message" name="message" rows="4" required placeholder="Describe your project goals, timelines, or key requirements..." 
-                                  class="w-full px-4 py-3.5 rounded-xl border border-white/20 bg-zinc-900 text-white placeholder-zinc-500 focus:border-white focus:ring-1 focus:ring-white outline-none transition-colors resize-none"></textarea>
+                        <label for="message" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Project Overview</label>
+                        <textarea id="message" name="message" rows="4" required placeholder="Describe your technical requirements or system architecture goals..."
+                                  class="w-full px-4 py-3 bg-black border border-white/15 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white text-sm transition-colors resize-none"></textarea>
                     </div>
 
+                    <!-- Submit Button -->
                     <div>
-                        <button id="submit-btn" type="submit" class="w-full py-4 text-xs font-bold text-black bg-white hover:bg-zinc-200 rounded-full border border-white transition-all shadow-lg cursor-pointer flex items-center justify-center space-x-2 uppercase tracking-widest">
-                            <svg id="btn-spinner" class="hidden w-4 h-4 text-black animate-spin" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            <span id="btn-text">Submit Lead Inquiry &rarr;</span>
+                        <button type="submit" 
+                                class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 text-xs font-bold text-black bg-white hover:bg-zinc-200 rounded-xl transition-colors uppercase tracking-widest text-center cursor-pointer shadow-lg">
+                            Submit Consultation Request &rarr;
                         </button>
                     </div>
-
-                    <!-- Async Inline Response Feedback Container -->
-                    <div id="form-response" class="mt-4"></div>
                 </form>
+
+                <!-- Dynamic Form Response Target Container -->
+                <div id="form-response" class="mt-6"></div>
             </div>
         </div>
     </div>
