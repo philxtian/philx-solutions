@@ -87,10 +87,12 @@
 </head>
 <body class="bg-white dark:bg-black text-slate-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 relative bg-tech-grid overflow-x-hidden">
 
-    <!-- Dynamic Viewport-Spanning Ambient Color Gradient Blobs -->
-    <div class="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[1100px] h-[750px] bg-gradient-to-b from-indigo-500/30 via-sky-500/20 to-transparent rounded-full blur-[140px] pointer-events-none z-0 animate-morph-slow"></div>
-    <div class="fixed top-[38%] right-[-10%] w-[950px] h-[950px] bg-gradient-to-tr from-amber-500/25 via-emerald-500/20 to-transparent rounded-full blur-[160px] pointer-events-none z-0 animate-morph-reverse"></div>
-    <div class="fixed bottom-[-10%] left-[-10%] w-[1000px] h-[1000px] bg-gradient-to-tr from-violet-500/30 via-cyan-500/20 to-transparent rounded-full blur-[160px] pointer-events-none z-0 animate-morph-slow"></div>
+    <!-- Fixed Viewport-Spanning Ambient Color Gradient Layer -->
+    <div class="fixed inset-0 w-screen h-screen pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[1100px] h-[750px] bg-gradient-to-b from-indigo-500/30 via-sky-500/20 to-transparent rounded-full blur-[140px] animate-morph-slow"></div>
+        <div class="absolute top-[38%] right-[-10%] w-[950px] h-[950px] bg-gradient-to-tr from-amber-500/25 via-emerald-500/20 to-transparent rounded-full blur-[160px] animate-morph-reverse"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[1000px] h-[1000px] bg-gradient-to-tr from-violet-500/30 via-cyan-500/20 to-transparent rounded-full blur-[160px] animate-morph-slow"></div>
+    </div>
 
     <!-- Sticky Pill Navigation Bar -->
     <div id="navbar-container" hx-get="partials/navbar.html" hx-trigger="load" hx-swap="outerHTML" class="z-50 relative">
