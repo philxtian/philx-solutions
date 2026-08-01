@@ -1,8 +1,9 @@
 /**
- * PHILX Solutions — 2026 Multi-Stage Luxury Intro Sequence
- * ARCHITECTURE: Anchored Logo Coordinates & Independent Pill Expansion.
- *   - Logo is pinned at its exact target location on the left side of the container.
- *   - Container width expands left-to-right without shifting logo transform origin off-axis.
+ * PHILX Solutions — 2026 Intro Keyframe Sequence & Stable Layout Morph
+ * ARCHITECTURE:
+ *   - Independent Background Capsule & Static Logo Layer separation.
+ *   - Logo is relocated to its exact final destination coordinates before pill expansion.
+ *   - Keyframe sequence morphs background container horizontally without shifting logo layout box.
  */
 
 (function () {
@@ -12,26 +13,41 @@
         if (window.PHILX_INTRO_RUNNING) return;
         window.PHILX_INTRO_RUNNING = true;
 
-        const EASE = 'cubic-bezier(0.16,1,0.3,1)';
+        const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
-        // Overlay Container
+        // 1. Inject Keyframe CSS for Background Expansion
+        const style = document.createElement('style');
+        style.id = 'intro-keyframes-style';
+        style.textContent = `
+            @keyframes introPillExpand {
+                from {
+                    width: var(--pill-start-width);
+                }
+                to {
+                    width: var(--pill-target-width);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 2. Create Overlay Container
         const overlay = document.createElement('div');
         overlay.id = 'intro-overlay';
         overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);';
 
-        // Expanded White Circle Container
+        // 3. Create Independent Background Capsule and Logo Layer
         overlay.innerHTML = `
-            <div id="intro-morph-capsule" style="position:fixed;top:50%;left:50%;width:180px;height:180px;margin-top:-90px;margin-left:-90px;border-radius:9999px;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;transform:scale(0);transform-origin:center center;transition:transform 0.8s ${EASE}, top 0.65s ${EASE}, left 0.65s ${EASE}, margin 0.65s ${EASE}, width 0.65s ${EASE}, height 0.65s ${EASE}, padding 0.65s ${EASE}, border-radius 0.65s ${EASE};will-change:transform, top, left, width, height;overflow:hidden;">
-                <div id="intro-logo-wrapper" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:left 0.65s ${EASE}, transform 0.65s ${EASE};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <div id="intro-logo-content" style="opacity:0;transform:scale(0.85);transition:opacity 0.45s ease-out, transform 0.45s ${EASE};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                        <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="height:38px;width:auto;border-radius:8px;flex-shrink:0;">
-                        <div style="display:flex;flex-direction:column;justify-content:center;width:72px;margin-left:12px;flex-shrink:0;">
-                            <div style="display:flex;justify-content:space-between;font-weight:900;color:#000000;line-height:1;font-size:13px;text-transform:uppercase;">
-                                <span>P</span><span>H</span><span>I</span><span>L</span><span>X</span>
-                            </div>
-                            <div style="display:flex;justify-content:space-between;font-size:9px;font-weight:700;color:#64748b;line-height:1;margin-top:4px;text-transform:uppercase;">
-                                <span>S</span><span>O</span><span>L</span><span>U</span><span>T</span><span>I</span><span>O</span><span>N</span><span>S</span>
-                            </div>
+            <div id="intro-bg-capsule" style="position:fixed;top:50%;left:50%;width:160px;height:160px;margin-top:-80px;margin-left:-80px;border-radius:9999px;background:#ffffff;box-shadow:0 25px 60px -15px rgba(0,0,0,0.6);transform:scale(0);transform-origin:center center;will-change:transform, top, left, width, height;overflow:hidden;z-index:1;"></div>
+            
+            <div id="intro-logo-layer" style="position:fixed;z-index:2;pointer-events:none;display:flex;align-items:center;will-change:top, left, opacity, transform;opacity:0;">
+                <div style="display:flex;align-items:center;" class="space-x-3">
+                    <img src="assets/logo-mark-black.png" alt="PHILX Logo" style="height:36px;width:36px;border-radius:8px;object-fit:contain;flex-shrink:0;">
+                    <div style="display:flex;flex-direction:column;justify-content:center;width:72px;flex-shrink:0;">
+                        <div style="display:flex;justify-content:space-between;font-weight:900;color:#000000;line-height:1;font-size:13px;text-transform:uppercase;">
+                            <span>P</span><span>H</span><span>I</span><span>L</span><span>X</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:9px;font-weight:700;color:#64748b;line-height:1;margin-top:4px;text-transform:uppercase;">
+                            <span>S</span><span>O</span><span>L</span><span>U</span><span>T</span><span>I</span><span>O</span><span>N</span><span>S</span>
                         </div>
                     </div>
                 </div>
@@ -40,57 +56,90 @@
         document.body.appendChild(overlay);
 
         function runSequence() {
-            const capsule = document.getElementById('intro-morph-capsule');
-            const logoWrapper = document.getElementById('intro-logo-wrapper');
-            const logoContent = document.getElementById('intro-logo-content');
+            const capsule = document.getElementById('intro-bg-capsule');
+            const logoLayer = document.getElementById('intro-logo-layer');
             const navbarCapsule = document.getElementById('navbar-capsule');
 
-            if (!capsule || !logoWrapper || !logoContent || !navbarCapsule) {
+            if (!capsule || !logoLayer || !navbarCapsule) {
                 setTimeout(() => {
                     overlay.style.opacity = '0';
-                    setTimeout(() => overlay.remove(), 750);
+                    setTimeout(() => {
+                        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                        if (style.parentNode) style.parentNode.removeChild(style);
+                    }, 750);
                 }, 400);
                 return;
             }
 
-            // Phase 1 (0.0s - 0.8s): Centered White Circle Reveal
+            const navbarLogo = navbarCapsule.querySelector('a');
+            const navRect = navbarCapsule.getBoundingClientRect();
+            const logoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
+
+            const targetLogoWidth = logoRect ? logoRect.width : 120;
+            const targetLogoHeight = logoRect ? logoRect.height : 36;
+
+            const screenCenterX = window.innerWidth / 2;
+            const screenCenterY = window.innerHeight / 2;
+
+            // Initial center coordinates for static logo layer
+            logoLayer.style.top = `${screenCenterY - targetLogoHeight / 2}px`;
+            logoLayer.style.left = `${screenCenterX - targetLogoWidth / 2}px`;
+            logoLayer.style.transform = 'scale(0.85)';
+
+            // Phase 1 (0.05s - 0.75s): Centered White Circle & Logo Reveal
             setTimeout(() => {
+                capsule.style.transition = `transform 0.7s ${EASE}`;
                 capsule.style.transform = 'scale(1)';
 
-                // Phase 2 (0.8s - 1.4s): Crisp Logo Fade & Relocate directly to top navbar bounding rect
+                logoLayer.style.transition = `opacity 0.45s ease-out, transform 0.6s ${EASE}`;
+                logoLayer.style.opacity = '1';
+                logoLayer.style.transform = 'scale(1)';
+
+                // Phase 2 (0.75s - 1.35s): Relocate Logo to Destination & Dock Capsule Circle to Navbar Left
                 setTimeout(() => {
-                    logoContent.style.opacity = '1';
-                    logoContent.style.transform = 'scale(1)';
+                    const currentNavRect = navbarCapsule.getBoundingClientRect();
+                    const currentLogoRect = navbarLogo ? navbarLogo.getBoundingClientRect() : null;
 
+                    const finalLogoTop = currentLogoRect ? currentLogoRect.top : (currentNavRect.top + (currentNavRect.height - 36) / 2);
+                    const finalLogoLeft = currentLogoRect ? currentLogoRect.left : (currentNavRect.left + 24);
+
+                    // 1. Move logo layer directly to exact navbar destination coordinates
+                    logoLayer.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}`;
+                    logoLayer.style.top = `${finalLogoTop}px`;
+                    logoLayer.style.left = `${finalLogoLeft}px`;
+
+                    // 2. Move background capsule to navbar left as a matching circle
+                    capsule.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, border-radius 0.6s ${EASE}`;
+                    capsule.style.top = `${currentNavRect.top}px`;
+                    capsule.style.left = `${currentNavRect.left}px`;
+                    capsule.style.marginTop = '0px';
+                    capsule.style.marginLeft = '0px';
+                    capsule.style.width = `${currentNavRect.height}px`;
+                    capsule.style.height = `${currentNavRect.height}px`;
+                    capsule.style.borderRadius = '9999px';
+
+                    // Phase 3 (1.35s - 1.95s): Horizontal Pill Expansion (Circle-to-Pill Reveal via Keyframe Sequence)
                     setTimeout(() => {
-                        const targetNavbarRect = navbarCapsule.getBoundingClientRect();
+                        const navRectFinal = navbarCapsule.getBoundingClientRect();
 
-                        // Dock capsule top, left, and height directly to top sticky navbar position
-                        capsule.style.top = `${targetNavbarRect.top}px`;
-                        capsule.style.left = `${targetNavbarRect.left}px`;
-                        capsule.style.marginTop = '0px';
-                        capsule.style.marginLeft = '0px';
-                        capsule.style.height = `${targetNavbarRect.height}px`;
+                        // Keyframe sequence for horizontal expansion of background container
+                        capsule.style.setProperty('--pill-start-width', `${navRectFinal.height}px`);
+                        capsule.style.setProperty('--pill-target-width', `${navRectFinal.width}px`);
+                        capsule.style.animation = `introPillExpand 0.6s ${EASE} forwards`;
 
-                        // Lock logo wrapper position to the left side of the capsule (24px left offset)
-                        logoWrapper.style.left = '24px';
-                        logoWrapper.style.transform = 'translate(0, -50%)';
+                        // Logo is 100% static & frozen at its destination coordinates during background reveal.
 
-                        // Phase 3 (1.4s - 2.0s): Left-to-Right Pill Morph Width Expansion
+                        // Phase 4 (1.95s - 2.7s): Handover & Fade Out
                         setTimeout(() => {
-                            capsule.style.width = `${targetNavbarRect.width}px`;
-
-                            // Phase 4 (2.0s - 2.2s): Settle & Sticky Navbar Handover
+                            overlay.style.opacity = '0';
                             setTimeout(() => {
-                                overlay.style.opacity = '0';
-                                setTimeout(() => {
-                                    overlay.remove();
-                                }, 750);
-                            }, 450);
-                        }, 550);
-                    }, 350);
-                }, 350);
-            }, 100);
+                                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                                if (style.parentNode) style.parentNode.removeChild(style);
+                            }, 750);
+                        }, 600);
+                    }, 600);
+                }, 700);
+            }, 50);
         }
 
         if (document.getElementById('navbar-capsule')) {
@@ -104,3 +153,4 @@
         }
     });
 })();
+
