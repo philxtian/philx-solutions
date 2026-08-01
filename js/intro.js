@@ -136,14 +136,44 @@
     }
 
     function init() {
-        if (document.getElementById('navbar-capsule')) runSequence();
-        else {
+        if (document.getElementById('navbar-capsule')) {
+            runSequence();
+            return;
+        }
+
+        let executed = false;
+        const trigger = () => {
+            if (executed) return;
+            executed = true;
+            if (observer) observer.disconnect();
+            runSequence();
+        };
+
+        const observer = new MutationObserver(() => {
+            if (document.getElementById('navbar-capsule')) {
+                trigger();
+            }
+        });
+
+        observer.observe(document.body || document.documentElement, {
+            childList: true,
+            subtree: true
+        });
+
+        if (document.body) {
             document.body.addEventListener('htmx:afterSwap', function (evt) {
-                if (evt.detail.target.id === 'navbar-container' || document.getElementById('navbar-capsule')) {
-                    runSequence();
+                if (evt.detail && (evt.detail.target.id === 'navbar-container' || document.getElementById('navbar-capsule'))) {
+                    trigger();
                 }
             }, { once: true });
         }
+
+        // Failsafe backup timer
+        setTimeout(() => {
+            if (!executed && document.getElementById('navbar-capsule')) {
+                trigger();
+            }
+        }, 1500);
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
