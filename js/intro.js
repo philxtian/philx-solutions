@@ -6,7 +6,7 @@
 
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
     
-    // Inject Custom Keyframes for the initial tiny ball bounce
+    // Inject Custom Keyframes for initial tiny ball bounce
     const style = document.createElement('style');
     style.innerHTML = `
         @keyframes philx-bounce {
@@ -18,13 +18,42 @@
     `;
     document.head.appendChild(style);
 
+    // Generate cluster of 3 distinct, randomly sized and shaped color patches (Sky Blue, Emerald Green, Deep Teal)
+    function generateBlobConstellationHtml() {
+        const patches = [
+            { color: 'bg-sky-400/90', size: 50 + Math.floor(Math.random() * 25), anim: 'animate-morph-fast' },
+            { color: 'bg-emerald-400/85', size: 45 + Math.floor(Math.random() * 25), anim: 'animate-morph-slow' },
+            { color: 'bg-teal-500/90', size: 48 + Math.floor(Math.random() * 25), anim: 'animate-morph-reverse' }
+        ];
+
+        return patches.map((patch, idx) => {
+            const r1 = 30 + Math.floor(Math.random() * 40);
+            const r2 = 30 + Math.floor(Math.random() * 40);
+            const r3 = 30 + Math.floor(Math.random() * 40);
+            const r4 = 30 + Math.floor(Math.random() * 40);
+            const r5 = 30 + Math.floor(Math.random() * 40);
+            const r6 = 30 + Math.floor(Math.random() * 40);
+            const r7 = 30 + Math.floor(Math.random() * 40);
+            const r8 = 30 + Math.floor(Math.random() * 40);
+            const borderRadius = `${r1}% ${r2}% ${r3}% ${r4}% / ${r5}% ${r6}% ${r7}% ${r8}%`;
+
+            // Random offset positions around center
+            const offsetX = (idx === 0) ? -22 + Math.floor(Math.random() * 12) : (idx === 1 ? 16 + Math.floor(Math.random() * 12) : -6 + Math.floor(Math.random() * 12));
+            const offsetY = (idx === 0) ? -18 + Math.floor(Math.random() * 12) : (idx === 1 ? 12 + Math.floor(Math.random() * 12) : 18 + Math.floor(Math.random() * 12));
+
+            return `<div id="intro-blob-${idx}" class="absolute ${patch.color} blur-[20px] ${patch.anim} transform-gpu will-change-transform" style="width:${patch.size}px;height:${patch.size}px;border-radius:${borderRadius};transform:translate3d(${offsetX}px, ${offsetY}px, 0);mix-blend-mode:screen;"></div>`;
+        }).join('');
+    }
+
     const overlay = document.createElement('div');
     overlay.id = 'intro-overlay';
     overlay.style.cssText = 'position:fixed;inset:0;background:#000000;z-index:99999;pointer-events:none;transition:opacity 0.75s ease;';
 
-    // Start with a 3D glass sphere in the center, backed by a compact 3-color refracting blob (sky-blue, emerald green, deep teal)
+    // Start with a 3D glass sphere in the center, backed by a multi-color randomized blob constellation
     overlay.innerHTML = `
-        <div id="intro-blob" class="w-24 h-24 rounded-full bg-gradient-to-tr from-sky-400/90 via-emerald-400/85 to-teal-500/90 blur-[28px] animate-morph-fast transform-gpu will-change-transform" style="position:fixed;top:50%;left:50%;margin-top:-48px;margin-left:-48px;z-index:0;opacity:1;will-change:top, left, margin, opacity; transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1), left 0.6s cubic-bezier(0.16, 1, 0.3, 1), margin 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;"></div>
+        <div id="intro-blob-container" style="position:fixed;top:50%;left:50%;width:130px;height:130px;margin-top:-65px;margin-left:-65px;z-index:0;opacity:1;display:flex;align-items:center;justify-content:center;will-change:top, left, margin, opacity; transition: top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}, opacity 0.8s ease;">
+            ${generateBlobConstellationHtml()}
+        </div>
 
         <div id="intro-bg-pill" class="w-24 h-24 rounded-full bg-white/[0.05] backdrop-blur-3xl border border-white/[0.1] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] transform-gpu will-change-transform" style="position:fixed;top:50%;left:50%;margin-top:-48px;margin-left:-48px;z-index:1;animation: philx-bounce 0.7s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;"></div>
         
@@ -58,7 +87,7 @@
         const bgPill = document.getElementById('intro-bg-pill');
         const staticLogo = document.getElementById('intro-static-logo');
         const navbarCapsule = document.getElementById('navbar-capsule');
-        const introBlob = document.getElementById('intro-blob');
+        const blobContainer = document.getElementById('intro-blob-container');
 
         if (!bgPill || !staticLogo || !navbarCapsule) {
             overlay.style.opacity = '0';
@@ -75,49 +104,46 @@
         // Phase 1: Wait for 3D glass sphere to bounce in, then prepare smooth transition properties
         setTimeout(() => {
             bgPill.style.animation = 'none'; // Clear keyframe
-            bgPill.style.transition = `width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, border-radius 0.6s ${EASE}`;
+            bgPill.style.transition = `width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, border-radius 0.6s ${EASE}, padding 0.6s ${EASE}`;
             bgPill.style.width = '96px';
             bgPill.style.height = '96px';
             bgPill.style.margin = '-48px 0 0 -48px';
-
 
             // Phase 2: Fade in perfectly centered Logo Icon
             setTimeout(() => {
                 staticLogo.style.transition = 'opacity 0.4s ease';
                 staticLogo.style.opacity = '1';
 
-                // Phase 3: Move precisely to upper-left logo placement
+                // Phase 3: Morph cleanly into exact navigation bar pill shape & position
                 setTimeout(() => {
                     const navRect = navbarCapsule.getBoundingClientRect();
-                    const safeHeight = Math.min(navRect.height, 80); 
-                    const targetTop = navRect.top + (safeHeight / 2); 
-                    
                     const realLogo = navbarCapsule.querySelector('a') || navbarCapsule.querySelector('img');
                     const exactLogoLeft = realLogo ? realLogo.getBoundingClientRect().left : (navRect.left + 24);
 
-                    bgPill.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, border-radius 0.6s ${EASE}`;
+                    bgPill.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, border-radius 0.6s ${EASE}, padding 0.6s ${EASE}`;
                     staticLogo.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}`;
 
-                    // Move Pill to upper-left logo placement
-                    bgPill.style.top = `${targetTop}px`;
-                    bgPill.style.left = `${exactLogoLeft - 12}px`;
-                    bgPill.style.margin = `-${safeHeight / 2}px 0 0 0`; 
-                    bgPill.style.height = `${safeHeight}px`;
-                    bgPill.style.width = '175px'; 
+                    // Morph initial circle into exact navigation bar pill dimensions & position
+                    bgPill.style.top = `${navRect.top}px`;
+                    bgPill.style.left = `${navRect.left}px`;
+                    bgPill.style.margin = '0px'; 
+                    bgPill.style.height = `${navRect.height}px`;
+                    bgPill.style.width = `${navRect.width}px`;
+                    bgPill.style.borderRadius = '9999px';
 
-                    // Track backing intro blob precisely behind upper-left logo placement
-                    if (introBlob) {
-                        introBlob.style.top = `${targetTop}px`;
-                        introBlob.style.left = `${exactLogoLeft + 65}px`;
-                        introBlob.style.margin = '-48px 0 0 -48px';
+                    // Track multi-color randomized blob constellation smoothly behind logo placement in header
+                    if (blobContainer) {
+                        blobContainer.style.top = `${navRect.top + (navRect.height / 2)}px`;
+                        blobContainer.style.left = `${exactLogoLeft + 60}px`;
+                        blobContainer.style.margin = '-65px 0 0 -65px';
                     }
                     
-                    // Move Logo to upper-left position
-                    staticLogo.style.top = `${targetTop}px`;
+                    // Move Logo to upper-left logo position inside navigation bar
+                    staticLogo.style.top = `${navRect.top + (navRect.height / 2)}px`;
                     staticLogo.style.left = `${exactLogoLeft}px`;
                     staticLogo.style.margin = `-18px 0 0 0`;
 
-                    // Smoothly unroll the text alongside the logo
+                    // Smoothly unroll the text alongside the logo mark
                     const logoText = document.getElementById('intro-logo-text');
                     if (logoText) {
                         logoText.style.transition = `width 0.6s ${EASE}, opacity 0.6s ${EASE}`;
@@ -125,15 +151,14 @@
                         logoText.style.opacity = '1';
                     }
 
-
-                    // Phase 4: Settle precisely at upper-left logo placement
+                    // Phase 4: Settle at exact navbar pill shape
                     setTimeout(() => {
-                        bgPill.style.width = '175px';
+                        bgPill.style.width = `${navRect.width}px`;
 
-                        // Phase 5: Reveal Navigation Items & Cleanup, dissolving intro blob into section ambient glow
+                        // Phase 5: Reveal Navigation Items & Cleanup, dissolving blob constellation into ambient glow
                         setTimeout(() => {
-                            if (introBlob) {
-                                introBlob.style.opacity = '0';
+                            if (blobContainer) {
+                                blobContainer.style.opacity = '0';
                             }
                             navItems.forEach((item, idx) => {
                                 setTimeout(() => {
