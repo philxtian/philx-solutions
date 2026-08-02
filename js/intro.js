@@ -206,15 +206,16 @@
                     // Phase 4 + 5 unified: settle pill width AND launch orb sweep in the same tick.
                     // No intermediate pause – rAF reveal starts the moment the pill snaps to final width.
                     setTimeout(() => {
-                        bgPill.style.width = `${navRect.width}px`;
-
+                        // Re-measure pill at this exact moment (after it has morphed to nav position)
                         const pillRect  = bgPill.getBoundingClientRect();
                         const sweepDur  = 900; // ms – orb crosses pill interior
                         const orbSize   = 80;  // px – collapsed orb diameter
                         const orbRadius = orbSize / 2;
+                        const padLeft   = 8;   // px gap from left pill wall
                         const padRight  = 20;  // px gap from right pill wall
 
-                        const startLeft = exactLogoLeft;
+                        // Sweep from the pill's LEFT wall all the way to the RIGHT wall
+                        const startLeft = pillRect.left + padLeft;
                         const endLeft   = pillRect.right - orbRadius - padRight;
 
                         if (blobContainer) {
@@ -224,7 +225,7 @@
                                 if (b) b.style.animation = 'none';
                             }
 
-                            // Instant snap to tight orb at logo origin (transition:none prevents interpolation)
+                            // Instant snap to tight orb at pill LEFT WALL (transition:none prevents interpolation)
                             blobContainer.style.transition = 'none';
                             blobContainer.style.width   = `${orbSize}px`;
                             blobContainer.style.height  = `${orbSize}px`;
@@ -233,10 +234,10 @@
                             blobContainer.style.margin  = `-${orbRadius}px 0 0 -${orbRadius}px`;
                             blobContainer.style.opacity = '0.9';
 
-                            // Reflow: commit stable origin before enabling the sweep transition
+                            // Force reflow: commit stable origin before enabling the sweep transition
                             void blobContainer.offsetWidth;
 
-                            // Launch CSS sweep – rAF will read live position each frame
+                            // Launch CSS sweep from left → right wall
                             blobContainer.style.transition = `left ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease`;
                             blobContainer.style.left = `${endLeft}px`;
 
@@ -245,39 +246,44 @@
                         }
 
                         // Snapshot each item's left boundary before the sweep begins.
-                        // rAF fires the reveal the exact frame orbTrailX crosses that coordinate.
-                        const pending = new Set();
+                        // Use time-based linear lerp for orbTrailX — CSS transition positions
+                        // are NOT reliably readable via getBoundingClientRect() during animation.
+                        const pending = [];
                         navItems.forEach((item) => {
                             const r = item.getBoundingClientRect();
-                            pending.add({ item, triggerX: r.left });
+                            pending.push({ item, triggerX: r.left, revealed: false });
                         });
 
                         const sweepStart = performance.now();
+                        const sweepEase  = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // ease-in-out
                         let overlayFading = false;
 
                         function rafReveal(now) {
-                            if (pending.size === 0) return;
-
-                            const orbRect   = blobContainer ? blobContainer.getBoundingClientRect() : null;
-                            const orbTrailX = orbRect ? orbRect.left + orbRect.width : startLeft;
-
-                            pending.forEach((entry) => {
-                                if (orbTrailX >= entry.triggerX) {
-                                    entry.item.style.opacity   = '1';
-                                    entry.item.style.transform = 'translateY(0)';
-                                    pending.delete(entry);
-                                }
-                            });
-
                             const elapsed = now - sweepStart;
+                            const t = Math.min(elapsed / sweepDur, 1);
 
-                            if (pending.size === 0 || elapsed >= sweepDur + 50) {
-                                // Force-reveal any stragglers then begin overlay dissolve immediately
+                            // Time-based orb trail position: right edge of the sweeping orb
+                            const orbLeadX = startLeft + (endLeft - startLeft) * sweepEase(t) + orbSize;
+
+                            let allRevealed = true;
+                            for (const entry of pending) {
+                                if (!entry.revealed) {
+                                    if (orbLeadX >= entry.triggerX) {
+                                        entry.item.style.opacity   = '1';
+                                        entry.item.style.transform = 'translateY(0)';
+                                        entry.revealed = true;
+                                    } else {
+                                        allRevealed = false;
+                                    }
+                                }
+                            }
+
+                            if (allRevealed || elapsed >= sweepDur + 50) {
+                                // Force-reveal any stragglers then begin overlay dissolve
                                 pending.forEach(({ item }) => {
                                     item.style.opacity   = '1';
                                     item.style.transform = 'translateY(0)';
                                 });
-                                pending.clear();
 
                                 if (!overlayFading) {
                                     overlayFading = true;
