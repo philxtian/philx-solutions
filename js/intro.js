@@ -207,27 +207,26 @@
                     setTimeout(() => {
                         bgPill.style.width = `${navRect.width}px`;
 
-                        // Phase 5: Sweep the existing blob container L→R inside the pill to reveal nav items
+                        // Phase 5: rAF-driven real-time coordinate reveal –
+                        // nav items fade in the exact frame the orb's trailing edge crosses them.
                         setTimeout(() => {
-                            const pillRect   = bgPill.getBoundingClientRect();
-                            const sweepDur   = 900; // ms to cross the pill interior
-                            const orbSize    = 80;  // px – collapsed container diameter for the sweep orb
-                            const orbRadius  = orbSize / 2;
-                            const padRight   = 20;  // px gap from right pill edge so glow stays contained
+                            const pillRect  = bgPill.getBoundingClientRect();
+                            const sweepDur  = 900; // ms
+                            const orbSize   = 80;  // px – collapsed orb diameter
+                            const orbRadius = orbSize / 2;
+                            const padRight  = 20;  // px gap from right pill wall
 
-                            // Sweep origin: logo left edge (where blobContainer already sits after Phase 3)
-                            const startLeft  = exactLogoLeft;
-                            // Sweep destination: right pill boundary minus orb radius minus padding
-                            const endLeft    = pillRect.right - orbRadius - padRight;
+                            const startLeft = exactLogoLeft;
+                            const endLeft   = pillRect.right - orbRadius - padRight;
 
                             if (blobContainer) {
-                                // Stop all firefly loops – freeze the individual blobs in place
+                                // Stop firefly loops – freeze blobs before collapsing
                                 for (let i = 0; i < 3; i++) {
                                     const b = document.getElementById(`intro-blob-${i}`);
                                     if (b) b.style.animation = 'none';
                                 }
 
-                                // Collapse to a tight, focused orb centered on the logo position
+                                // Collapse to tight orb at logo origin (no transition – instant snap)
                                 blobContainer.style.transition = 'none';
                                 blobContainer.style.width   = `${orbSize}px`;
                                 blobContainer.style.height  = `${orbSize}px`;
@@ -236,35 +235,61 @@
                                 blobContainer.style.margin  = `-${orbRadius}px 0 0 -${orbRadius}px`;
                                 blobContainer.style.opacity = '0.9';
 
-                                // Force a reflow so the browser registers the new stable position
+                                // Reflow: commit new stable position before enabling transition
                                 void blobContainer.offsetWidth;
 
-                                // Sweep right – constrained to stay within the pill boundary
+                                // Kick off CSS transition sweep – eased motion the rAF will track
                                 blobContainer.style.transition = `left ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease`;
                                 blobContainer.style.left = `${endLeft}px`;
 
-                                // Fade out as it reaches the right edge
+                                // Dissolve orb at 80% of sweep travel
                                 setTimeout(() => {
                                     blobContainer.style.opacity = '0';
                                 }, sweepDur * 0.8);
                             }
 
-                            // Reveal each nav item precisely as the orb glow passes over its midpoint
+                            // Build a Set of un-revealed items; rAF polls live orb position each frame
+                            // and reveals each item the instant the orb trailing edge (center + radius)
+                            // crosses that item's left boundary – true coordinate matching regardless of easing.
+                            const pending = new Set();
                             navItems.forEach((item) => {
-                                const itemRect    = item.getBoundingClientRect();
-                                const itemMidX    = itemRect.left + itemRect.width / 2;
-                                // Map item midpoint to progress along the sweep track (startLeft → endLeft)
-                                const sweepTrack  = endLeft - startLeft;
-                                const orbProgress = sweepTrack > 0
-                                    ? Math.min(1, Math.max(0, (itemMidX - startLeft) / sweepTrack))
-                                    : 0;
-                                const revealAt    = orbProgress * sweepDur;
-
-                                setTimeout(() => {
-                                    item.style.opacity   = '1';
-                                    item.style.transform = 'translateY(0)';
-                                }, revealAt);
+                                const r = item.getBoundingClientRect();
+                                pending.add({ item, triggerX: r.left }); // reveal when orb trailing edge >= item.left
                             });
+
+                            const sweepStart = performance.now();
+
+                            function rafReveal(now) {
+                                if (pending.size === 0) return; // all revealed – stop polling
+
+                                // Read live orb center from DOM (reflects actual eased position)
+                                const orbRect    = blobContainer ? blobContainer.getBoundingClientRect() : null;
+                                const orbTrailX  = orbRect ? orbRect.left + orbRect.width : startLeft;
+
+                                pending.forEach((entry) => {
+                                    if (orbTrailX >= entry.triggerX) {
+                                        entry.item.style.opacity   = '1';
+                                        entry.item.style.transform = 'translateY(0)';
+                                        pending.delete(entry);
+                                    }
+                                });
+
+                                // Also guard with elapsed time so items are never permanently hidden
+                                // if blobContainer has been removed or rect returns zero
+                                const elapsed = now - sweepStart;
+                                if (elapsed < sweepDur + 50 && pending.size > 0) {
+                                    requestAnimationFrame(rafReveal);
+                                } else if (pending.size > 0) {
+                                    // Force-reveal any stragglers after sweep timeout
+                                    pending.forEach(({ item }) => {
+                                        item.style.opacity   = '1';
+                                        item.style.transform = 'translateY(0)';
+                                    });
+                                    pending.clear();
+                                }
+                            }
+
+                            requestAnimationFrame(rafReveal);
 
                             setTimeout(() => {
                                 overlay.style.opacity = '0';
