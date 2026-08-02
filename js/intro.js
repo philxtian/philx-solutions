@@ -130,20 +130,12 @@
             return;
         }
 
-        // Step A: Temporarily suppress the real nav's background/border so the dummy pill
-        // is the sole visible container throughout the sweep — removed on cleanup.
+        // Step A: Completely hide the real nav container so the dummy pill is the sole
+        // visible nav element throughout the intro — removed on Early Handoff in Phase 4.
         const hideNavStyle = document.createElement('style');
         hideNavStyle.id = 'philx-intro-hide-nav';
-        hideNavStyle.innerHTML = '#navbar-capsule { background: transparent !important; backdrop-filter: none !important; box-shadow: none !important; border: none !important; }';
+        hideNavStyle.innerHTML = '#navbar-capsule { opacity: 0 !important; pointer-events: none !important; }';
         document.head.appendChild(hideNavStyle);
-
-
-        // Hoist real logo reference so both Step A (hide) and Step C (restore) can reach it
-        const introRealLogo = navbarCapsule.querySelector('a') || navbarCapsule.querySelector('img');
-        if (introRealLogo) {
-            introRealLogo.style.opacity = '0';
-            introRealLogo.style.transition = 'opacity 0.4s ease';
-        }
 
         // Hide each nav item individually so the overlay background conceals them until the
         // orb sweeps over — opacity+transform keeps everything on the GPU compositor.
@@ -196,12 +188,8 @@
                     bgPill.style.left = `${navRect.left}px`;
                     bgPill.style.margin = '0px';
                     bgPill.style.height = `${navRect.height}px`;
-                    // Set full width immediately (overlay covers it) then clamp to scaleX(0)
-                    // so Phase 4 can expand it GPU-only from left-center anchor
                     bgPill.style.width = `${navRect.width}px`;
                     bgPill.style.borderRadius = '9999px';
-                    bgPill.style.transformOrigin = 'left center';
-                    bgPill.style.transform = 'scaleX(0)';
 
                     // Track multi-color randomized blob constellation smoothly behind logo placement in header
                     if (blobContainer) {
@@ -238,9 +226,11 @@
                         const orbSize = 60;
                         const padRight = 20;
 
-                        // Step B: Expand glass pill from left-center anchor — GPU scaleX, zero layout cost
-                        bgPill.style.transition = `transform ${sweepDur}ms ${EASE}`;
-                        bgPill.style.transform = 'scaleX(1)';
+                        // Early Handoff: Reveal real nav, instantly destroy dummy elements
+                        const hideNav = document.getElementById('philx-intro-hide-nav');
+                        if (hideNav) hideNav.remove();
+                        bgPill.style.display = 'none';
+                        staticLogo.style.display = 'none';
 
                         if (blobContainer) {
                             // Step B: Push orb above the frosted glass dummy pill
@@ -280,20 +270,13 @@
                             item.style.transform = 'translateY(0)';
                         });
 
-                        // Remove overlay, restore real nav, and clean up inline styles
+                        // Remove overlay and clean up nav item inline styles
                         setTimeout(() => {
                             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                            const hideNav = document.getElementById('philx-intro-hide-nav');
-                            if (hideNav) hideNav.remove();
                             navItems.forEach(item => {
                                 item.style.transition = '';
                                 item.style.transform = '';
                             });
-                            // Restore real logo and clear bgPill GPU transform
-                            if (introRealLogo) introRealLogo.style.opacity = '1';
-                            bgPill.style.transition = '';
-                            bgPill.style.transform = '';
-                            bgPill.style.transformOrigin = '';
                         }, sweepDur + 350);
 
                     }, 600);
