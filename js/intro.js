@@ -252,11 +252,10 @@
                             const scale = orbSize / 130;
 
                             // 3. GPU-accelerated sweep — compositor-threaded, zero layout recalculations
+                            // Opacity decays from 100% → 0% across the full travel distance (no abrupt dissolve)
                             blobContainer.style.transition = `transform ${sweepDur}ms ${EASE}, opacity ${sweepDur}ms ease`;
                             blobContainer.style.transform = `translate3d(${translateX}px, 0, 0) scale(${scale})`;
-
-                            // Fade out slightly before the end of the sweep
-                            setTimeout(() => { blobContainer.style.opacity = '0'; }, sweepDur * 0.8);
+                            blobContainer.style.opacity = '0';
                         }
 
                         // Premium stagger: delay step is sized so the last item finishes just
