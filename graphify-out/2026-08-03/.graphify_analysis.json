@@ -24,7 +24,6 @@
       "js_animations",
       "js_animations_initadaptivenavbar",
       "js_animations_initall",
-      "js_animations_initliquidnavpill",
       "js_animations_initmagneticelements",
       "js_animations_initscrollreveals"
     ],
@@ -107,7 +106,7 @@
   "cohesion": {
     "0": 0.25,
     "1": 0.25,
-    "2": 0.6,
+    "2": 0.7,
     "3": 0.6,
     "4": 0.5,
     "5": 0.8333333333333334,
@@ -132,7 +131,7 @@
     {
       "id": "js_animations_initall",
       "label": "initAll()",
-      "degree": 5
+      "degree": 4
     },
     {
       "id": "agents_md_philx_solutions",
@@ -170,13 +169,13 @@
       "degree": 2
     },
     {
-      "id": "js_wp_api_setloadingstate",
-      "label": "setLoadingState()",
+      "id": "js_animations_initscrollreveals",
+      "label": "initScrollReveals()",
       "degree": 2
     },
     {
-      "id": "js_wp_api_rendererrormessage",
-      "label": "renderErrorMessage()",
+      "id": "js_animations_initmagneticelements",
+      "label": "initMagneticElements()",
       "degree": 2
     }
   ],
