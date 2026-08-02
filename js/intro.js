@@ -130,6 +130,13 @@
             return;
         }
 
+        // Step A: Temporarily suppress the real nav's background/border so the dummy pill
+        // is the sole visible container throughout the sweep — removed on cleanup.
+        const hideNavStyle = document.createElement('style');
+        hideNavStyle.id = 'philx-intro-hide-nav';
+        hideNavStyle.innerHTML = '#navbar-capsule { background: transparent !important; backdrop-filter: none !important; box-shadow: none !important; border: none !important; }';
+        document.head.appendChild(hideNavStyle);
+
         // Hide each nav item individually so the overlay background conceals them until the
         // orb sweeps over — opacity+transform keeps everything on the GPU compositor.
         const navItems = navbarCapsule.querySelectorAll('.nav-link, .nav-cta, .nav-mobile-btn');
@@ -181,7 +188,7 @@
                     bgPill.style.left = `${navRect.left}px`;
                     bgPill.style.margin = '0px';
                     bgPill.style.height = `${navRect.height}px`;
-                    bgPill.style.width = `${navRect.width}px`;
+                    bgPill.style.width = `${navRect.height}px`; // Stay a circle — pill unrolls in Phase 4
                     bgPill.style.borderRadius = '9999px';
 
                     // Track multi-color randomized blob constellation smoothly behind logo placement in header
@@ -220,6 +227,10 @@
                         const orbSize = 60;
                         const padRight = 20;
 
+                        // Step C: Unroll the dummy pill to full nav width in exact sync with the orb sweep
+                        bgPill.style.transition = `width ${sweepDur}ms ${EASE}`;
+                        bgPill.style.width = `${pillRect.width}px`;
+
                         if (blobContainer) {
                             // Stop fireflies
                             for (let i = 0; i < 3; i++) {
@@ -255,9 +266,12 @@
                             item.style.transform = 'translateY(0)';
                         });
 
-                        // Remove overlay and clean up all inline nav-item styles once sweep settles
+                        // Remove overlay, restore real nav background, and clean up nav-item styles
                         setTimeout(() => {
                             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                            // Step D: Hand background duties back to the real DOM seamlessly
+                            const hideNav = document.getElementById('philx-intro-hide-nav');
+                            if (hideNav) hideNav.remove();
                             navItems.forEach(item => {
                                 item.style.transition = '';
                                 item.style.transform = '';
