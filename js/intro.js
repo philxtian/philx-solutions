@@ -50,6 +50,14 @@
             88%  { transform: translate3d( 10px,  18px, 0) scale(1.03); opacity: 0.70; }
             100% { transform: translate3d(0px,    0px,  0) scale(1.00); opacity: 0.80; }
         }
+
+        /* Horizontal orb sweep across the pill during nav reveal */
+        @keyframes philx-orb-sweep {
+            0%   { transform: translateX(0px);              opacity: 0;    }
+            6%   { transform: translateX(0px);              opacity: 1;    }
+            88%  { transform: translateX(var(--sweep-dist)); opacity: 0.85; }
+            100% { transform: translateX(var(--sweep-dist)); opacity: 0;   }
+        }
     `;
     document.head.appendChild(style);
 
@@ -106,6 +114,8 @@
                 </div>
             </div>
         </div>
+        <!-- Glowing orb that sweeps L→R across the pill during nav reveal (hidden until Phase 5) -->
+        <div id="intro-sweep-orb" style="position:fixed;z-index:99998;pointer-events:none;opacity:0;width:56px;height:56px;border-radius:50%;background:radial-gradient(circle, rgba(34,211,238,0.95) 0%, rgba(20,184,166,0.6) 40%, rgba(6,182,212,0.15) 70%, transparent 100%);filter:blur(14px);mix-blend-mode:screen;will-change:transform,opacity;"></div>
     `;
 
     function mountOverlay() {
@@ -206,16 +216,34 @@
                     setTimeout(() => {
                         bgPill.style.width = `${navRect.width}px`;
 
-                        // Phase 5: Reveal Navigation Items & Cleanup, dissolving blob constellation into ambient glow
+                        // Phase 5: Horizontal orb sweep reveals nav items as glow passes over each one
                         setTimeout(() => {
-                            if (blobContainer) {
-                                blobContainer.style.opacity = '0';
+                            if (blobContainer) blobContainer.style.opacity = '0';
+
+                            const sweepOrb  = document.getElementById('intro-sweep-orb');
+                            const pillRect  = bgPill.getBoundingClientRect();
+                            const sweepDur  = 900; // ms for the orb to cross full pill width
+                            const orbW      = 56;  // orb element width (matches inline style above)
+
+                            // Position orb at the left edge of the pill, vertically centered
+                            if (sweepOrb) {
+                                sweepOrb.style.top  = `${pillRect.top  + pillRect.height / 2 - orbW / 2}px`;
+                                sweepOrb.style.left = `${pillRect.left - orbW / 2}px`;
+                                sweepOrb.style.setProperty('--sweep-dist', `${pillRect.width}px`);
+                                sweepOrb.style.animation = `philx-orb-sweep ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1) forwards`;
                             }
-                            navItems.forEach((item, idx) => {
+
+                            // Reveal each nav item exactly when the orb's center passes over it
+                            navItems.forEach((item) => {
+                                const itemRect    = item.getBoundingClientRect();
+                                const itemMidX    = itemRect.left + itemRect.width / 2;
+                                const orbProgress = (itemMidX - pillRect.left) / pillRect.width; // 0→1
+                                const revealAt    = Math.max(0, orbProgress) * sweepDur;
+
                                 setTimeout(() => {
-                                    item.style.opacity = '1';
+                                    item.style.opacity   = '1';
                                     item.style.transform = 'translateY(0)';
-                                }, idx * 75); 
+                                }, revealAt);
                             });
 
                             setTimeout(() => {
@@ -223,12 +251,12 @@
                                 setTimeout(() => {
                                     if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
                                     navItems.forEach(item => {
-                                        item.style.opacity = '';
+                                        item.style.opacity   = '';
                                         item.style.transform = '';
                                         item.style.transition = '';
                                     });
                                 }, 750);
-                            }, 650);
+                            }, sweepDur + 200);
                         }, 400); 
                     }, 600); 
                 }, 900); // Hold time to admire the centered logo before moving
