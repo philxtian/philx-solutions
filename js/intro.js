@@ -130,12 +130,10 @@
             return;
         }
 
-        const navItems = navbarCapsule.querySelectorAll('.nav-link, .nav-cta, .nav-mobile-btn');
-        navItems.forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(10px)';
-            item.style.transition = `opacity 0.4s ${EASE}, transform 0.4s ${EASE}`;
-        });
+        // Step B: Initialize navbarCapsule with clip-path fully closed (right-to-left clipping).
+        // This hides all nav text behind a GPU-composited mask — zero layout thrashing.
+        navbarCapsule.style.clipPath = 'inset(0 100% 0 0)';
+        navbarCapsule.style.webkitClipPath = 'inset(0 100% 0 0)';
 
         // Phase 1: Wait for 3D glass sphere to bounce in, then start firefly drift on each blob
         setTimeout(() => {
@@ -203,6 +201,12 @@
                         logoText.style.opacity = '1';
                     }
 
+                    // Step A: Dissolve the overlay's black background so the real DOM nav is
+                    // exposed underneath while the glowing orb remains visible on top.
+                    // This must happen before Phase 4 so clip-path can do its reveal work.
+                    overlay.style.transition = 'background-color 0.5s ease';
+                    overlay.style.backgroundColor = 'transparent';
+
                     // Phase 4 + 5 unified: fluid CSS sweep + staggered nav reveal (no rAF polling).
                     // The blob transitions smoothly from its current position to the pill's right wall
                     // while simultaneously collapsing in size. Nav items are revealed via index-based
@@ -233,25 +237,21 @@
                             setTimeout(() => { blobContainer.style.opacity = '0'; }, sweepDur * 0.8);
                         }
 
-                        // Staggered reveal: each nav item's delay is calculated so they flow
-                        // left to right in perfect sync with the orb sweep arc.
-                        const staggerStep = (sweepDur * 0.8) / (navItems.length || 1);
-                        navItems.forEach((item, index) => {
-                            item.style.transition = `opacity 0.4s ${EASE} ${index * staggerStep}ms, transform 0.4s ${EASE} ${index * staggerStep}ms`;
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateY(0)';
-                        });
+                        // Step C: GPU-accelerated clip-path sweep — replaces all navItems opacity forEach loops.
+                        // Animates the nav container's clip window from fully closed (right edge) to fully open
+                        // in exactly sweepDur ms, perfectly synchronized with the orb's horizontal travel.
+                        navbarCapsule.style.transition = `clip-path ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-clip-path ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+                        navbarCapsule.style.clipPath = 'inset(0 0% 0 0)';
+                        navbarCapsule.style.webkitClipPath = 'inset(0 0% 0 0)';
 
-                        // Dissolve overlay after sweep completes, then clean up inline styles
+                        // Remove overlay entirely after sweep completes, then clean up clip-path
                         setTimeout(() => {
-                            overlay.style.opacity = '0';
-                            setTimeout(() => {
-                                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                                navItems.forEach(item => {
-                                    item.style.transition = '';
-                                });
-                            }, 750);
-                        }, sweepDur + 300);
+                            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                            // Restore navbarCapsule — clear clip-path so nothing interferes with normal rendering
+                            navbarCapsule.style.transition = '';
+                            navbarCapsule.style.clipPath = '';
+                            navbarCapsule.style.webkitClipPath = '';
+                        }, sweepDur + 350);
 
                     }, 600);
                 }, 900); // Hold time to admire the centered logo before moving
