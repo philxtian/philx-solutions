@@ -170,7 +170,7 @@
             });
 
             // Phase 2 merged: Fade in Logo Icon instantly as bounce settles
-            staticLogo.style.transition = 'opacity 0.4s ease';
+            staticLogo.style.transition = 'opacity 0.15s ease';
             staticLogo.style.opacity = '1';
 
             // Phase 3: Morph cleanly into exact navigation bar pill shape & position
@@ -280,7 +280,7 @@
 
                 }, 600);
             }, 1200); // Hold time to admire the centered logo before moving
-        }, 800); // Wait for initial tiny ball bounce animation to finish
+        }, 700); // Wait for initial tiny ball bounce animation to finish
     }
 
     function init() {
