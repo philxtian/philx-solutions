@@ -196,7 +196,7 @@
                         blobContainer.style.top = `${navRect.top + (navRect.height / 2)}px`;
                         blobContainer.style.left = `${exactLogoLeft + 60}px`;
                         blobContainer.style.margin = '-65px 0 0 -65px';
-                        blobContainer.style.opacity = '0.8'; // Dim the orb early for a subtler presence
+                        blobContainer.style.opacity = '0.65'; // Dim the orb early for a subtler presence
                     }
 
                     // Move Logo to upper-left logo position inside navigation bar
