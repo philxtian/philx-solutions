@@ -137,10 +137,6 @@
         hideNavStyle.innerHTML = '#navbar-capsule { background: transparent !important; backdrop-filter: none !important; box-shadow: none !important; border: none !important; }';
         document.head.appendChild(hideNavStyle);
 
-        // Elevate real nav above the overlay so text isn't blurred, disable clicks during intro
-        navbarCapsule.style.position = 'relative';
-        navbarCapsule.style.zIndex = '100000';
-        navbarCapsule.style.pointerEvents = 'none';
 
         // Hoist real logo reference so both Step A (hide) and Step C (restore) can reach it
         const introRealLogo = navbarCapsule.querySelector('a') || navbarCapsule.querySelector('img');
@@ -200,8 +196,12 @@
                     bgPill.style.left = `${navRect.left}px`;
                     bgPill.style.margin = '0px';
                     bgPill.style.height = `${navRect.height}px`;
-                    bgPill.style.width = `${navRect.height}px`; // Stay a circle — pill unrolls in Phase 4
+                    // Set full width immediately (overlay covers it) then clamp to scaleX(0)
+                    // so Phase 4 can expand it GPU-only from left-center anchor
+                    bgPill.style.width = `${navRect.width}px`;
                     bgPill.style.borderRadius = '9999px';
+                    bgPill.style.transformOrigin = 'left center';
+                    bgPill.style.transform = 'scaleX(0)';
 
                     // Track multi-color randomized blob constellation smoothly behind logo placement in header
                     if (blobContainer) {
@@ -238,10 +238,9 @@
                         const orbSize = 60;
                         const padRight = 20;
 
-                        // Step C (cleanup): pillRect removed — navRect is the authoritative target bounds
-                        // Step A: Unroll the dummy pill to the real nav's full width in sync with the sweep
-                        bgPill.style.transition = `width ${sweepDur}ms ${EASE}`;
-                        bgPill.style.width = `${navRect.width}px`;
+                        // Step B: Expand glass pill from left-center anchor — GPU scaleX, zero layout cost
+                        bgPill.style.transition = `transform ${sweepDur}ms ${EASE}`;
+                        bgPill.style.transform = 'scaleX(1)';
 
                         if (blobContainer) {
                             // Step B: Push orb above the frosted glass dummy pill
@@ -281,21 +280,20 @@
                             item.style.transform = 'translateY(0)';
                         });
 
-                        // Remove overlay, restore real nav, and clean up nav-item styles
+                        // Remove overlay, restore real nav, and clean up inline styles
                         setTimeout(() => {
                             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                            // Step D: Hand background duties back to the real DOM seamlessly
                             const hideNav = document.getElementById('philx-intro-hide-nav');
                             if (hideNav) hideNav.remove();
                             navItems.forEach(item => {
                                 item.style.transition = '';
                                 item.style.transform = '';
                             });
-                            // Step C: Restore real logo visibility and nav interactivity
+                            // Restore real logo and clear bgPill GPU transform
                             if (introRealLogo) introRealLogo.style.opacity = '1';
-                            navbarCapsule.style.zIndex = '';
-                            navbarCapsule.style.position = '';
-                            navbarCapsule.style.pointerEvents = '';
+                            bgPill.style.transition = '';
+                            bgPill.style.transform = '';
+                            bgPill.style.transformOrigin = '';
                         }, sweepDur + 350);
 
                     }, 600);
