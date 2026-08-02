@@ -1,11 +1,11 @@
 (function () {
     'use strict';
-    
+
     if (window.PHILX_INTRO_ACTIVE) return;
     window.PHILX_INTRO_ACTIVE = true;
 
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
-    
+
     // Inject Custom Keyframes: initial bounce + 3 independent firefly drift curves
     const style = document.createElement('style');
     style.innerHTML = `
@@ -114,7 +114,7 @@
             (document.body || document.documentElement).appendChild(overlay);
         }
     }
-    
+
     if (document.body) mountOverlay();
     else document.addEventListener('DOMContentLoaded', mountOverlay);
 
@@ -148,8 +148,8 @@
             // Kick off independent firefly drift for each blob immediately after bounce settles.
             // Staggered delays desynchronize them so they feel like separate living creatures.
             const fireflyAnims = [
-                { name: 'philx-firefly-a', duration: '3.2s', delay: '0s'    },
-                { name: 'philx-firefly-b', duration: '2.6s', delay: '0.4s'  },
+                { name: 'philx-firefly-a', duration: '3.2s', delay: '0s' },
+                { name: 'philx-firefly-b', duration: '2.6s', delay: '0.4s' },
                 { name: 'philx-firefly-c', duration: '4.1s', delay: '0.15s' }
             ];
             fireflyAnims.forEach((cfg, i) => {
@@ -178,7 +178,7 @@
                     // Morph initial circle into exact navigation bar pill dimensions & position
                     bgPill.style.top = `${navRect.top}px`;
                     bgPill.style.left = `${navRect.left}px`;
-                    bgPill.style.margin = '0px'; 
+                    bgPill.style.margin = '0px';
                     bgPill.style.height = `${navRect.height}px`;
                     bgPill.style.width = `${navRect.width}px`;
                     bgPill.style.borderRadius = '9999px';
@@ -189,7 +189,7 @@
                         blobContainer.style.left = `${exactLogoLeft + 60}px`;
                         blobContainer.style.margin = '-65px 0 0 -65px';
                     }
-                    
+
                     // Move Logo to upper-left logo position inside navigation bar
                     staticLogo.style.top = `${navRect.top + (navRect.height / 2)}px`;
                     staticLogo.style.left = `${exactLogoLeft}px`;
@@ -207,16 +207,20 @@
                     // No intermediate pause – rAF reveal starts the moment the pill snaps to final width.
                     setTimeout(() => {
                         // Re-measure pill at this exact moment (after it has morphed to nav position)
-                        const pillRect  = bgPill.getBoundingClientRect();
-                        const sweepDur  = 900; // ms – orb crosses pill interior
-                        const orbSize   = 80;  // px – collapsed orb diameter
+                        const pillRect = bgPill.getBoundingClientRect();
+                        const sweepDur = 900; // ms – orb crosses pill interior
+                        const orbSize = 80;  // px – collapsed orb diameter
                         const orbRadius = orbSize / 2;
-                        const padLeft   = 8;   // px gap from left pill wall
-                        const padRight  = 20;  // px gap from right pill wall
+                        const padRight = 20;  // px gap from right pill wall
 
-                        // Sweep from the pill's LEFT wall all the way to the RIGHT wall
-                        const startLeft = pillRect.left + padLeft;
-                        const endLeft   = pillRect.right - orbRadius - padRight;
+                        // Anchor sweep start to the first nav item so the orb light
+                        // begins exactly where the menu links are, not the logo edge.
+                        const firstItemRect = navItems.length > 0 ? navItems[0].getBoundingClientRect() : null;
+                        const startLeft = firstItemRect ? firstItemRect.left - orbRadius : pillRect.left + 100;
+
+                        // End at the last nav item's right edge (or fall back to pill right wall)
+                        const lastItemRect = navItems.length > 0 ? navItems[navItems.length - 1].getBoundingClientRect() : null;
+                        const endLeft = lastItemRect ? lastItemRect.right - orbRadius : pillRect.right - orbRadius - padRight;
 
                         if (blobContainer) {
                             // Stop firefly loops – freeze blobs before collapsing to orb shape
@@ -227,11 +231,11 @@
 
                             // Instant snap to tight orb at pill LEFT WALL (transition:none prevents interpolation)
                             blobContainer.style.transition = 'none';
-                            blobContainer.style.width   = `${orbSize}px`;
-                            blobContainer.style.height  = `${orbSize}px`;
-                            blobContainer.style.top     = `${pillRect.top + pillRect.height / 2}px`;
-                            blobContainer.style.left    = `${startLeft}px`;
-                            blobContainer.style.margin  = `-${orbRadius}px 0 0 -${orbRadius}px`;
+                            blobContainer.style.width = `${orbSize}px`;
+                            blobContainer.style.height = `${orbSize}px`;
+                            blobContainer.style.top = `${pillRect.top + pillRect.height / 2}px`;
+                            blobContainer.style.left = `${startLeft}px`;
+                            blobContainer.style.margin = `-${orbRadius}px 0 0 -${orbRadius}px`;
                             blobContainer.style.opacity = '0.9';
 
                             // Force reflow: commit stable origin before enabling the sweep transition
@@ -255,7 +259,7 @@
                         });
 
                         const sweepStart = performance.now();
-                        const sweepEase  = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // ease-in-out
+                        const sweepEase = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // ease-in-out
                         let overlayFading = false;
 
                         function rafReveal(now) {
@@ -269,7 +273,7 @@
                             for (const entry of pending) {
                                 if (!entry.revealed) {
                                     if (orbLeadX >= entry.triggerX) {
-                                        entry.item.style.opacity   = '1';
+                                        entry.item.style.opacity = '1';
                                         entry.item.style.transform = 'translateY(0)';
                                         entry.revealed = true;
                                     } else {
@@ -281,7 +285,7 @@
                             if (allRevealed || elapsed >= sweepDur + 50) {
                                 // Force-reveal any stragglers then begin overlay dissolve
                                 pending.forEach(({ item }) => {
-                                    item.style.opacity   = '1';
+                                    item.style.opacity = '1';
                                     item.style.transform = 'translateY(0)';
                                 });
 
@@ -291,7 +295,7 @@
                                     setTimeout(() => {
                                         if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
                                         navItems.forEach(item => {
-                                            item.style.opacity   = '';
+                                            item.style.opacity = '';
                                             item.style.transform = '';
                                             item.style.transition = '';
                                         });
@@ -304,7 +308,7 @@
 
                         // Start rAF immediately – no additional setTimeout wrapper
                         requestAnimationFrame(rafReveal);
-                    }, 600); 
+                    }, 600);
                 }, 900); // Hold time to admire the centered logo before moving
             }, 400); // Wait for circle to expand before showing logo
         }, 800); // Wait for initial tiny ball bounce animation to finish
