@@ -4,6 +4,12 @@
     if (window.PHILX_INTRO_ACTIVE) return;
     window.PHILX_INTRO_ACTIVE = true;
 
+    // Force scroll to top on refresh to preserve the cinematic intro experience
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
     // Inject Custom Keyframes: initial bounce + 3 independent firefly drift curves
