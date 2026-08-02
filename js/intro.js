@@ -130,10 +130,13 @@
             return;
         }
 
-        // Step B: Initialize navbarCapsule with clip-path fully closed (right-to-left clipping).
-        // This hides all nav text behind a GPU-composited mask — zero layout thrashing.
-        navbarCapsule.style.clipPath = 'inset(0 100% 0 0)';
-        navbarCapsule.style.webkitClipPath = 'inset(0 100% 0 0)';
+        // Hide each nav item individually so the overlay background conceals them until the
+        // orb sweeps over — opacity+transform keeps everything on the GPU compositor.
+        const navItems = navbarCapsule.querySelectorAll('.nav-link, .nav-cta, .nav-mobile-btn');
+        navItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(8px)';
+        });
 
         // Phase 1: Wait for 3D glass sphere to bounce in, then start firefly drift on each blob
         setTimeout(() => {
@@ -241,17 +244,24 @@
                             setTimeout(() => { blobContainer.style.opacity = '0'; }, sweepDur * 0.8);
                         }
 
-                        // GPU-accelerated clip-path sweep for the navigation text
-                        navbarCapsule.style.transition = `clip-path ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-clip-path ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-                        navbarCapsule.style.clipPath = 'inset(0 0% 0 0)';
-                        navbarCapsule.style.webkitClipPath = 'inset(0 0% 0 0)';
+                        // Premium stagger: delay step is sized so the last item finishes just
+                        // before the orb fades, keeping the reveal locked to the sweep arc.
+                        const staggerStep = (sweepDur * 0.75) / (navItems.length || 1);
 
-                        // Remove overlay entirely after sweep completes, then clean up clip-path
+                        navItems.forEach((item, index) => {
+                            // Soft fade-up timed so each item appears exactly as the light passes
+                            item.style.transition = `opacity 0.5s ${EASE} ${index * staggerStep}ms, transform 0.5s ${EASE} ${index * staggerStep}ms`;
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        });
+
+                        // Remove overlay and clean up all inline nav-item styles once sweep settles
                         setTimeout(() => {
                             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                            navbarCapsule.style.transition = '';
-                            navbarCapsule.style.clipPath = '';
-                            navbarCapsule.style.webkitClipPath = '';
+                            navItems.forEach(item => {
+                                item.style.transition = '';
+                                item.style.transform = '';
+                            });
                         }, sweepDur + 350);
 
                     }, 600);
