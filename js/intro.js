@@ -215,9 +215,7 @@
                         const pillRect = bgPill.getBoundingClientRect();
                         const sweepDur = 900;
                         const orbSize = 60;
-                        const orbRadius = orbSize / 2;
                         const padRight = 20;
-                        const endLeft = pillRect.right - orbRadius - padRight;
 
                         if (blobContainer) {
                             // Stop fireflies
@@ -226,20 +224,24 @@
                                 if (b) b.style.animation = 'none';
                             }
 
-                            // Smoothly sweep and collapse simultaneously — no transition:none jump
-                            blobContainer.style.transition = `left ${sweepDur}ms ${EASE}, width ${sweepDur}ms ${EASE}, height ${sweepDur}ms ${EASE}, margin ${sweepDur}ms ${EASE}, opacity ${sweepDur}ms ease`;
-                            blobContainer.style.left = `${endLeft}px`;
-                            blobContainer.style.width = `${orbSize}px`;
-                            blobContainer.style.height = `${orbSize}px`;
-                            blobContainer.style.margin = `-${orbRadius}px 0 0 -${orbRadius}px`;
+                            // 1. Calculate the exact delta for the GPU transform — read layout once, write never
+                            const blobRect = blobContainer.getBoundingClientRect();
+                            const currentCenterX = blobRect.left + (blobRect.width / 2);
+                            const targetCenterX = pillRect.right - (orbSize / 2) - padRight;
+                            const translateX = targetCenterX - currentCenterX;
+
+                            // 2. Scale factor: blobContainer is 130px wide, collapse to orbSize
+                            const scale = orbSize / 130;
+
+                            // 3. GPU-accelerated sweep — compositor-threaded, zero layout recalculations
+                            blobContainer.style.transition = `transform ${sweepDur}ms ${EASE}, opacity ${sweepDur}ms ease`;
+                            blobContainer.style.transform = `translate3d(${translateX}px, 0, 0) scale(${scale})`;
 
                             // Fade out slightly before the end of the sweep
                             setTimeout(() => { blobContainer.style.opacity = '0'; }, sweepDur * 0.8);
                         }
 
-                        // Step C: GPU-accelerated clip-path sweep — replaces all navItems opacity forEach loops.
-                        // Animates the nav container's clip window from fully closed (right edge) to fully open
-                        // in exactly sweepDur ms, perfectly synchronized with the orb's horizontal travel.
+                        // GPU-accelerated clip-path sweep for the navigation text
                         navbarCapsule.style.transition = `clip-path ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-clip-path ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1)`;
                         navbarCapsule.style.clipPath = 'inset(0 0% 0 0)';
                         navbarCapsule.style.webkitClipPath = 'inset(0 0% 0 0)';
@@ -247,7 +249,6 @@
                         // Remove overlay entirely after sweep completes, then clean up clip-path
                         setTimeout(() => {
                             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                            // Restore navbarCapsule — clear clip-path so nothing interferes with normal rendering
                             navbarCapsule.style.transition = '';
                             navbarCapsule.style.clipPath = '';
                             navbarCapsule.style.webkitClipPath = '';
