@@ -6,14 +6,49 @@
 
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
     
-    // Inject Custom Keyframes for initial tiny ball bounce
+    // Inject Custom Keyframes: initial bounce + 3 independent firefly drift curves
     const style = document.createElement('style');
     style.innerHTML = `
         @keyframes philx-bounce {
-            0% { transform: scale(0); opacity: 0; }
-            60% { transform: scale(1.3); opacity: 1; }
-            80% { transform: scale(0.85); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
+            0%   { transform: scale(0);    opacity: 0; }
+            60%  { transform: scale(1.3);  opacity: 1; }
+            80%  { transform: scale(0.85); opacity: 1; }
+            100% { transform: scale(1);    opacity: 1; }
+        }
+
+        /* Firefly A – lazy arc, slow breathing */
+        @keyframes philx-firefly-a {
+            0%   { transform: translate3d(0px,    0px,   0) scale(1.00); opacity: 0.90; }
+            15%  { transform: translate3d(-9px,  -14px,  0) scale(1.06); opacity: 0.75; }
+            30%  { transform: translate3d( 6px,  -22px,  0) scale(0.94); opacity: 0.95; }
+            48%  { transform: translate3d( 14px,  -8px,  0) scale(1.10); opacity: 0.70; }
+            63%  { transform: translate3d( 4px,   10px,  0) scale(0.97); opacity: 0.88; }
+            78%  { transform: translate3d(-12px,  16px,  0) scale(1.04); opacity: 0.78; }
+            90%  { transform: translate3d(-16px,  -4px,  0) scale(0.92); opacity: 0.92; }
+            100% { transform: translate3d(0px,    0px,   0) scale(1.00); opacity: 0.90; }
+        }
+
+        /* Firefly B – tighter jitter, faster opacity flicker */
+        @keyframes philx-firefly-b {
+            0%   { transform: translate3d(0px,   0px,  0) scale(1.00); opacity: 0.85; }
+            12%  { transform: translate3d( 11px, -10px, 0) scale(1.08); opacity: 0.60; }
+            25%  { transform: translate3d( 18px,  6px,  0) scale(0.92); opacity: 0.90; }
+            40%  { transform: translate3d( 8px,  18px,  0) scale(1.12); opacity: 0.55; }
+            55%  { transform: translate3d(-10px,  12px, 0) scale(0.96); opacity: 0.88; }
+            70%  { transform: translate3d(-18px, -6px,  0) scale(1.05); opacity: 0.65; }
+            85%  { transform: translate3d(-6px,  -16px, 0) scale(0.90); opacity: 0.95; }
+            100% { transform: translate3d(0px,   0px,  0) scale(1.00); opacity: 0.85; }
+        }
+
+        /* Firefly C – wide elliptical sweep, slow pulse */
+        @keyframes philx-firefly-c {
+            0%   { transform: translate3d(0px,    0px,  0) scale(1.00); opacity: 0.80; }
+            20%  { transform: translate3d(-14px,  12px, 0) scale(1.07); opacity: 0.65; }
+            38%  { transform: translate3d(-20px, -10px, 0) scale(0.95); opacity: 0.92; }
+            55%  { transform: translate3d(  2px, -20px, 0) scale(1.09); opacity: 0.58; }
+            72%  { transform: translate3d( 16px, -6px,  0) scale(0.93); opacity: 0.88; }
+            88%  { transform: translate3d( 10px,  18px, 0) scale(1.03); opacity: 0.70; }
+            100% { transform: translate3d(0px,    0px,  0) scale(1.00); opacity: 0.80; }
         }
     `;
     document.head.appendChild(style);
@@ -101,13 +136,29 @@
             item.style.transition = `opacity 0.4s ${EASE}, transform 0.4s ${EASE}`;
         });
 
-        // Phase 1: Wait for 3D glass sphere to bounce in, then prepare smooth transition properties
+        // Phase 1: Wait for 3D glass sphere to bounce in, then start firefly drift on each blob
         setTimeout(() => {
-            bgPill.style.animation = 'none'; // Clear keyframe
+            bgPill.style.animation = 'none'; // Clear bounce keyframe
             bgPill.style.transition = `width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, border-radius 0.6s ${EASE}, padding 0.6s ${EASE}`;
             bgPill.style.width = '96px';
             bgPill.style.height = '96px';
             bgPill.style.margin = '-48px 0 0 -48px';
+
+            // Kick off independent firefly drift for each blob immediately after bounce settles.
+            // Staggered delays desynchronize them so they feel like separate living creatures.
+            const fireflyAnims = [
+                { name: 'philx-firefly-a', duration: '3.2s', delay: '0s'    },
+                { name: 'philx-firefly-b', duration: '2.6s', delay: '0.4s'  },
+                { name: 'philx-firefly-c', duration: '4.1s', delay: '0.15s' }
+            ];
+            fireflyAnims.forEach((cfg, i) => {
+                const blob = document.getElementById(`intro-blob-${i}`);
+                if (blob) {
+                    // Override any morph class animation with the firefly drift curve,
+                    // keeping it looping until the overlay dissolves.
+                    blob.style.animation = `${cfg.name} ${cfg.duration} ease-in-out ${cfg.delay} infinite`;
+                }
+            });
 
             // Phase 2: Fade in perfectly centered Logo Icon
             setTimeout(() => {
