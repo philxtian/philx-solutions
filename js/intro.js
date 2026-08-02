@@ -203,106 +203,101 @@
                         logoText.style.opacity = '1';
                     }
 
-                    // Phase 4: Settle at exact navbar pill shape
+                    // Phase 4 + 5 unified: settle pill width AND launch orb sweep in the same tick.
+                    // No intermediate pause – rAF reveal starts the moment the pill snaps to final width.
                     setTimeout(() => {
                         bgPill.style.width = `${navRect.width}px`;
 
-                        // Phase 5: rAF-driven real-time coordinate reveal –
-                        // nav items fade in the exact frame the orb's trailing edge crosses them.
-                        setTimeout(() => {
-                            const pillRect  = bgPill.getBoundingClientRect();
-                            const sweepDur  = 900; // ms
-                            const orbSize   = 80;  // px – collapsed orb diameter
-                            const orbRadius = orbSize / 2;
-                            const padRight  = 20;  // px gap from right pill wall
+                        const pillRect  = bgPill.getBoundingClientRect();
+                        const sweepDur  = 900; // ms – orb crosses pill interior
+                        const orbSize   = 80;  // px – collapsed orb diameter
+                        const orbRadius = orbSize / 2;
+                        const padRight  = 20;  // px gap from right pill wall
 
-                            const startLeft = exactLogoLeft;
-                            const endLeft   = pillRect.right - orbRadius - padRight;
+                        const startLeft = exactLogoLeft;
+                        const endLeft   = pillRect.right - orbRadius - padRight;
 
-                            if (blobContainer) {
-                                // Stop firefly loops – freeze blobs before collapsing
-                                for (let i = 0; i < 3; i++) {
-                                    const b = document.getElementById(`intro-blob-${i}`);
-                                    if (b) b.style.animation = 'none';
-                                }
-
-                                // Collapse to tight orb at logo origin (no transition – instant snap)
-                                blobContainer.style.transition = 'none';
-                                blobContainer.style.width   = `${orbSize}px`;
-                                blobContainer.style.height  = `${orbSize}px`;
-                                blobContainer.style.top     = `${pillRect.top + pillRect.height / 2}px`;
-                                blobContainer.style.left    = `${startLeft}px`;
-                                blobContainer.style.margin  = `-${orbRadius}px 0 0 -${orbRadius}px`;
-                                blobContainer.style.opacity = '0.9';
-
-                                // Reflow: commit new stable position before enabling transition
-                                void blobContainer.offsetWidth;
-
-                                // Kick off CSS transition sweep – eased motion the rAF will track
-                                blobContainer.style.transition = `left ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease`;
-                                blobContainer.style.left = `${endLeft}px`;
-
-                                // Dissolve orb at 80% of sweep travel
-                                setTimeout(() => {
-                                    blobContainer.style.opacity = '0';
-                                }, sweepDur * 0.8);
+                        if (blobContainer) {
+                            // Stop firefly loops – freeze blobs before collapsing to orb shape
+                            for (let i = 0; i < 3; i++) {
+                                const b = document.getElementById(`intro-blob-${i}`);
+                                if (b) b.style.animation = 'none';
                             }
 
-                            // Build a Set of un-revealed items; rAF polls live orb position each frame
-                            // and reveals each item the instant the orb trailing edge (center + radius)
-                            // crosses that item's left boundary – true coordinate matching regardless of easing.
-                            const pending = new Set();
-                            navItems.forEach((item) => {
-                                const r = item.getBoundingClientRect();
-                                pending.add({ item, triggerX: r.left }); // reveal when orb trailing edge >= item.left
+                            // Instant snap to tight orb at logo origin (transition:none prevents interpolation)
+                            blobContainer.style.transition = 'none';
+                            blobContainer.style.width   = `${orbSize}px`;
+                            blobContainer.style.height  = `${orbSize}px`;
+                            blobContainer.style.top     = `${pillRect.top + pillRect.height / 2}px`;
+                            blobContainer.style.left    = `${startLeft}px`;
+                            blobContainer.style.margin  = `-${orbRadius}px 0 0 -${orbRadius}px`;
+                            blobContainer.style.opacity = '0.9';
+
+                            // Reflow: commit stable origin before enabling the sweep transition
+                            void blobContainer.offsetWidth;
+
+                            // Launch CSS sweep – rAF will read live position each frame
+                            blobContainer.style.transition = `left ${sweepDur}ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease`;
+                            blobContainer.style.left = `${endLeft}px`;
+
+                            // Dissolve orb at 80% of sweep travel
+                            setTimeout(() => { blobContainer.style.opacity = '0'; }, sweepDur * 0.8);
+                        }
+
+                        // Snapshot each item's left boundary before the sweep begins.
+                        // rAF fires the reveal the exact frame orbTrailX crosses that coordinate.
+                        const pending = new Set();
+                        navItems.forEach((item) => {
+                            const r = item.getBoundingClientRect();
+                            pending.add({ item, triggerX: r.left });
+                        });
+
+                        const sweepStart = performance.now();
+                        let overlayFading = false;
+
+                        function rafReveal(now) {
+                            if (pending.size === 0) return;
+
+                            const orbRect   = blobContainer ? blobContainer.getBoundingClientRect() : null;
+                            const orbTrailX = orbRect ? orbRect.left + orbRect.width : startLeft;
+
+                            pending.forEach((entry) => {
+                                if (orbTrailX >= entry.triggerX) {
+                                    entry.item.style.opacity   = '1';
+                                    entry.item.style.transform = 'translateY(0)';
+                                    pending.delete(entry);
+                                }
                             });
 
-                            const sweepStart = performance.now();
+                            const elapsed = now - sweepStart;
 
-                            function rafReveal(now) {
-                                if (pending.size === 0) return; // all revealed – stop polling
-
-                                // Read live orb center from DOM (reflects actual eased position)
-                                const orbRect    = blobContainer ? blobContainer.getBoundingClientRect() : null;
-                                const orbTrailX  = orbRect ? orbRect.left + orbRect.width : startLeft;
-
-                                pending.forEach((entry) => {
-                                    if (orbTrailX >= entry.triggerX) {
-                                        entry.item.style.opacity   = '1';
-                                        entry.item.style.transform = 'translateY(0)';
-                                        pending.delete(entry);
-                                    }
+                            if (pending.size === 0 || elapsed >= sweepDur + 50) {
+                                // Force-reveal any stragglers then begin overlay dissolve immediately
+                                pending.forEach(({ item }) => {
+                                    item.style.opacity   = '1';
+                                    item.style.transform = 'translateY(0)';
                                 });
+                                pending.clear();
 
-                                // Also guard with elapsed time so items are never permanently hidden
-                                // if blobContainer has been removed or rect returns zero
-                                const elapsed = now - sweepStart;
-                                if (elapsed < sweepDur + 50 && pending.size > 0) {
-                                    requestAnimationFrame(rafReveal);
-                                } else if (pending.size > 0) {
-                                    // Force-reveal any stragglers after sweep timeout
-                                    pending.forEach(({ item }) => {
-                                        item.style.opacity   = '1';
-                                        item.style.transform = 'translateY(0)';
-                                    });
-                                    pending.clear();
+                                if (!overlayFading) {
+                                    overlayFading = true;
+                                    overlay.style.opacity = '0';
+                                    setTimeout(() => {
+                                        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                                        navItems.forEach(item => {
+                                            item.style.opacity   = '';
+                                            item.style.transform = '';
+                                            item.style.transition = '';
+                                        });
+                                    }, 750);
                                 }
+                            } else {
+                                requestAnimationFrame(rafReveal);
                             }
+                        }
 
-                            requestAnimationFrame(rafReveal);
-
-                            setTimeout(() => {
-                                overlay.style.opacity = '0';
-                                setTimeout(() => {
-                                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                                    navItems.forEach(item => {
-                                        item.style.opacity   = '';
-                                        item.style.transform = '';
-                                        item.style.transition = '';
-                                    });
-                                }, 750);
-                            }, sweepDur + 200);
-                        }, 400); 
+                        // Start rAF immediately – no additional setTimeout wrapper
+                        requestAnimationFrame(rafReveal);
                     }, 600); 
                 }, 900); // Hold time to admire the centered logo before moving
             }, 400); // Wait for circle to expand before showing logo
