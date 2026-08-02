@@ -222,14 +222,14 @@
                     // while simultaneously collapsing in size. Nav items are revealed via index-based
                     // transition-delay that perfectly tracks the 900ms sweep arc.
                     setTimeout(() => {
-                        const pillRect = bgPill.getBoundingClientRect();
                         const sweepDur = 900;
                         const orbSize = 60;
                         const padRight = 20;
 
-                        // Step C: Unroll the dummy pill to full nav width in exact sync with the orb sweep
+                        // Step C (cleanup): pillRect removed — navRect is the authoritative target bounds
+                        // Step A: Unroll the dummy pill to the real nav's full width in sync with the sweep
                         bgPill.style.transition = `width ${sweepDur}ms ${EASE}`;
-                        bgPill.style.width = `${pillRect.width}px`;
+                        bgPill.style.width = `${navRect.width}px`;
 
                         if (blobContainer) {
                             // Stop fireflies
@@ -241,7 +241,8 @@
                             // 1. Calculate the exact delta for the GPU transform — read layout once, write never
                             const blobRect = blobContainer.getBoundingClientRect();
                             const currentCenterX = blobRect.left + (blobRect.width / 2);
-                            const targetCenterX = pillRect.right - (orbSize / 2) - padRight;
+                            // Step B: Target the real nav's right edge, not the collapsed circle
+                            const targetCenterX = navRect.right - (orbSize / 2) - padRight;
                             const translateX = targetCenterX - currentCenterX;
 
                             // 2. Scale factor: blobContainer is 130px wide, collapse to orbSize
