@@ -509,9 +509,9 @@
       "source_file": "js/animations.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "js_animations",
       "community": 2,
-      "norm_label": "animations.js"
+      "norm_label": "animations.js",
+      "id": "js_animations"
     },
     {
       "label": "initScrollReveals()",
@@ -519,9 +519,9 @@
       "source_file": "js/animations.js",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "js_animations_initscrollreveals",
       "community": 2,
-      "norm_label": "initscrollreveals()"
+      "norm_label": "initscrollreveals()",
+      "id": "js_animations_initscrollreveals"
     },
     {
       "label": "initMagneticElements()",
@@ -529,9 +529,9 @@
       "source_file": "js/animations.js",
       "source_location": "L48",
       "_origin": "ast",
-      "id": "js_animations_initmagneticelements",
       "community": 2,
-      "norm_label": "initmagneticelements()"
+      "norm_label": "initmagneticelements()",
+      "id": "js_animations_initmagneticelements"
     },
     {
       "label": "initAdaptiveNavbar()",
@@ -539,9 +539,9 @@
       "source_file": "js/animations.js",
       "source_location": "L95",
       "_origin": "ast",
-      "id": "js_animations_initadaptivenavbar",
       "community": 2,
-      "norm_label": "initadaptivenavbar()"
+      "norm_label": "initadaptivenavbar()",
+      "id": "js_animations_initadaptivenavbar"
     },
     {
       "label": "initLiquidNavPill()",
@@ -549,9 +549,9 @@
       "source_file": "js/animations.js",
       "source_location": "L173",
       "_origin": "ast",
-      "id": "js_animations_initliquidnavpill",
       "community": 2,
-      "norm_label": "initliquidnavpill()"
+      "norm_label": "initliquidnavpill()",
+      "id": "js_animations_initliquidnavpill"
     },
     {
       "label": "initAll()",
@@ -559,9 +559,9 @@
       "source_file": "js/animations.js",
       "source_location": "L251",
       "_origin": "ast",
-      "id": "js_animations_initall",
       "community": 2,
-      "norm_label": "initall()"
+      "norm_label": "initall()",
+      "id": "js_animations_initall"
     },
     {
       "label": "intro.js",
@@ -569,9 +569,9 @@
       "source_file": "js/intro.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "js_intro",
       "community": 3,
-      "norm_label": "intro.js"
+      "norm_label": "intro.js",
+      "id": "js_intro"
     },
     {
       "label": "generateBlobConstellationHtml()",
@@ -579,9 +579,9 @@
       "source_file": "js/intro.js",
       "source_location": "L63",
       "_origin": "ast",
-      "id": "js_intro_generateblobconstellationhtml",
       "community": 3,
-      "norm_label": "generateblobconstellationhtml()"
+      "norm_label": "generateblobconstellationhtml()",
+      "id": "js_intro_generateblobconstellationhtml"
     },
     {
       "label": "mountOverlay()",
@@ -589,9 +589,9 @@
       "source_file": "js/intro.js",
       "source_location": "L118",
       "_origin": "ast",
-      "id": "js_intro_mountoverlay",
       "community": 3,
-      "norm_label": "mountoverlay()"
+      "norm_label": "mountoverlay()",
+      "id": "js_intro_mountoverlay"
     },
     {
       "label": "runSequence()",
@@ -599,9 +599,9 @@
       "source_file": "js/intro.js",
       "source_location": "L127",
       "_origin": "ast",
-      "id": "js_intro_runsequence",
       "community": 3,
-      "norm_label": "runsequence()"
+      "norm_label": "runsequence()",
+      "id": "js_intro_runsequence"
     },
     {
       "label": "init()",
@@ -609,9 +609,9 @@
       "source_file": "js/intro.js",
       "source_location": "L293",
       "_origin": "ast",
-      "id": "js_intro_init",
       "community": 3,
-      "norm_label": "init()"
+      "norm_label": "init()",
+      "id": "js_intro_init"
     }
   ],
   "links": [
@@ -897,9 +897,9 @@
       "source_location": "L95",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initadaptivenavbar",
-      "confidence_score": 1.0
+      "target": "js_animations_initadaptivenavbar"
     },
     {
       "relation": "contains",
@@ -908,9 +908,9 @@
       "source_location": "L251",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initall",
-      "confidence_score": 1.0
+      "target": "js_animations_initall"
     },
     {
       "relation": "contains",
@@ -919,9 +919,9 @@
       "source_location": "L173",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initliquidnavpill",
-      "confidence_score": 1.0
+      "target": "js_animations_initliquidnavpill"
     },
     {
       "relation": "contains",
@@ -930,9 +930,9 @@
       "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initmagneticelements",
-      "confidence_score": 1.0
+      "target": "js_animations_initmagneticelements"
     },
     {
       "relation": "contains",
@@ -941,9 +941,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initscrollreveals",
-      "confidence_score": 1.0
+      "target": "js_animations_initscrollreveals"
     },
     {
       "relation": "calls",
@@ -953,9 +953,9 @@
       "source_location": "L252",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations_initall",
-      "target": "js_animations_initscrollreveals",
-      "confidence_score": 1.0
+      "target": "js_animations_initscrollreveals"
     },
     {
       "relation": "calls",
@@ -965,9 +965,9 @@
       "source_location": "L253",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations_initall",
-      "target": "js_animations_initmagneticelements",
-      "confidence_score": 1.0
+      "target": "js_animations_initmagneticelements"
     },
     {
       "relation": "calls",
@@ -977,9 +977,9 @@
       "source_location": "L254",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations_initall",
-      "target": "js_animations_initadaptivenavbar",
-      "confidence_score": 1.0
+      "target": "js_animations_initadaptivenavbar"
     },
     {
       "relation": "calls",
@@ -989,9 +989,9 @@
       "source_location": "L255",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations_initall",
-      "target": "js_animations_initliquidnavpill",
-      "confidence_score": 1.0
+      "target": "js_animations_initliquidnavpill"
     },
     {
       "relation": "contains",
@@ -1000,9 +1000,9 @@
       "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro",
-      "target": "js_intro_generateblobconstellationhtml",
-      "confidence_score": 1.0
+      "target": "js_intro_generateblobconstellationhtml"
     },
     {
       "relation": "contains",
@@ -1011,9 +1011,9 @@
       "source_location": "L293",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro",
-      "target": "js_intro_init",
-      "confidence_score": 1.0
+      "target": "js_intro_init"
     },
     {
       "relation": "contains",
@@ -1022,9 +1022,9 @@
       "source_location": "L118",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro",
-      "target": "js_intro_mountoverlay",
-      "confidence_score": 1.0
+      "target": "js_intro_mountoverlay"
     },
     {
       "relation": "contains",
@@ -1033,9 +1033,9 @@
       "source_location": "L127",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro",
-      "target": "js_intro_runsequence",
-      "confidence_score": 1.0
+      "target": "js_intro_runsequence"
     },
     {
       "relation": "calls",
@@ -1045,9 +1045,9 @@
       "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro_runsequence",
-      "target": "js_intro_mountoverlay",
-      "confidence_score": 1.0
+      "target": "js_intro_mountoverlay"
     },
     {
       "relation": "calls",
@@ -1057,9 +1057,9 @@
       "source_location": "L295",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_intro_init",
-      "target": "js_intro_runsequence",
-      "confidence_score": 1.0
+      "target": "js_intro_runsequence"
     }
   ],
   "hyperedges": [
@@ -1135,5 +1135,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "61e44af2d26cdfe90b25e154fb6d99125cf2909d"
+  "built_at_commit": "4e8f01f1f8c7987a34669ceaf71a26ebf927ac53"
 }
