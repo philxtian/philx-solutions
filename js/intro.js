@@ -137,6 +137,18 @@
         hideNavStyle.innerHTML = '#navbar-capsule { background: transparent !important; backdrop-filter: none !important; box-shadow: none !important; border: none !important; }';
         document.head.appendChild(hideNavStyle);
 
+        // Elevate real nav above the overlay so text isn't blurred, disable clicks during intro
+        navbarCapsule.style.position = 'relative';
+        navbarCapsule.style.zIndex = '100000';
+        navbarCapsule.style.pointerEvents = 'none';
+
+        // Hoist real logo reference so both Step A (hide) and Step C (restore) can reach it
+        const introRealLogo = navbarCapsule.querySelector('a') || navbarCapsule.querySelector('img');
+        if (introRealLogo) {
+            introRealLogo.style.opacity = '0';
+            introRealLogo.style.transition = 'opacity 0.4s ease';
+        }
+
         // Hide each nav item individually so the overlay background conceals them until the
         // orb sweeps over — opacity+transform keeps everything on the GPU compositor.
         const navItems = navbarCapsule.querySelectorAll('.nav-link, .nav-cta, .nav-mobile-btn');
@@ -232,6 +244,8 @@
                         bgPill.style.width = `${navRect.width}px`;
 
                         if (blobContainer) {
+                            // Step B: Push orb above the frosted glass dummy pill
+                            blobContainer.style.zIndex = '2';
                             // Stop fireflies
                             for (let i = 0; i < 3; i++) {
                                 const b = document.getElementById(`intro-blob-${i}`);
@@ -267,7 +281,7 @@
                             item.style.transform = 'translateY(0)';
                         });
 
-                        // Remove overlay, restore real nav background, and clean up nav-item styles
+                        // Remove overlay, restore real nav, and clean up nav-item styles
                         setTimeout(() => {
                             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
                             // Step D: Hand background duties back to the real DOM seamlessly
@@ -277,6 +291,11 @@
                                 item.style.transition = '';
                                 item.style.transform = '';
                             });
+                            // Step C: Restore real logo visibility and nav interactivity
+                            if (introRealLogo) introRealLogo.style.opacity = '1';
+                            navbarCapsule.style.zIndex = '';
+                            navbarCapsule.style.position = '';
+                            navbarCapsule.style.pointerEvents = '';
                         }, sweepDur + 350);
 
                     }, 600);
