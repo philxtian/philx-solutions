@@ -169,119 +169,117 @@
                 }
             });
 
-            // Phase 2: Fade in perfectly centered Logo Icon
+            // Phase 2 merged: Fade in Logo Icon instantly as bounce settles
+            staticLogo.style.transition = 'opacity 0.4s ease';
+            staticLogo.style.opacity = '1';
+
+            // Phase 3: Morph cleanly into exact navigation bar pill shape & position
             setTimeout(() => {
-                staticLogo.style.transition = 'opacity 0.4s ease';
-                staticLogo.style.opacity = '1';
+                const navRect = navbarCapsule.getBoundingClientRect();
+                const realLogo = navbarCapsule.querySelector('a') || navbarCapsule.querySelector('img');
+                const exactLogoLeft = realLogo ? realLogo.getBoundingClientRect().left : (navRect.left + 24);
 
-                // Phase 3: Morph cleanly into exact navigation bar pill shape & position
+                bgPill.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, border-radius 0.6s ${EASE}, padding 0.6s ${EASE}`;
+                staticLogo.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}`;
+
+                // Morph initial circle into exact navigation bar pill dimensions & position
+                bgPill.style.top = `${navRect.top}px`;
+                bgPill.style.left = `${navRect.left}px`;
+                bgPill.style.margin = '0px';
+                bgPill.style.height = `${navRect.height}px`;
+                bgPill.style.width = `${navRect.width}px`;
+                bgPill.style.borderRadius = '9999px';
+
+                // Track multi-color randomized blob constellation smoothly behind logo placement in header
+                if (blobContainer) {
+                    blobContainer.style.top = `${navRect.top + (navRect.height / 2)}px`;
+                    blobContainer.style.left = `${exactLogoLeft + 60}px`;
+                    blobContainer.style.margin = '-65px 0 0 -65px';
+                    blobContainer.style.opacity = '0.65'; // Dim the orb early for a subtler presence
+                }
+
+                // Move Logo to upper-left logo position inside navigation bar
+                staticLogo.style.top = `${navRect.top + (navRect.height / 2)}px`;
+                staticLogo.style.left = `${exactLogoLeft}px`;
+                staticLogo.style.margin = `-18px 0 0 0`;
+
+                // Smoothly unroll the text alongside the logo mark
+                const logoText = document.getElementById('intro-logo-text');
+                if (logoText) {
+                    logoText.style.transition = `width 0.6s ${EASE}, opacity 0.6s ${EASE}`;
+                    logoText.style.width = '84px'; // 12px gap + 72px text width
+                    logoText.style.opacity = '1';
+                }
+
+                // Step A: Dissolve the overlay's black background so the real DOM nav is
+                // exposed underneath while the glowing orb remains visible on top.
+                // This must happen before Phase 4 so clip-path can do its reveal work.
+                overlay.style.transition = 'background-color 0.5s ease';
+                overlay.style.backgroundColor = 'transparent';
+
+                // Phase 4 + 5 unified: fluid CSS sweep + staggered nav reveal (no rAF polling).
+                // The blob transitions smoothly from its current position to the pill's right wall
+                // while simultaneously collapsing in size. Nav items are revealed via index-based
+                // transition-delay that perfectly tracks the 900ms sweep arc.
                 setTimeout(() => {
-                    const navRect = navbarCapsule.getBoundingClientRect();
-                    const realLogo = navbarCapsule.querySelector('a') || navbarCapsule.querySelector('img');
-                    const exactLogoLeft = realLogo ? realLogo.getBoundingClientRect().left : (navRect.left + 24);
+                    const sweepDur = 900;
+                    const orbSize = 60;
+                    const padRight = 20;
 
-                    bgPill.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, border-radius 0.6s ${EASE}, padding 0.6s ${EASE}`;
-                    staticLogo.style.transition = `top 0.6s ${EASE}, left 0.6s ${EASE}, margin 0.6s ${EASE}`;
+                    // Early Handoff: Reveal real nav, instantly destroy dummy elements
+                    const hideNav = document.getElementById('philx-intro-hide-nav');
+                    if (hideNav) hideNav.remove();
+                    bgPill.style.display = 'none';
+                    staticLogo.style.display = 'none';
 
-                    // Morph initial circle into exact navigation bar pill dimensions & position
-                    bgPill.style.top = `${navRect.top}px`;
-                    bgPill.style.left = `${navRect.left}px`;
-                    bgPill.style.margin = '0px';
-                    bgPill.style.height = `${navRect.height}px`;
-                    bgPill.style.width = `${navRect.width}px`;
-                    bgPill.style.borderRadius = '9999px';
-
-                    // Track multi-color randomized blob constellation smoothly behind logo placement in header
                     if (blobContainer) {
-                        blobContainer.style.top = `${navRect.top + (navRect.height / 2)}px`;
-                        blobContainer.style.left = `${exactLogoLeft + 60}px`;
-                        blobContainer.style.margin = '-65px 0 0 -65px';
-                        blobContainer.style.opacity = '0.65'; // Dim the orb early for a subtler presence
-                    }
-
-                    // Move Logo to upper-left logo position inside navigation bar
-                    staticLogo.style.top = `${navRect.top + (navRect.height / 2)}px`;
-                    staticLogo.style.left = `${exactLogoLeft}px`;
-                    staticLogo.style.margin = `-18px 0 0 0`;
-
-                    // Smoothly unroll the text alongside the logo mark
-                    const logoText = document.getElementById('intro-logo-text');
-                    if (logoText) {
-                        logoText.style.transition = `width 0.6s ${EASE}, opacity 0.6s ${EASE}`;
-                        logoText.style.width = '84px'; // 12px gap + 72px text width
-                        logoText.style.opacity = '1';
-                    }
-
-                    // Step A: Dissolve the overlay's black background so the real DOM nav is
-                    // exposed underneath while the glowing orb remains visible on top.
-                    // This must happen before Phase 4 so clip-path can do its reveal work.
-                    overlay.style.transition = 'background-color 0.5s ease';
-                    overlay.style.backgroundColor = 'transparent';
-
-                    // Phase 4 + 5 unified: fluid CSS sweep + staggered nav reveal (no rAF polling).
-                    // The blob transitions smoothly from its current position to the pill's right wall
-                    // while simultaneously collapsing in size. Nav items are revealed via index-based
-                    // transition-delay that perfectly tracks the 900ms sweep arc.
-                    setTimeout(() => {
-                        const sweepDur = 900;
-                        const orbSize = 60;
-                        const padRight = 20;
-
-                        // Early Handoff: Reveal real nav, instantly destroy dummy elements
-                        const hideNav = document.getElementById('philx-intro-hide-nav');
-                        if (hideNav) hideNav.remove();
-                        bgPill.style.display = 'none';
-                        staticLogo.style.display = 'none';
-
-                        if (blobContainer) {
-                            // Step B: Push orb above the frosted glass dummy pill
-                            blobContainer.style.zIndex = '2';
-                            // Stop fireflies
-                            for (let i = 0; i < 3; i++) {
-                                const b = document.getElementById(`intro-blob-${i}`);
-                                if (b) b.style.animation = 'none';
-                            }
-
-                            // 1. Calculate the exact delta for the GPU transform — read layout once, write never
-                            const blobRect = blobContainer.getBoundingClientRect();
-                            const currentCenterX = blobRect.left + (blobRect.width / 2);
-                            // Step B: Target the real nav's right edge, not the collapsed circle
-                            const targetCenterX = navRect.right - (orbSize / 2) - padRight;
-                            const translateX = targetCenterX - currentCenterX;
-
-                            // 2. Scale factor: blobContainer is 130px wide, collapse to orbSize
-                            const scale = orbSize / 130;
-
-                            // 3. GPU-accelerated sweep — compositor-threaded, zero layout recalculations
-                            // Opacity decays from 100% → 0% across the full travel distance (no abrupt dissolve)
-                            blobContainer.style.transition = `transform ${sweepDur}ms ${EASE}, opacity ${sweepDur}ms ease`;
-                            blobContainer.style.transform = `translate3d(${translateX}px, 0, 0) scale(${scale})`;
-                            blobContainer.style.opacity = '0';
+                        // Step B: Push orb above the frosted glass dummy pill
+                        blobContainer.style.zIndex = '2';
+                        // Stop fireflies
+                        for (let i = 0; i < 3; i++) {
+                            const b = document.getElementById(`intro-blob-${i}`);
+                            if (b) b.style.animation = 'none';
                         }
 
-                        // Premium stagger: delay step is sized so the last item finishes just
-                        // before the orb fades, keeping the reveal locked to the sweep arc.
-                        const staggerStep = (sweepDur * 0.75) / (navItems.length || 1);
+                        // 1. Calculate the exact delta for the GPU transform — read layout once, write never
+                        const blobRect = blobContainer.getBoundingClientRect();
+                        const currentCenterX = blobRect.left + (blobRect.width / 2);
+                        // Step B: Target the real nav's right edge, not the collapsed circle
+                        const targetCenterX = navRect.right - (orbSize / 2) - padRight;
+                        const translateX = targetCenterX - currentCenterX;
 
-                        navItems.forEach((item, index) => {
-                            // Soft fade-up timed so each item appears exactly as the light passes
-                            item.style.transition = `opacity 0.5s ${EASE} ${index * staggerStep}ms, transform 0.5s ${EASE} ${index * staggerStep}ms`;
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateY(0)';
+                        // 2. Scale factor: blobContainer is 130px wide, collapse to orbSize
+                        const scale = orbSize / 130;
+
+                        // 3. GPU-accelerated sweep — compositor-threaded, zero layout recalculations
+                        // Opacity decays from 100% → 0% across the full travel distance (no abrupt dissolve)
+                        blobContainer.style.transition = `transform ${sweepDur}ms ${EASE}, opacity ${sweepDur}ms ease`;
+                        blobContainer.style.transform = `translate3d(${translateX}px, 0, 0) scale(${scale})`;
+                        blobContainer.style.opacity = '0';
+                    }
+
+                    // Premium stagger: delay step is sized so the last item finishes just
+                    // before the orb fades, keeping the reveal locked to the sweep arc.
+                    const staggerStep = (sweepDur * 0.75) / (navItems.length || 1);
+
+                    navItems.forEach((item, index) => {
+                        // Soft fade-up timed so each item appears exactly as the light passes
+                        item.style.transition = `opacity 0.5s ${EASE} ${index * staggerStep}ms, transform 0.5s ${EASE} ${index * staggerStep}ms`;
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    });
+
+                    // Remove overlay and clean up nav item inline styles
+                    setTimeout(() => {
+                        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                        navItems.forEach(item => {
+                            item.style.transition = '';
+                            item.style.transform = '';
                         });
+                    }, sweepDur + 350);
 
-                        // Remove overlay and clean up nav item inline styles
-                        setTimeout(() => {
-                            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                            navItems.forEach(item => {
-                                item.style.transition = '';
-                                item.style.transform = '';
-                            });
-                        }, sweepDur + 350);
-
-                    }, 600);
-                }, 900); // Hold time to admire the centered logo before moving
-            }, 400); // Wait for circle to expand before showing logo
+                }, 600);
+            }, 1200); // Hold time to admire the centered logo before moving
         }, 800); // Wait for initial tiny ball bounce animation to finish
     }
 
