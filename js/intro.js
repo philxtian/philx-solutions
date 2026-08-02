@@ -146,7 +146,8 @@
         });
 
         // Phase 1: Wait for 3D glass sphere to bounce in, then start firefly drift on each blob
-        setTimeout(() => {
+        bgPill.addEventListener('animationend', (e) => {
+            if (e.animationName !== 'philx-bounce') return;
             bgPill.style.animation = 'none'; // Clear bounce keyframe
             bgPill.style.transition = `width 0.6s ${EASE}, height 0.6s ${EASE}, margin 0.6s ${EASE}, top 0.6s ${EASE}, left 0.6s ${EASE}, border-radius 0.6s ${EASE}, padding 0.6s ${EASE}`;
             bgPill.style.width = '96px';
@@ -170,7 +171,7 @@
             });
 
             // Phase 2 merged: Fade in Logo Icon instantly as bounce settles
-            staticLogo.style.transition = 'opacity 0.15s ease';
+            staticLogo.style.transition = 'none';
             staticLogo.style.opacity = '1';
 
             // Phase 3: Morph cleanly into exact navigation bar pill shape & position
@@ -280,7 +281,7 @@
 
                 }, 600);
             }, 1200); // Hold time to admire the centered logo before moving
-        }, 700); // Wait for initial tiny ball bounce animation to finish
+        }, { once: true }); // Trigger instantly as bounce animation frame ends
     }
 
     function init() {
