@@ -104,7 +104,7 @@
         const title = capsule.querySelector('.nav-title');
         const subtitle = capsule.querySelector('.nav-subtitle');
         const links = capsule.querySelectorAll('.nav-link');
-        const underlines = capsule.querySelectorAll('.nav-underline');
+        const fluidPill = capsule.querySelector('#nav-fluid-pill');
         const cta = capsule.querySelector('.nav-cta');
         const mobileBtn = capsule.querySelector('.nav-mobile-btn');
 
@@ -135,8 +135,8 @@
 
                         if (title) title.className = 'nav-title flex justify-between font-black text-white leading-none text-[13px] uppercase';
                         if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-white/80 leading-none mt-1 uppercase';
-                        links.forEach(l => l.className = 'nav-link relative py-1 text-white/90 hover:text-white transition-colors group');
-                        underlines.forEach(u => u.className = 'nav-underline absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full');
+                        links.forEach(l => l.className = 'nav-link relative z-10 px-4 py-1.5 text-white/90 hover:text-white transition-colors');
+                        if (fluidPill) fluidPill.className = 'absolute top-0 bottom-0 rounded-full bg-white/15 backdrop-blur-md border border-white/25 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-0 shadow-[0_4px_16px_rgba(255,255,255,0.08)]';
                         if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-white/10 backdrop-blur-md border border-white/20 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 relative z-30 cursor-pointer uppercase tracking-widest';
                         if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-white/20 bg-white/10 text-white shadow-lg hover:bg-white/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-pointer';
                     } else if (theme === 'light') {
@@ -155,8 +155,8 @@
 
                         if (title) title.className = 'nav-title flex justify-between font-black text-gray-900 leading-none text-[13px] uppercase';
                         if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-gray-600 leading-none mt-1 uppercase';
-                        links.forEach(l => l.className = 'nav-link relative py-1 text-gray-800 hover:text-black transition-colors group');
-                        underlines.forEach(u => u.className = 'nav-underline absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all duration-300 ease-out group-hover:w-full');
+                        links.forEach(l => l.className = 'nav-link relative z-10 px-4 py-1.5 text-gray-800 hover:text-black transition-colors');
+                        if (fluidPill) fluidPill.className = 'absolute top-0 bottom-0 rounded-full bg-black/10 backdrop-blur-md border border-black/15 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-0 shadow-[0_4px_16px_rgba(0,0,0,0.06)]';
                         if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-gray-900 bg-black/[0.03] backdrop-blur-md border border-black/10 rounded-full shadow-sm hover:bg-black/[0.06] transition-all duration-300 relative z-30 cursor-pointer uppercase tracking-widest';
                         if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-gray-900/20 bg-gray-900/10 text-gray-900 shadow-lg hover:bg-gray-900/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-pointer';
                     }
@@ -165,6 +165,70 @@
         }, navObserverOptions);
 
         sections.forEach(s => navObserver.observe(s));
+    }
+
+    /**
+     * Fluid Liquid Glass Island Navbar Tracker
+     */
+    function initLiquidNavPill() {
+        const navContainer = document.querySelector('header nav');
+        const pill = document.getElementById('nav-fluid-pill');
+        if (!navContainer || !pill) return;
+
+        const navLinks = navContainer.querySelectorAll('.nav-link');
+        let activeLink = navContainer.querySelector('.nav-link.is-active') || navLinks[0];
+
+        function updateNavPill(targetElement) {
+            if (!targetElement) {
+                pill.style.opacity = '0';
+                return;
+            }
+            pill.style.left = `${targetElement.offsetLeft}px`;
+            pill.style.width = `${targetElement.offsetWidth}px`;
+            pill.style.opacity = '1';
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                updateNavPill(link);
+            });
+            link.addEventListener('click', () => {
+                navLinks.forEach(l => l.classList.remove('is-active'));
+                link.classList.add('is-active');
+                activeLink = link;
+                updateNavPill(activeLink);
+            });
+        });
+
+        navContainer.addEventListener('mouseleave', () => {
+            updateNavPill(activeLink);
+        });
+
+        // Initial position sync
+        setTimeout(() => updateNavPill(activeLink), 100);
+
+        // Scrollspy active link observer
+        const sections = document.querySelectorAll('section[id]');
+        if (sections.length && 'IntersectionObserver' in window) {
+            const spyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        const matchingLink = navContainer.querySelector(`.nav-link[href="#${id}"]`);
+                        if (matchingLink) {
+                            navLinks.forEach(l => l.classList.remove('is-active'));
+                            matchingLink.classList.add('is-active');
+                            activeLink = matchingLink;
+                            if (!navContainer.matches(':hover')) {
+                                updateNavPill(activeLink);
+                            }
+                        }
+                    }
+                });
+            }, { rootMargin: '-30% 0px -50% 0px', threshold: 0 });
+
+            sections.forEach(sec => spyObserver.observe(sec));
+        }
     }
 
     // Dynamic CSS Injection for Kinetic Scroll Reveal States
@@ -188,6 +252,7 @@
         initScrollReveals();
         initMagneticElements();
         initAdaptiveNavbar();
+        initLiquidNavPill();
     }
 
     if (document.readyState === 'loading') {
