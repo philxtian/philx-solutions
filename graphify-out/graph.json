@@ -559,9 +559,9 @@
       "source_file": "js/animations.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "js_animations",
       "community": 2,
-      "norm_label": "animations.js"
+      "norm_label": "animations.js",
+      "id": "js_animations"
     },
     {
       "label": "initScrollReveals()",
@@ -569,9 +569,9 @@
       "source_file": "js/animations.js",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "js_animations_initscrollreveals",
       "community": 2,
-      "norm_label": "initscrollreveals()"
+      "norm_label": "initscrollreveals()",
+      "id": "js_animations_initscrollreveals"
     },
     {
       "label": "initMagneticElements()",
@@ -579,9 +579,9 @@
       "source_file": "js/animations.js",
       "source_location": "L48",
       "_origin": "ast",
-      "id": "js_animations_initmagneticelements",
       "community": 2,
-      "norm_label": "initmagneticelements()"
+      "norm_label": "initmagneticelements()",
+      "id": "js_animations_initmagneticelements"
     },
     {
       "label": "initAdaptiveNavbar()",
@@ -589,9 +589,9 @@
       "source_file": "js/animations.js",
       "source_location": "L95",
       "_origin": "ast",
-      "id": "js_animations_initadaptivenavbar",
       "community": 2,
-      "norm_label": "initadaptivenavbar()"
+      "norm_label": "initadaptivenavbar()",
+      "id": "js_animations_initadaptivenavbar"
     },
     {
       "label": "initLiquidNavPill()",
@@ -599,9 +599,9 @@
       "source_file": "js/animations.js",
       "source_location": "L173",
       "_origin": "ast",
-      "id": "js_animations_initliquidnavpill",
       "community": 2,
-      "norm_label": "initliquidnavpill()"
+      "norm_label": "initliquidnavpill()",
+      "id": "js_animations_initliquidnavpill"
     },
     {
       "label": "initAll()",
@@ -609,9 +609,9 @@
       "source_file": "js/animations.js",
       "source_location": "L251",
       "_origin": "ast",
-      "id": "js_animations_initall",
       "community": 2,
-      "norm_label": "initall()"
+      "norm_label": "initall()",
+      "id": "js_animations_initall"
     }
   ],
   "links": [
@@ -965,9 +965,9 @@
       "source_location": "L95",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initadaptivenavbar",
-      "confidence_score": 1.0
+      "target": "js_animations_initadaptivenavbar"
     },
     {
       "relation": "contains",
@@ -976,9 +976,9 @@
       "source_location": "L251",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initall",
-      "confidence_score": 1.0
+      "target": "js_animations_initall"
     },
     {
       "relation": "contains",
@@ -987,9 +987,9 @@
       "source_location": "L173",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initliquidnavpill",
-      "confidence_score": 1.0
+      "target": "js_animations_initliquidnavpill"
     },
     {
       "relation": "contains",
@@ -998,9 +998,9 @@
       "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initmagneticelements",
-      "confidence_score": 1.0
+      "target": "js_animations_initmagneticelements"
     },
     {
       "relation": "contains",
@@ -1009,9 +1009,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations",
-      "target": "js_animations_initscrollreveals",
-      "confidence_score": 1.0
+      "target": "js_animations_initscrollreveals"
     },
     {
       "relation": "calls",
@@ -1021,9 +1021,9 @@
       "source_location": "L252",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations_initall",
-      "target": "js_animations_initscrollreveals",
-      "confidence_score": 1.0
+      "target": "js_animations_initscrollreveals"
     },
     {
       "relation": "calls",
@@ -1033,9 +1033,9 @@
       "source_location": "L253",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations_initall",
-      "target": "js_animations_initmagneticelements",
-      "confidence_score": 1.0
+      "target": "js_animations_initmagneticelements"
     },
     {
       "relation": "calls",
@@ -1045,9 +1045,9 @@
       "source_location": "L254",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations_initall",
-      "target": "js_animations_initadaptivenavbar",
-      "confidence_score": 1.0
+      "target": "js_animations_initadaptivenavbar"
     },
     {
       "relation": "calls",
@@ -1057,9 +1057,9 @@
       "source_location": "L255",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "js_animations_initall",
-      "target": "js_animations_initliquidnavpill",
-      "confidence_score": 1.0
+      "target": "js_animations_initliquidnavpill"
     }
   ],
   "hyperedges": [
@@ -1135,5 +1135,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "73684ced418ea5bd3e79ecd6fe19cd321aff9858"
+  "built_at_commit": "bd81680a200b2c7266c9842a65c2b9952fe1a905"
 }
