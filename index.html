@@ -5,10 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHILX Solutions | Enterprise IT & Software Solutions</title>
     <meta name="description" content="PHILX Solutions delivers enterprise website design, full-stack development, mobile apps, and cloud software powered by Headless WordPress, HTMX, and modern engineering.">
-    <!-- Brand Favicon -->
-    <link rel="icon" type="image/png" href="assets/logo-mark.png">
-    <!-- Inline Theme Initializer script -->
+    <!-- Dynamic Light/Dark Brand Favicon -->
+    <link id="dynamic-favicon" rel="icon" type="image/png" href="assets/logo-mark-white.png">
     <script>
+        const updateFavicon = (e) => {
+            const favicon = document.getElementById('dynamic-favicon');
+            if (favicon) {
+                favicon.href = e.matches ? 'assets/logo-mark-white.png' : 'assets/logo-mark-black.png';
+            }
+        };
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkModeMediaQuery.addEventListener('change', updateFavicon);
+        updateFavicon(darkModeMediaQuery);
+
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -200,6 +209,13 @@
         .flex-shrink-0 {
             -webkit-flex-shrink: 0;
             flex-shrink: 0;
+        }
+
+        /* Safari GPU Hardware Acceleration & Backdrop Thrashing Prevention */
+        nav, footer, .backdrop-blur-3xl, .backdrop-blur-2xl, .backdrop-blur-xl, .backdrop-blur-md {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform, backdrop-filter;
         }
     </style>
     <!-- Intro Sequence Script (Instant Overlay Mount) -->
