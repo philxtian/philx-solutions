@@ -217,6 +217,13 @@
             transform: translateZ(0);
             will-change: transform, backdrop-filter;
         }
+
+        /* WebKit / Safari Backdrop Filter Fallback Support */
+        @supports (-webkit-backdrop-filter: none) {
+            footer {
+                background-color: rgba(9, 13, 22, 0.9) !important;
+            }
+        }
     </style>
     <!-- Intro Sequence Script (Instant Overlay Mount) -->
     <script src="js/intro.js"></script>
