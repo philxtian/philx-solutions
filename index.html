@@ -173,6 +173,34 @@
             animation: footerFireDrift 8s ease-in-out infinite;
             will-change: transform, opacity;
         }
+
+        /* WebKit / Safari Backdrop-Filter & Stacking Context Compatibility */
+        .backdrop-blur-3xl {
+            -webkit-backdrop-filter: blur(64px);
+            backdrop-filter: blur(64px);
+        }
+        .backdrop-blur-2xl {
+            -webkit-backdrop-filter: blur(40px);
+            backdrop-filter: blur(40px);
+        }
+        .backdrop-blur-xl {
+            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(24px);
+        }
+        .backdrop-blur-md {
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+
+        /* WebKit Composite Layer & Flex Shrink Hardening */
+        .transform-gpu {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+        .flex-shrink-0 {
+            -webkit-flex-shrink: 0;
+            flex-shrink: 0;
+        }
     </style>
     <!-- Intro Sequence Script (Instant Overlay Mount) -->
     <script src="js/intro.js"></script>
