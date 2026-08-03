@@ -156,7 +156,7 @@
                         if (title) title.className = 'nav-title flex justify-between font-black text-gray-900 leading-none text-[13px] uppercase';
                         if (subtitle) subtitle.className = 'nav-subtitle flex justify-between text-[9px] font-bold text-gray-600 leading-none mt-1 uppercase';
                         links.forEach(l => l.className = 'nav-link relative z-10 px-4 py-1.5 text-gray-800 hover:text-black transition-colors');
-                        if (fluidPill) fluidPill.className = 'absolute top-0 bottom-0 rounded-full bg-black/10 backdrop-blur-md border border-black/15 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-0 shadow-[0_4px_16px_rgba(0,0,0,0.06)]';
+                        if (fluidPill) fluidPill.className = 'absolute top-0 bottom-0 rounded-full bg-white/80 backdrop-blur-md border border-slate-200/80 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-0 shadow-sm';
                         if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-gray-900 bg-black/[0.03] backdrop-blur-md border border-black/10 rounded-full shadow-sm hover:bg-black/[0.06] transition-all duration-300 relative z-30 cursor-pointer uppercase tracking-widest';
                         if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-gray-900/20 bg-gray-900/10 text-gray-900 shadow-lg hover:bg-gray-900/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-pointer';
                     }
