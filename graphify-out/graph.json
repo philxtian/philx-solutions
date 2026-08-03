@@ -504,66 +504,6 @@
       "id": "js_blob_tracker_render"
     },
     {
-      "label": "animations.js",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "animations.js",
-      "id": "js_animations"
-    },
-    {
-      "label": "initScrollReveals()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initscrollreveals()",
-      "id": "js_animations_initscrollreveals"
-    },
-    {
-      "label": "initMagneticElements()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L48",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initmagneticelements()",
-      "id": "js_animations_initmagneticelements"
-    },
-    {
-      "label": "initAdaptiveNavbar()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L95",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initadaptivenavbar()",
-      "id": "js_animations_initadaptivenavbar"
-    },
-    {
-      "label": "initLiquidNavPill()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L173",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initliquidnavpill()",
-      "id": "js_animations_initliquidnavpill"
-    },
-    {
-      "label": "initAll()",
-      "file_type": "code",
-      "source_file": "js/animations.js",
-      "source_location": "L251",
-      "_origin": "ast",
-      "community": 2,
-      "norm_label": "initall()",
-      "id": "js_animations_initall"
-    },
-    {
       "label": "intro.js",
       "file_type": "code",
       "source_file": "js/intro.js",
@@ -612,6 +552,66 @@
       "community": 3,
       "norm_label": "init()",
       "id": "js_intro_init"
+    },
+    {
+      "label": "animations.js",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_animations",
+      "community": 2,
+      "norm_label": "animations.js"
+    },
+    {
+      "label": "initScrollReveals()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "js_animations_initscrollreveals",
+      "community": 2,
+      "norm_label": "initscrollreveals()"
+    },
+    {
+      "label": "initMagneticElements()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "js_animations_initmagneticelements",
+      "community": 2,
+      "norm_label": "initmagneticelements()"
+    },
+    {
+      "label": "initAdaptiveNavbar()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L95",
+      "_origin": "ast",
+      "id": "js_animations_initadaptivenavbar",
+      "community": 2,
+      "norm_label": "initadaptivenavbar()"
+    },
+    {
+      "label": "initLiquidNavPill()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L173",
+      "_origin": "ast",
+      "id": "js_animations_initliquidnavpill",
+      "community": 2,
+      "norm_label": "initliquidnavpill()"
+    },
+    {
+      "label": "initAll()",
+      "file_type": "code",
+      "source_file": "js/animations.js",
+      "source_location": "L251",
+      "_origin": "ast",
+      "id": "js_animations_initall",
+      "community": 2,
+      "norm_label": "initall()"
     }
   ],
   "links": [
@@ -893,109 +893,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L95",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initadaptivenavbar"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L251",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initall"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L173",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initliquidnavpill"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L48",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initmagneticelements"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations",
-      "target": "js_animations_initscrollreveals"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L252",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations_initall",
-      "target": "js_animations_initscrollreveals"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L253",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations_initall",
-      "target": "js_animations_initmagneticelements"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L254",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations_initall",
-      "target": "js_animations_initadaptivenavbar"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/animations.js",
-      "source_location": "L255",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "js_animations_initall",
-      "target": "js_animations_initliquidnavpill"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "js/intro.js",
       "source_location": "L63",
       "weight": 1.0,
@@ -1060,6 +957,109 @@
       "confidence_score": 1.0,
       "source": "js_intro_init",
       "target": "js_intro_runsequence"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initadaptivenavbar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L251",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initall",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L173",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initliquidnavpill",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initmagneticelements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations",
+      "target": "js_animations_initscrollreveals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L252",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initscrollreveals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L253",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initmagneticelements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L254",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initadaptivenavbar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/animations.js",
+      "source_location": "L255",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "js_animations_initall",
+      "target": "js_animations_initliquidnavpill",
+      "confidence_score": 1.0
     }
   ],
   "hyperedges": [
@@ -1135,5 +1135,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "644d45b174d2e254607df174df67d97a8221f2be"
+  "built_at_commit": "73684ced418ea5bd3e79ecd6fe19cd321aff9858"
 }
