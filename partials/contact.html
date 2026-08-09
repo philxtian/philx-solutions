@@ -54,11 +54,7 @@
         <div class="group relative no-tilt reveal-hidden delay-200">
             <div class="bg-white/[0.05] backdrop-blur-3xl border border-white/[0.1] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] rounded-3xl overflow-hidden p-8 sm:p-12 relative z-10 transition-all duration-500 ease-out hover:bg-white/[0.08] hover:border-white/30">
                 <div class="card-spotlight absolute inset-0 pointer-events-none z-0"></div>
-                <form id="contact-form" 
-                      hx-post="api/contact-success.html" 
-                      hx-target="#form-response" 
-                      hx-swap="innerHTML"
-                      class="space-y-6">
+                <form id="contact-form" class="space-y-6">
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- Full Name -->
@@ -105,6 +101,8 @@
                                   class="w-full px-4 py-3 bg-black border border-white/15 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white text-sm transition-colors resize-none"></textarea>
                     </div>
 
+                    <div class="cf-turnstile mb-6" data-sitekey="NEXT_PUBLIC_CLOUDFLARE_SITE_KEY"></div>
+
                     <!-- Submit Button -->
                     <div>
                         <button type="submit" 
@@ -116,6 +114,39 @@
 
                 <!-- Dynamic Form Response Target Container -->
                 <div id="form-response" class="mt-6"></div>
+
+                <script>
+                    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const form = e.target;
+                        const formData = new FormData(form);
+                        const data = Object.fromEntries(formData.entries());
+                        
+                        // Ensure Turnstile token exists
+                        if (!data['cf-turnstile-response']) {
+                            alert('Please complete the security check.');
+                            return;
+                        }
+
+                        // Send to your backend API
+                        try {
+                            const res = await fetch('/api/contact', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(data)
+                            });
+                            
+                            if (res.ok) {
+                                document.getElementById('form-response').innerHTML = '<div class="text-emerald-400 text-center p-4 bg-emerald-400/10 rounded-xl border border-emerald-400/20">Thank you! Your consultation request has been securely sent.</div>';
+                                form.reset();
+                            } else {
+                                document.getElementById('form-response').innerHTML = '<div class="text-red-400 text-center p-4 bg-red-400/10 rounded-xl border border-red-400/20">Error submitting the form. Bot detected or server issue.</div>';
+                            }
+                        } catch (err) {
+                            document.getElementById('form-response').innerHTML = '<div class="text-red-400 text-center p-4 bg-red-400/10 rounded-xl border border-red-400/20">Network error. Please try again later.</div>';
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>
