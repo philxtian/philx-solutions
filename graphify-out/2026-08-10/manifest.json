@@ -15,9 +15,9 @@
     "semantic_hash": "78b5b75f0d963fbd9513351dd42ce1ef"
   },
   "js/wp-api.js": {
-    "mtime": 1786349459.6620991,
-    "ast_hash": "41a3c965940a43ab8439025457be5771",
-    "semantic_hash": "41a3c965940a43ab8439025457be5771"
+    "mtime": 1785615995.3133724,
+    "ast_hash": "3fef9aff5170f8672003201c4644b90a",
+    "semantic_hash": "3fef9aff5170f8672003201c4644b90a"
   },
   ".agents/skills/backend/api-design/SKILL.md": {
     "mtime": 1784814280.3325667,
@@ -163,10 +163,5 @@
     "mtime": 1785714394.283818,
     "ast_hash": "64ea78c73a263c8c3838d0190e0c848d",
     "semantic_hash": "64ea78c73a263c8c3838d0190e0c848d"
-  },
-  "api/contact.js": {
-    "mtime": 1786349416.0204194,
-    "ast_hash": "b59f15797b171153fe85cc1b9c899058",
-    "semantic_hash": "b59f15797b171153fe85cc1b9c899058"
   }
 }

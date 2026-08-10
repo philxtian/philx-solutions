@@ -109,7 +109,7 @@
       "file_type": "code",
       "source_file": "api/contact-success.html",
       "verification": "unverified",
-      "community": 16,
+      "community": 15,
       "norm_label": "contact success response",
       "community_name": "Main Layout Shell",
       "id": "api_contact_success"
@@ -136,7 +136,7 @@
       "label": "Default Logo Mark",
       "file_type": "image",
       "source_file": "assets/logo-mark.png",
-      "community": 19,
+      "community": 18,
       "norm_label": "default logo mark",
       "community_name": "Default Logo Mark",
       "id": "assets_logo_mark"
@@ -145,7 +145,7 @@
       "label": "Full Transparent Logo",
       "file_type": "image",
       "source_file": "assets/logo-full-transparent.png",
-      "community": 18,
+      "community": 17,
       "norm_label": "full transparent logo",
       "community_name": "Full Transparent Logo",
       "id": "assets_logo_full_transparent"
@@ -154,7 +154,7 @@
       "label": "Transparent Logo",
       "file_type": "image",
       "source_file": "assets/logo-transparent.png",
-      "community": 20,
+      "community": 19,
       "norm_label": "transparent logo",
       "community_name": "Transparent Logo",
       "id": "assets_logo_transparent"
@@ -163,7 +163,7 @@
       "label": "Main Logo",
       "file_type": "image",
       "source_file": "assets/logo.png",
-      "community": 17,
+      "community": 16,
       "norm_label": "main logo",
       "community_name": "Main Logo",
       "id": "assets_logo"
@@ -172,7 +172,7 @@
       "label": "UI/UX Pro Max Skill",
       "file_type": "concept",
       "source_file": ".agents/skills/design/ui-ux-pro-max/SKILL.md",
-      "community": 13,
+      "community": 12,
       "norm_label": "ui/ux pro max skill",
       "community_name": "Agent Instructions",
       "id": "agents_skills_design_ui_ux_pro_max_skill_ui_ux_pro_max"
@@ -181,7 +181,7 @@
       "label": "Caveman Skill",
       "file_type": "concept",
       "source_file": ".agents/skills/workflow/caveman/SKILL.md",
-      "community": 14,
+      "community": 13,
       "norm_label": "caveman skill",
       "community_name": "Agent Instructions",
       "id": "agents_skills_workflow_caveman_skill_caveman"
@@ -190,7 +190,7 @@
       "label": "API Design Skill",
       "file_type": "concept",
       "source_file": ".agents/skills/backend/api-design/SKILL.md",
-      "community": 12,
+      "community": 11,
       "norm_label": "api design skill",
       "community_name": "Agent Instructions",
       "id": "agents_skills_backend_api_design_skill_api_design"
@@ -247,7 +247,7 @@
       "label": "Code Simplification Skill",
       "file_type": "document",
       "source_file": ".agents/skills/workflow/code-simplify/SKILL.md",
-      "community": 15,
+      "community": 14,
       "norm_label": "code simplification skill",
       "id": "agents_skills_workflow_code_simplify_skill"
     },
@@ -295,7 +295,7 @@
       "label": "HTMX Library",
       "file_type": "code",
       "source_file": "https://unpkg.com/htmx.org@1.9.10",
-      "community": 21,
+      "community": 20,
       "norm_label": "htmx library",
       "id": "htmx_org"
     },
@@ -303,7 +303,7 @@
       "label": "Tailwind CSS",
       "file_type": "code",
       "source_file": "https://cdn.tailwindcss.com",
-      "community": 22,
+      "community": 21,
       "norm_label": "tailwind css",
       "id": "tailwindcss"
     },
@@ -399,7 +399,7 @@
       "source_file": "js/scroll-reveal.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 10,
       "norm_label": "scroll-reveal.js",
       "id": "js_scroll_reveal"
     },
@@ -409,7 +409,7 @@
       "source_file": "js/scroll-reveal.js",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 11,
+      "community": 10,
       "norm_label": "initscrollreveals()",
       "id": "js_scroll_reveal_initscrollreveals"
     },
@@ -419,7 +419,7 @@
       "source_file": "js/card-spotlight.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 9,
       "norm_label": "card-spotlight.js",
       "id": "js_card_spotlight"
     },
@@ -429,9 +429,49 @@
       "source_file": "js/card-spotlight.js",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 10,
+      "community": 9,
       "norm_label": "init3dtilt()",
       "id": "js_card_spotlight_init3dtilt"
+    },
+    {
+      "label": "wp-api.js",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "wp-api.js",
+      "id": "js_wp_api"
+    },
+    {
+      "label": "handleContactSubmit()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L68",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "handlecontactsubmit()",
+      "id": "js_wp_api_handlecontactsubmit"
+    },
+    {
+      "label": "setLoadingState()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L126",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "setloadingstate()",
+      "id": "js_wp_api_setloadingstate"
+    },
+    {
+      "label": "renderErrorMessage()",
+      "file_type": "code",
+      "source_file": "js/wp-api.js",
+      "source_location": "L140",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "rendererrormessage()",
+      "id": "js_wp_api_rendererrormessage"
     },
     {
       "label": "blob-tracker.js",
@@ -572,66 +612,6 @@
       "community": 2,
       "norm_label": "initall()",
       "id": "js_animations_initall"
-    },
-    {
-      "label": "contact.js",
-      "file_type": "code",
-      "source_file": "api/contact.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "api_contact",
-      "community": 9,
-      "norm_label": "contact.js"
-    },
-    {
-      "label": "handler()",
-      "file_type": "code",
-      "source_file": "api/contact.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "api_contact_handler",
-      "community": 9,
-      "norm_label": "handler()"
-    },
-    {
-      "label": "wp-api.js",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "js_wp_api",
-      "community": 5,
-      "norm_label": "wp-api.js"
-    },
-    {
-      "label": "handleContactSubmit()",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L68",
-      "_origin": "ast",
-      "id": "js_wp_api_handlecontactsubmit",
-      "community": 5,
-      "norm_label": "handlecontactsubmit()"
-    },
-    {
-      "label": "setLoadingState()",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L126",
-      "_origin": "ast",
-      "id": "js_wp_api_setloadingstate",
-      "community": 5,
-      "norm_label": "setloadingstate()"
-    },
-    {
-      "label": "renderErrorMessage()",
-      "file_type": "code",
-      "source_file": "js/wp-api.js",
-      "source_location": "L140",
-      "_origin": "ast",
-      "id": "js_wp_api_rendererrormessage",
-      "community": 5,
-      "norm_label": "rendererrormessage()"
     }
   ],
   "links": [
@@ -834,6 +814,63 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_wp_api",
+      "target": "js_wp_api_handlecontactsubmit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_wp_api",
+      "target": "js_wp_api_rendererrormessage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_wp_api",
+      "target": "js_wp_api_setloadingstate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_wp_api_handlecontactsubmit",
+      "target": "js_wp_api_rendererrormessage"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/wp-api.js",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "js_wp_api_handlecontactsubmit",
+      "target": "js_wp_api_setloadingstate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "js/blob-tracker.js",
       "source_location": "L44",
       "weight": 1.0,
@@ -1023,74 +1060,6 @@
       "confidence_score": 1.0,
       "source": "js_animations_initall",
       "target": "js_animations_initliquidnavpill"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/contact.js",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "api_contact",
-      "target": "api_contact_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L68",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "js_wp_api",
-      "target": "js_wp_api_handlecontactsubmit",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L140",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "js_wp_api",
-      "target": "js_wp_api_rendererrormessage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L126",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "js_wp_api",
-      "target": "js_wp_api_setloadingstate",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L111",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "js_wp_api_handlecontactsubmit",
-      "target": "js_wp_api_rendererrormessage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "js/wp-api.js",
-      "source_location": "L81",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "js_wp_api_handlecontactsubmit",
-      "target": "js_wp_api_setloadingstate",
-      "confidence_score": 1.0
     }
   ],
   "hyperedges": [
@@ -1166,5 +1135,5 @@
       "confidence_score": 0.9
     }
   ],
-  "built_at_commit": "e3b83a9f0b27b105780e4d82f7b48e2746519425"
+  "built_at_commit": "1e9c7503c61f79d461be79f5674dc2c926c51ec0"
 }

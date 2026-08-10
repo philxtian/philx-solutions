@@ -63,48 +63,44 @@
       "js_smooth_scroll_initsmoothscroll"
     ],
     "9": [
-      "api_contact",
-      "api_contact_handler"
-    ],
-    "10": [
       "js_card_spotlight",
       "js_card_spotlight_init3dtilt"
     ],
-    "11": [
+    "10": [
       "js_scroll_reveal",
       "js_scroll_reveal_initscrollreveals"
     ],
-    "12": [
+    "11": [
       "agents_skills_backend_api_design_skill_api_design"
     ],
-    "13": [
+    "12": [
       "agents_skills_design_ui_ux_pro_max_skill_ui_ux_pro_max"
     ],
-    "14": [
+    "13": [
       "agents_skills_workflow_caveman_skill_caveman"
     ],
-    "15": [
+    "14": [
       "agents_skills_workflow_code_simplify_skill"
     ],
-    "16": [
+    "15": [
       "api_contact_success"
     ],
-    "17": [
+    "16": [
       "assets_logo"
     ],
-    "18": [
+    "17": [
       "assets_logo_full_transparent"
     ],
-    "19": [
+    "18": [
       "assets_logo_mark"
     ],
-    "20": [
+    "19": [
       "assets_logo_transparent"
     ],
-    "21": [
+    "20": [
       "htmx_org"
     ],
-    "22": [
+    "21": [
       "tailwindcss"
     ]
   },
@@ -130,8 +126,7 @@
     "18": 1.0,
     "19": 1.0,
     "20": 1.0,
-    "21": 1.0,
-    "22": 1.0
+    "21": 1.0
   },
   "gods": [
     {
@@ -145,13 +140,13 @@
       "degree": 3
     },
     {
-      "id": "js_intro_runsequence",
-      "label": "runSequence()",
+      "id": "js_wp_api_handlecontactsubmit",
+      "label": "handleContactSubmit()",
       "degree": 3
     },
     {
-      "id": "js_wp_api_handlecontactsubmit",
-      "label": "handleContactSubmit()",
+      "id": "js_intro_runsequence",
+      "label": "runSequence()",
       "degree": 3
     },
     {
@@ -175,13 +170,13 @@
       "degree": 2
     },
     {
-      "id": "js_intro_mountoverlay",
-      "label": "mountOverlay()",
+      "id": "js_wp_api_setloadingstate",
+      "label": "setLoadingState()",
       "degree": 2
     },
     {
-      "id": "js_intro_init",
-      "label": "init()",
+      "id": "js_wp_api_rendererrormessage",
+      "label": "renderErrorMessage()",
       "degree": 2
     }
   ],

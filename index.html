@@ -25,7 +25,8 @@
         }
     </script>
     <!-- Cloudflare Turnstile -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
+            onerror="window.__turnstileLoadFailed = true; window.dispatchEvent(new Event('turnstile-load-error'))"></script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -225,6 +226,18 @@
             footer {
                 background-color: rgba(9, 13, 22, 0.9) !important;
             }
+        }
+
+        /* Cloudflare Turnstile Responsive Overflow Fix */
+        #cf-turnstile-widget {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        #cf-turnstile-widget iframe {
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box;
         }
     </style>
     <!-- Intro Sequence Script (Instant Overlay Mount) -->

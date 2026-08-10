@@ -101,13 +101,20 @@
                                   class="w-full px-4 py-3 bg-black border border-white/15 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white text-sm transition-colors resize-none"></textarea>
                     </div>
 
-                    <div class="cf-turnstile mb-6" data-sitekey="NEXT_PUBLIC_CLOUDFLARE_SITE_KEY"></div>
+                    <!-- Cloudflare Turnstile Widget Wrapper -->
+                    <div class="w-full flex justify-center items-center mb-6 min-h-[65px] rounded-xl border border-white/5 bg-black/50">
+                        <div id="cf-turnstile-widget" style="max-width: 100%; width: 100%;" class="flex justify-center"></div>
+                    </div>
 
                     <!-- Submit Button -->
                     <div>
-                        <button type="submit" 
-                                class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 text-xs font-bold text-white bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 rounded-xl uppercase tracking-widest text-center cursor-pointer">
-                            Submit Consultation Request &rarr;
+                        <button type="submit" id="contact-submit-btn"
+                                class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 text-xs font-bold text-white bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 rounded-xl uppercase tracking-widest text-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                            <svg id="contact-btn-spinner" class="animate-spin -ml-1 mr-3 h-4 w-4 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span id="contact-btn-text">Submit Consultation Request &rarr;</span>
                         </button>
                     </div>
                 </form>
@@ -116,17 +123,76 @@
                 <div id="form-response" class="mt-6"></div>
 
                 <script>
+                    // Render Turnstile explicitly because of HTMX dynamic injection
+                    function renderTurnstile() {
+                        if (typeof turnstile !== 'undefined') {
+                            const widgetContainer = document.getElementById('cf-turnstile-widget');
+                            // Ensure it hasn't been rendered yet to prevent duplicate widgets
+                            if (widgetContainer && widgetContainer.innerHTML.trim() === '') {
+                                turnstile.render('#cf-turnstile-widget', {
+                                    sitekey: '0x4AAAAAAELif50Z16CKUluC',
+                                    theme: 'dark',
+                                    size: 'flexible'
+                                });
+                            }
+                        }
+                    }
+
+                    function showTurnstileLoadError() {
+                        if (typeof turnstile !== 'undefined') return; // it loaded after all, race-safe no-op
+                        const responseContainer = document.getElementById('form-response');
+                        const submitBtn = document.getElementById('contact-submit-btn');
+                        if (responseContainer && !responseContainer.dataset.turnstileErrorShown) {
+                            responseContainer.dataset.turnstileErrorShown = 'true';
+                            responseContainer.innerHTML = '<div class="text-amber-400 text-sm font-medium p-4 bg-amber-400/10 rounded-xl border border-amber-400/20 flex items-center space-x-3"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg><span>Security check failed to load. Please disable ad-blockers or content-blocking extensions and refresh the page.</span></div>';
+                        }
+                        if (submitBtn) submitBtn.disabled = true;
+                    }
+
+                    // React immediately if the Turnstile script tag's onerror already fired
+                    window.addEventListener('turnstile-load-error', showTurnstileLoadError);
+                    if (window.__turnstileLoadFailed) showTurnstileLoadError();
+
+                    // Attempt immediate render, or wait for script to load
+                    if (typeof turnstile !== 'undefined') {
+                        renderTurnstile();
+                    } else {
+                        // Polling fallback if Turnstile script is still loading
+                        let attempts = 0;
+                        const turnstileInterval = setInterval(() => {
+                            if (typeof turnstile !== 'undefined') {
+                                clearInterval(turnstileInterval);
+                                renderTurnstile();
+                            }
+                            attempts++;
+                            if (attempts > 50) {
+                                clearInterval(turnstileInterval); // Timeout after 5 seconds
+                                showTurnstileLoadError();
+                            }
+                        }, 100);
+                    }
+
                     document.getElementById('contact-form').addEventListener('submit', async (e) => {
                         e.preventDefault();
                         const form = e.target;
                         const formData = new FormData(form);
                         const data = Object.fromEntries(formData.entries());
+                        const responseContainer = document.getElementById('form-response');
+                        const submitBtn = document.getElementById('contact-submit-btn');
+                        const btnSpinner = document.getElementById('contact-btn-spinner');
+                        const btnText = document.getElementById('contact-btn-text');
                         
                         // Ensure Turnstile token exists
                         if (!data['cf-turnstile-response']) {
-                            alert('Please complete the security check.');
+                            responseContainer.innerHTML = '<div class="text-amber-400 text-sm font-medium p-4 bg-amber-400/10 rounded-xl border border-amber-400/20 flex items-center space-x-3"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg><span>Please complete the security check.</span></div>';
                             return;
                         }
+
+                        // Loading State
+                        submitBtn.disabled = true;
+                        btnSpinner.classList.remove('hidden');
+                        btnText.textContent = 'Submitting...';
+                        responseContainer.innerHTML = '';
 
                         // Send to your backend API
                         try {
@@ -136,14 +202,25 @@
                                 body: JSON.stringify(data)
                             });
                             
+                            const resultData = await res.json().catch(() => ({}));
+                            
                             if (res.ok) {
-                                document.getElementById('form-response').innerHTML = '<div class="text-emerald-400 text-center p-4 bg-emerald-400/10 rounded-xl border border-emerald-400/20">Thank you! Your consultation request has been securely sent.</div>';
+                                responseContainer.innerHTML = '<div class="text-emerald-400 text-sm font-medium p-4 bg-emerald-400/10 rounded-xl border border-emerald-400/20 flex items-center space-x-3"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Thank you! Your request has been securely sent.</span></div>';
                                 form.reset();
+                                if (typeof turnstile !== 'undefined') turnstile.reset();
                             } else {
-                                document.getElementById('form-response').innerHTML = '<div class="text-red-400 text-center p-4 bg-red-400/10 rounded-xl border border-red-400/20">Error submitting the form. Bot detected or server issue.</div>';
+                                const errMsg = resultData.error || 'Error submitting the form. Bot detected or server issue.';
+                                responseContainer.innerHTML = `<div class="text-red-400 text-sm font-medium p-4 bg-red-400/10 rounded-xl border border-red-400/20 flex items-center space-x-3"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>${errMsg}</span></div>`;
+                                if (typeof turnstile !== 'undefined') turnstile.reset();
                             }
                         } catch (err) {
-                            document.getElementById('form-response').innerHTML = '<div class="text-red-400 text-center p-4 bg-red-400/10 rounded-xl border border-red-400/20">Network error. Please try again later.</div>';
+                            responseContainer.innerHTML = '<div class="text-red-400 text-sm font-medium p-4 bg-red-400/10 rounded-xl border border-red-400/20 flex items-center space-x-3"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Network error. Please try again later.</span></div>';
+                            if (typeof turnstile !== 'undefined') turnstile.reset();
+                        } finally {
+                            // Reset Loading State
+                            submitBtn.disabled = false;
+                            btnSpinner.classList.add('hidden');
+                            btnText.innerHTML = 'Submit Consultation Request &rarr;';
                         }
                     });
                 </script>
