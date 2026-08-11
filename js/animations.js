@@ -8,44 +8,22 @@
 
     /**
      * 1. Kinetic Scroll & Fluid Reveal Observer
+     * NOTE: reveal-on-scroll is owned exclusively by js/scroll-reveal.js (targets
+     * .reveal-hidden on inner content only, with an immediate-visibility check and
+     * a hard-timeout failsafe). This file used to run a second, competing observer
+     * that additionally hid entire <section> elements (not just inner cards) with
+     * no safety check — if it ever raced against htmx's async partial loading, a
+     * whole section could get stuck at opacity:0, indistinguishable from unstyled
+     * black. Removed rather than duplicated.
      */
-    function initScrollReveals() {
-        const revealElements = document.querySelectorAll(
-            'section, .reveal-on-scroll, #services-grid > div, #about .group, #expertise > div, #contact form'
-        );
-
-        if (!('IntersectionObserver' in window)) {
-            revealElements.forEach(el => el.classList.add('is-revealed'));
-            return;
-        }
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -60px 0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-revealed');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        revealElements.forEach(el => {
-            if (!el.classList.contains('reveal-on-scroll')) {
-                el.classList.add('reveal-on-scroll');
-            }
-            observer.observe(el);
-        });
-    }
 
     /**
      * 2. Magnetic Hover Physics
      */
     function initMagneticElements() {
+        // mousemove-only effect; never fires on touch, so skip on touchscreens.
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
         const magneticTargets = document.querySelectorAll(
             'a[href^="#"], button, .magnetic-target'
         );
@@ -231,25 +209,8 @@
         }
     }
 
-    // Dynamic CSS Injection for Kinetic Scroll Reveal States
-    const style = document.createElement('style');
-    style.textContent = `
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translate3d(0, 28px, 0);
-            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .reveal-on-scroll.is-revealed {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-        }
-    `;
-    document.head.appendChild(style);
-
     // Initialize on DOM Ready
     function initAll() {
-        initScrollReveals();
         initMagneticElements();
         initAdaptiveNavbar();
         initLiquidNavPill();

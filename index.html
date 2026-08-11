@@ -32,26 +32,12 @@
     <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
             onerror="window.__turnstileLoadFailed = true; window.dispatchEvent(new Event('turnstile-load-error'))"></script>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        black: '#000000',
-                        white: '#FFFFFF',
-                        charcoal: '#0A0A0C'
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'sans-serif'],
-                        display: ['Plus Jakarta Sans', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS: compiled at build time (see tailwind.config.js / package.json).
+         Previously loaded via the Play CDN (cdn.tailwindcss.com), which Tailwind's own
+         docs say is not for production use — it ships a JS compiler to the browser and
+         recompiles at runtime on every DOM change (including every htmx partial swap),
+         which was a measurable cause of slow/late styling on mobile. -->
+    <link rel="stylesheet" href="assets/tailwind.css">
     <!-- HTMX CDN -->
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
     <!-- Google Fonts (Plus Jakarta Sans) -->

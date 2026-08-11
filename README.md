@@ -27,8 +27,8 @@ This codebase delivers a modern, lightweight, server-rendered frontend interface
 ## 🛠️ Tech Stack
 
 - **Frontend Core**: HTML5, JavaScript (Vanilla ES6+), React / Vue.js.
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) (CDN / Utility-first class architecture).
-- **Backend & APIs**: PHP Laravel & REST API endpoints (`/api/services.json`).
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/), compiled at build time via the Tailwind CLI (`tailwind.config.js` → `assets/tailwind.css`). Not loaded from the Play CDN — that's dev-only and was measurably slow on mobile.
+- **Backend & APIs**: Vercel serverless functions under `/api` (contact form + GA config), REST-style static endpoints (`/data/services.json`).
 
 ---
 
@@ -47,8 +47,12 @@ philx-solutions/
 │   ├── contact.html      # Interactive lead inquiry contact form
 │   └── footer.html       # Clean multi-column footer
 ├── api/
-│   ├── services.json     # Fallback mock dataset for local development
-│   └── contact-success.html # Inline HTMX submission response feedback
+│   ├── contact.js        # Vercel serverless function: contact form submission
+│   └── config.js         # Vercel serverless function: exposes GA measurement ID
+├── data/
+│   └── services.json     # Static dataset loaded via HTMX
+├── tailwind.config.js    # Tailwind build configuration
+├── src/tailwind-input.css # Tailwind entry point (compiles to assets/tailwind.css)
 └── .agents/
     └── skills/           # Customized agent skills (ui-ux-pro-max, caveman, etc.)
 ```
@@ -57,9 +61,17 @@ philx-solutions/
 
 ## 💻 Getting Started
 
-### Local Development (Standalone)
+### Local Development
 
-No complex build step or package installation required. Serve the workspace directory using any standard HTTP server:
+Tailwind CSS is compiled at build time (not loaded from a CDN), so a one-time install + build is required before serving the site:
+
+```bash
+npm install
+npm run build   # compiles assets/tailwind.css once
+# or: npm run watch   # recompiles on file changes while you work
+```
+
+Then serve the workspace directory using any standard HTTP server:
 
 ```bash
 # Using Python builtin HTTP server
@@ -69,7 +81,9 @@ python3 -m http.server 8000
 npx serve .
 ```
 
-Open `http://localhost:8000` in your browser.
+Open `http://localhost:8000` in your browser. Note that `/api/*` serverless functions (contact form, GA config) only run under Vercel — use `vercel dev` or a Vercel Preview Deployment to test those end-to-end; a plain static server will 404 on them.
+
+On Vercel, `vercel.json` runs `npm run build` automatically on every deploy, so `assets/tailwind.css` is always regenerated fresh — it's gitignored, not committed.
 
 ---
 

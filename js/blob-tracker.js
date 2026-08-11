@@ -1,5 +1,12 @@
 (function() {
     'use strict';
+
+    // Purely a mousemove-driven parallax effect: mousemove never fires on a
+    // touchscreen, so on iPhone/iPad this loop would otherwise run an infinite
+    // 60fps requestAnimationFrame writing transform on ~30 blob elements forever
+    // for zero visual benefit — a real, sustained perf/battery cost on mobile.
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
     let targetX = 0, targetY = 0;
     let trackedBlobs = [];
 

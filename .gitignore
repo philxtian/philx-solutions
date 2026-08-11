@@ -16,3 +16,4 @@ Thumbs.db
 dist/
 build/
 .next/
+assets/tailwind.css

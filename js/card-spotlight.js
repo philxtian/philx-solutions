@@ -1,7 +1,12 @@
 (function() {
     'use strict';
-    
+
     function init3DTilt() {
+        // mousemove never fires on touch, so skip entirely on touchscreens: avoids
+        // forcing a preserve-3d/perspective compositing layer on every card for a
+        // hover effect that can never trigger there.
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
         const cards = document.querySelectorAll('.group.relative:not(form):not(.no-tilt)');
         
         cards.forEach(card => {
