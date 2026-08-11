@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Trusted Types allow-list only (no script-src/style-src restrictions here, so this
+         cannot break the existing inline scripts, Tailwind CDN, or htmx). Without this,
+         Google's gtag.js/GTM internally calls trustedTypes.createPolicy('goog#html', ...)
+         which a stricter future CSP could otherwise block and log as a console warning. -->
+    <meta http-equiv="Content-Security-Policy" content="trusted-types default goog#html googhtml dompurify 'allow-duplicates';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>PHILX Solutions | Enterprise IT & Software Solutions</title>
     <meta name="description" content="PHILX Solutions delivers enterprise website design, full-stack development, mobile apps, and cloud software powered by Headless WordPress, HTMX, and modern engineering.">
     <!-- Dynamic Light/Dark Brand Favicon -->
@@ -243,7 +248,7 @@
     <!-- Intro Sequence Script (Instant Overlay Mount) -->
     <script src="js/intro.js"></script>
 </head>
-<body class="bg-slate-50 dark:bg-black text-slate-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 relative bg-tech-grid overflow-x-hidden">
+<body class="bg-slate-50 dark:bg-black text-slate-900 dark:text-white min-h-screen min-h-[100dvh] flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 relative bg-tech-grid overflow-x-hidden pb-[env(safe-area-inset-bottom)]">
 
 
 
