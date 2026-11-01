@@ -52,7 +52,12 @@
     </div>
 
     <!-- Mobile Dropdown Menu Drawer -->
-    <div id="mobile-menu" class="hidden md:hidden mt-3 w-full bg-black/90 border border-white/20 rounded-2xl p-6 backdrop-blur-3xl shadow-2xl space-y-4 text-sm font-semibold text-white uppercase tracking-wider relative z-40 transition-all duration-300">
+    <!-- max-h + scroll: the drawer lives inside a position:fixed header, so in landscape
+         on a phone (~390px tall viewport) its ~320px of links plus the 80-111px navbar
+         overflowed the screen with no way to reach the last item. Browsers without svh
+         support simply drop the invalid calc() and keep the previous behaviour.
+         overscroll-contain stops iOS scroll-chaining out of the drawer into the page. -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 w-full max-h-[calc(100svh-7rem)] overflow-y-auto overscroll-contain bg-black/90 border border-white/20 rounded-2xl p-6 backdrop-blur-3xl shadow-2xl space-y-4 text-sm font-semibold text-white uppercase tracking-wider relative z-40 transition-all duration-300">
         <a href="#hero" class="flex items-center min-h-[44px] py-2 hover:text-white border-b border-white/10">Home</a>
         <a href="#services" class="flex items-center min-h-[44px] py-2 hover:text-white border-b border-white/10">Services</a>
         <a href="#about" class="flex items-center min-h-[44px] py-2 hover:text-white border-b border-white/10">About</a>

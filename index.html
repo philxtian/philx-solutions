@@ -62,6 +62,39 @@
             background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
         }
 
+        /* Full-Viewport Height (iOS Safari Safe)
+           Replaces the `min-h-screen min-h-[100dvh]` class pair. That pair never worked:
+           Tailwind emits `.min-h-[100dvh]` BEFORE `.min-h-screen` in assets/tailwind.css,
+           so at equal specificity `min-height:100vh` always won and the dvh value was dead.
+           On iOS Safari `100vh` is the viewport with the toolbars RETRACTED, so a 100vh
+           section is taller than the visible area by the toolbar height and its content
+           gets pushed under the bottom bar.
+           `svh` (smallest viewport) rather than `dvh` on purpose: `dvh` re-resolves as the
+           toolbar collapses mid-scroll, which relayouts and visibly jerks the hero. */
+        .min-h-viewport-safe {
+            min-height: 100vh; /* fallback: iOS < 15.4 has no svh */
+        }
+        @supports (min-height: 100svh) {
+            .min-h-viewport-safe {
+                min-height: 100svh;
+            }
+        }
+
+        /* WebKit-Safe Clipping for Composited Children
+           `overflow: hidden` alone is not reliably honoured by the WebKit compositor for
+           descendants promoted to their own layer by a 3D transform (`transform-gpu` ->
+           translate3d) — the oversized hero blobs and footer glow orb can escape their
+           container and give the whole page sideways pan on iOS Safari. `clip-path` IS
+           respected for those layers, so it is applied alongside `overflow: hidden`.
+           The radius must be restated here: clip-path cannot read border-radius, and a
+           square inset() would let a composited child paint into the corners that
+           `rounded-*` is supposed to cut away. Set --clip-radius to match (e.g. the
+           footer card's rounded-3xl -> [--clip-radius:1.5rem]). */
+        .clip-inset {
+            -webkit-clip-path: inset(0 round var(--clip-radius, 0px));
+            clip-path: inset(0 round var(--clip-radius, 0px));
+        }
+
         /* Glass Panel Helper */
         .glass-panel {
             backdrop-filter: blur(24px);
@@ -205,17 +238,28 @@
             flex-shrink: 0;
         }
 
-        /* Safari GPU Hardware Acceleration & Backdrop Thrashing Prevention */
+        /* Safari GPU Hardware Acceleration & Backdrop Thrashing Prevention
+           `backdrop-filter` deliberately dropped from will-change: declaring it there
+           pins a permanently-promoted backdrop layer that WebKit re-samples every frame.
+           On the navbar that meant re-running a 64px blur over the animating hero blob
+           field continuously — the known cause of the frosted navbar going flat
+           grey/black or flickering on iPhone. Layer promotion via translateZ(0) is the
+           legitimate half of this rule and is kept. */
         nav, footer, .backdrop-blur-3xl, .backdrop-blur-2xl, .backdrop-blur-xl, .backdrop-blur-md {
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
-            will-change: transform, backdrop-filter;
+            will-change: transform;
         }
 
-        /* WebKit / Safari Backdrop Filter Fallback Support */
-        @supports (-webkit-backdrop-filter: none) {
-            footer {
-                background-color: rgba(9, 13, 22, 0.9) !important;
+        /* The hero blob parallax tracker (js/blob-tracker.js) is mousemove-driven and
+           no-ops on touch devices, so nothing ever writes transform to these wrappers on
+           a phone — but will-change still forces one promoted layer per blob, each
+           carrying a 110-160px blur over a ~950px box. That is a lot of backing store on
+           an iOS device and a known trigger for dropped/blank composited layers.
+           Released on touch pointers only; desktop parallax is untouched. */
+        @media (hover: none) {
+            .blob-slow, .blob-medium, .blob-fast {
+                will-change: auto;
             }
         }
 
@@ -234,7 +278,7 @@
     <!-- Intro Sequence Script (Instant Overlay Mount) -->
     <script src="js/intro.js"></script>
 </head>
-<body class="bg-slate-50 dark:bg-black text-slate-900 dark:text-white min-h-screen min-h-[100dvh] flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 relative bg-tech-grid overflow-x-hidden pb-[env(safe-area-inset-bottom)]">
+<body class="bg-slate-50 dark:bg-black text-slate-900 dark:text-white min-h-viewport-safe flex flex-col antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 relative bg-tech-grid overflow-x-hidden pb-[env(safe-area-inset-bottom)]">
 
 
 

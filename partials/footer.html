@@ -1,6 +1,12 @@
 <section class="relative bg-black py-12 px-4 md:px-12">
     <div class="max-w-7xl mx-auto">
-        <footer data-section-theme="dark" class="relative rounded-3xl bg-[#0b0f19] backdrop-blur-2xl border border-white/[0.1] shadow-[0_16px_40px_0_rgba(0,0,0,0.4)] p-8 sm:p-12 text-zinc-300 overflow-hidden z-20">
+        <!-- backdrop-blur-2xl removed: bg-[#0b0f19] is fully opaque, so there was nothing
+             behind the footer to blur — but WebKit still allocated and re-sampled a
+             backdrop layer for it every frame while the glow orb below animates.
+             clip-inset: `overflow-hidden` alone does not reliably clip the 650px-wide
+             transform-animated orb in WebKit, which can leak past the card's right edge
+             and give the page horizontal pan on iOS Safari. -->
+        <footer data-section-theme="dark" class="relative rounded-3xl bg-[#0b0f19] border border-white/[0.1] shadow-[0_16px_40px_0_rgba(0,0,0,0.4)] p-8 sm:p-12 text-zinc-300 overflow-hidden clip-inset [--clip-radius:1.5rem] z-20">
             <!-- Ambient Brand Glow Orb (Emerald, Deep Blue, and Teal) -->
             <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[650px] h-[280px] pointer-events-none z-0 rounded-full bg-gradient-to-t from-emerald-500/25 via-teal-500/15 to-blue-600/10 blur-[90px] animate-footer-fire"></div>
 
@@ -24,12 +30,17 @@
                 </div>
 
                 <!-- Footer Navigation Links -->
+                <!-- py-2/-my-2: these text-xs links had a ~12px tall touch area, far below
+                     Apple's 44pt guidance. The negative margin cancels the padding's
+                     layout effect, so the row renders identically while the tap target
+                     grows to ~28px. (Still short of 44px — going further would need the
+                     row to get taller, which is a visual call for the founder.) -->
                 <div class="flex flex-wrap justify-center gap-8 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
-                    <a href="#hero" class="hover:text-white transition-colors">Home</a>
-                    <a href="#services" class="hover:text-white transition-colors">Services</a>
-                    <a href="#about" class="hover:text-white transition-colors">About</a>
-                    <a href="#expertise" class="hover:text-white transition-colors">Expertise</a>
-                    <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+                    <a href="#hero" class="py-2 -my-2 hover:text-white transition-colors">Home</a>
+                    <a href="#services" class="py-2 -my-2 hover:text-white transition-colors">Services</a>
+                    <a href="#about" class="py-2 -my-2 hover:text-white transition-colors">About</a>
+                    <a href="#expertise" class="py-2 -my-2 hover:text-white transition-colors">Expertise</a>
+                    <a href="#contact" class="py-2 -my-2 hover:text-white transition-colors">Contact</a>
                 </div>
             </div>
 

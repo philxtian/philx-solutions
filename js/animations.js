@@ -86,6 +86,21 @@
         const cta = capsule.querySelector('.nav-cta');
         const mobileBtn = capsule.querySelector('.nav-mobile-btn');
 
+        // The hamburger is the only nav control on mobile, so its geometry classes
+        // (w-11 h-11 = 44x44, Apple's minimum tap target, plus the flex centering for
+        // the icon) must survive the theme swap. Previously this function assigned a
+        // whole new className containing `p-2` instead, which silently shrank the button
+        // to ~34x34 and un-centered the icon the moment the observer first fired — i.e.
+        // always, since the hero is data-section-theme="dark". Swap only the colours.
+        const MOBILE_BTN_DARK = ['border-white/20', 'bg-white/10', 'text-white', 'hover:bg-white/20'];
+        const MOBILE_BTN_LIGHT = ['border-gray-900/20', 'bg-gray-900/10', 'text-gray-900', 'hover:bg-gray-900/20'];
+
+        function setMobileBtnTheme(add, remove) {
+            if (!mobileBtn) return;
+            mobileBtn.classList.remove(...remove);
+            mobileBtn.classList.add(...add);
+        }
+
         const navObserverOptions = {
             root: null,
             rootMargin: '-5% 0px -85% 0px',
@@ -116,7 +131,7 @@
                         links.forEach(l => l.className = 'nav-link relative z-10 px-4 py-1.5 text-white/90 hover:text-white transition-colors');
                         if (fluidPill) fluidPill.className = 'absolute top-0 bottom-0 rounded-full bg-white/15 backdrop-blur-md border border-white/25 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-0 shadow-[0_4px_16px_rgba(255,255,255,0.08)]';
                         if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-white bg-white/10 backdrop-blur-md border border-white/20 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 relative z-30 cursor-pointer uppercase tracking-widest';
-                        if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-white/20 bg-white/10 text-white shadow-lg hover:bg-white/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-pointer';
+                        setMobileBtnTheme(MOBILE_BTN_DARK, MOBILE_BTN_LIGHT);
                     } else if (theme === 'light') {
                         // Floating over light/white section -> Navbar renders light iOS27 glass & high-contrast dark text
                         capsule.classList.remove('bg-white/[0.05]', 'border-white/[0.1]', 'shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]', 'bg-black/90', 'text-white', 'border-white/15');
@@ -136,7 +151,7 @@
                         links.forEach(l => l.className = 'nav-link relative z-10 px-4 py-1.5 text-gray-800 hover:text-black transition-colors');
                         if (fluidPill) fluidPill.className = 'absolute top-0 bottom-0 rounded-full bg-white/80 backdrop-blur-md border border-slate-200/80 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-0 shadow-sm';
                         if (cta) cta.className = 'nav-cta hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs font-bold text-gray-900 bg-black/[0.03] backdrop-blur-md border border-black/10 rounded-full shadow-sm hover:bg-black/[0.06] transition-all duration-300 relative z-30 cursor-pointer uppercase tracking-widest';
-                        if (mobileBtn) mobileBtn.className = 'nav-mobile-btn md:hidden p-2 rounded-full border border-gray-900/20 bg-gray-900/10 text-gray-900 shadow-lg hover:bg-gray-900/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-pointer';
+                        setMobileBtnTheme(MOBILE_BTN_LIGHT, MOBILE_BTN_DARK);
                     }
                 }
             });
