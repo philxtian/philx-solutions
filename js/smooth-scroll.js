@@ -1,79 +1,49 @@
+// Single owner of in-page anchor scrolling, including htmx content.
 (function() {
     'use strict';
-    
-    // Forcibly neutralize native CSS smooth scrolling to prevent Safari engine conflicts
+
     document.documentElement.style.scrollBehavior = 'auto';
-    
-    // Smooth easing math (easeInOutCubic)
-    function easeInOutCubic(t, b, c, d) {
-        t /= d/2;
-        if (t < 1) return c/2*t*t*t + b;
-        t -= 2;
-        return c/2*(t*t*t + 2) + b;
+
+    function getNavbarOffset() {
+        // Includes safe-area padding without counting the open drawer.
+        const capsule = document.getElementById('navbar-capsule');
+        if (!capsule) return 0;
+        const rect = capsule.getBoundingClientRect();
+        return rect.height > 0 ? rect.bottom + 12 : 0;
     }
 
-    let isScrolling = false; 
+    document.addEventListener('click', function(evt) {
+        const link = evt.target.closest && evt.target.closest('a[href^="#"]');
+        if (!link || evt.defaultPrevented || evt.button > 0 ||
+            evt.metaKey || evt.ctrlKey || evt.shiftKey || evt.altKey) return;
+        const targetId = link.getAttribute('href');
+        if (!targetId || targetId === '#') return;
 
-    function initSmoothScroll() {
-        const links = document.querySelectorAll('a[href^="#"]');
-        
-        links.forEach(link => {
-            if (link.dataset.scrollBound === 'true') return;
-            link.dataset.scrollBound = 'true';
-            
-            link.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (!targetId || targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault(); 
-                    
-                    // Force the browser to drop focus to unfreeze CSS hover/underline animations
-                    this.blur();
-                    
-                    if (isScrolling) return; 
-                    isScrolling = true;
-                    
-                    // Calculate layout instantly, start animation on the precise next frame
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-                    const startPosition = window.scrollY;
-                    const distance = targetPosition - startPosition;
-                    
-                    if (distance === 0) {
-                        isScrolling = false;
-                        return;
-                    }
+        let targetElement;
+        try {
+            targetElement = document.querySelector(targetId);
+        } catch (err) {
+            return; // Leave invalid selectors to the browser.
+        }
+        if (!targetElement) return;
 
-                    const duration = 800; 
-                    let startTime = null;
-                    
-                    function animation(currentTime) {
-                        if (startTime === null) startTime = currentTime; // High-res DOMHighResTimeStamp
-                        const timeElapsed = currentTime - startTime;
-                        
-                        const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
-                        window.scrollTo(0, run); 
-                        
-                        if (timeElapsed < duration) {
-                            requestAnimationFrame(animation);
-                        } else {
-                            window.scrollTo(0, targetPosition); 
-                            isScrolling = false; 
-                        }
-                    }
-                    
-                    requestAnimationFrame(animation);
-                }
-            });
-        });
-    }
+        evt.preventDefault();
+        link.blur();
+        const menu = document.getElementById('mobile-menu');
+        if (menu) menu.classList.add('hidden');
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSmoothScroll);
-    } else {
-        initSmoothScroll();
-    }
-    
-    document.body.addEventListener('htmx:afterSwap', initSmoothScroll);
+        const absoluteTop = targetElement.getBoundingClientRect().top + window.scrollY;
+        const maxScroll = Math.max(0,
+            document.documentElement.scrollHeight - window.innerHeight);
+        const top = Math.min(Math.max(absoluteTop - getNavbarOffset(), 0), maxScroll);
+        const reducedMotion = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Native scrolling accepts a new destination on every tap.
+        if ('scrollBehavior' in document.documentElement.style && !reducedMotion) {
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        } else {
+            window.scrollTo(0, top);
+        }
+    });
 })();

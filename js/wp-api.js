@@ -44,24 +44,7 @@ window.toggleMobileMenu = function() {
     menu.classList.toggle('hidden');
 };
 
-document.addEventListener('click', function (evt) {
-    const targetLink = evt.target.closest('a[href^="#"]');
-    if (!targetLink) return;
-
-    const targetId = targetLink.getAttribute('href');
-    if (!targetId || targetId === '#') return;
-
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-        evt.preventDefault();
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.add('hidden');
-        }
-    }
-});
+// Anchor scrolling and menu dismissal are owned by smooth-scroll.js.
 
 document.body.addEventListener('htmx:configRequest', function (evt) {
     const config = window.PHILX_WP_CONFIG;
